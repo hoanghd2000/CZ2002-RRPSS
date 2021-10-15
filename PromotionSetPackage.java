@@ -14,37 +14,37 @@ public class PromotionSetPackage {
      * @param type
      */
     public void addItem(String type, int quanity){
+        for(int i = 0 ; i < set.size() ; i++){
+            if(set.get(i).getType().equals(type)){
+                set.get(i).addQuantity(quanity);
+                return;
+            }
+        }
         set.add(new PromoItemType(type, quanity));
     }
 
     /**
      * Method to remove items of type "type" from the 
-     * promo set. It also removes orders partially. For example, 
-     * if the user wants to remove 5000 burgers from a promo set containing only 5, 
-     * it will remove those 5 and print a message saying limit reached.
+     * promo set. It also removes orders partially. For example, from a set of 5 burgers,
+     * if we want to remove 3, we can do so.
      * @param type
      * @return
      */
     public String removeItem(String type, int quanity){
-        int itemsLeftToRemove = quanity;
         for(int i = 0 ; i < set.size() ; i++){
             if(set.get(i).getType().equals(type)){
-                if(set.get(i).getQuantity() > 0){
-                    int q = set.get(i).getQuantity();
-                    if(itemsLeftToRemove <= q){
-                        set.get(i).reduceQuantity(quanity);
-                        System.out.println("Items removed successfully.");
-                        break;
-                    } else {
-                        set.get(i).reduceQuantity(itemsLeftToRemove - q);
-                        System.out.println("Successfully removed " + q + " instances. Looking for more in promo package.");
-                        itemsLeftToRemove -= q;
-                    }
+                if(set.get(i).getQuantity() < quanity) return "Cannot delete more quantity than what already exists.";
+                else if(set.get(i).getQuantity() == quanity){
+                    set.remove(i);
+                    return "Items of type, " + type + ", removed from this promo package.";
+                }
+                else{
+                    set.get(i).reduceQuantity(quanity);
+                    return "Operation successful.";
                 }
             }
         }
-        if(itemsLeftToRemove == 0) return ("Removal sucessful.");
-        return ("Successfully removed " + (quanity - itemsLeftToRemove) + " instances. The promo package has no more left.");
+        return "Item of type, " + type + ", not found in this promo package.";
     }
 
     /**
@@ -78,5 +78,4 @@ public class PromotionSetPackage {
             System.out.println(set.get(i).getType() + " : " + set.get(i).getQuantity());
         }
     }
-    
 }
