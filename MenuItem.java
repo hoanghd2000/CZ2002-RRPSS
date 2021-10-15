@@ -2,6 +2,8 @@ public class MenuItem{
 
     private double price;
 
+    private String name;
+
     private String description;
 
     private boolean isPartOfPromo;
@@ -15,24 +17,36 @@ public class MenuItem{
 
     public MenuItem(){
         price = 0;
+        name = "NOT SET";
         description = "No description for this item available at the time.";
         isPartOfPromo = false;
         type.setType("NOT SET");
     }
 
     /**
-     * constructor with price, description and boolean (to indicate whether it is 
-     * part of a promo)
      * @param price
      * @param description
      * @param isPartOfPromo
      * @param type
+     * @param name
      */
-    public MenuItem(double price, String description, boolean isPartOfPromo, String type){
+    public MenuItem(double price, String description, boolean isPartOfPromo, String type, String name){
+        this.name = name;
         this.price = price;
         this.description = description;
         this.isPartOfPromo = isPartOfPromo;
         this.type.setType(type);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getType() {

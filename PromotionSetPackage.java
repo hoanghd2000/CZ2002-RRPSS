@@ -4,8 +4,25 @@ public class PromotionSetPackage {
     
     private ArrayList<PromoItemType> set;
 
-    public PromotionSetPackage(){
+    private double price;
+
+    /**
+     * @param price
+     */
+    public PromotionSetPackage(double price){
         set = new ArrayList<PromoItemType>();
+        this.price = price;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    /**
+     * @param price
+     */
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     /**
@@ -73,9 +90,10 @@ public class PromotionSetPackage {
     }
 
     public void printPromoSet(){
-        System.out.println("The items for this promo set are as follows: ");
+        System.out.println("Promo Set \t\t\t " + this.getPrice());
         for(int i = 0 ; i < set.size() ; i++){
             System.out.println(set.get(i).getType() + " : " + set.get(i).getQuantity());
         }
+        System.out.println();
     }
 }
