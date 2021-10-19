@@ -11,6 +11,7 @@ public class MenuItem extends OrderableItems{
         this.name = name;
     }
 
+    // Default settings to the MenuItem initally
     public MenuItem(){
         type = "NOT SET";
         price = -1;
