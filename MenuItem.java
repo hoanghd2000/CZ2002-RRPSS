@@ -1,31 +1,48 @@
 public class MenuItem extends OrderableItems{
-    private String type;
-    private double price;
-    private String description;
+
+    // this variable will help with auto incrementing itemID when adding new items
+    private static int count = 0;
+
     private String name;
-    
-    public MenuItem(String type, double price, String description, String name) {
-        this.type = type;
-        this.price = price;
+    private String description;
+    private double price;
+    private int itemID;
+    private String type;
+
+    // creating an empty constructor
+    public MenuItem() {
+        super();
+        itemID = count;
+        count++;
+    }
+
+    // creating a constructor with parameters
+    public MenuItem(String name, String description, double price, String type) {
+        super();
+        this.name = name;
         this.description = description;
+        this.price = price;
+        this.itemID = count;
+        count++;
+        this.type = type;
+    }
+
+    // creating getters and setters
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 
-    // Default settings to the MenuItem initally
-    public MenuItem(){
-        type = "NOT SET";
-        price = -1;
-        description = "NOT SET";
-        name = "NAMELESS";
+    public String getDescription() {
+        return description;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
+    public void setDescription(String description) {
+        this.description = description;
+    }   
 
     public double getPrice() {
         return price;
@@ -35,23 +52,15 @@ public class MenuItem extends OrderableItems{
         this.price = price;
     }
 
-    public String getDescription() {
-        return description;
+    public int getItemID() {
+        return itemID;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String getType() {
+        return type;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean equals(Object o){
-        return ((MenuItem) o).getName() == this.name;
+    public void setType(String type) {
+        this.type = type;
     }
 }

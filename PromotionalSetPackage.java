@@ -2,97 +2,78 @@ import java.util.Hashtable;
 
 public class PromotionalSetPackage extends OrderableItems{
 
+    // this counter makes itemID autoincrement 
+    private static int counter = 200;
+
+    // This hashtable has the itemID mapped to the quantity of that itemID
+    Hashtable<Integer, Integer> set = new Hashtable<Integer, Integer>();
+
     private double price;
 
-    private double description;
-    
-    // This stores the list of MenuItems and their quantites in the promo set.
-    private Hashtable<MenuItem, Integer> set;
+    private int itemID;
 
-    // This stores the types of items and their quantities in the promo set.
-    private Hashtable<String, Integer> typeSet;
+    private String description;
 
-    // Constructor initializes the promo package.
+    private String name;
+
+    //creating an empty constructor
     public PromotionalSetPackage(){
-        this.set = new Hashtable<MenuItem, Integer>();
-        this.typeSet = new Hashtable<String, Integer>();
+        super();
+        this.price = 0;
+        this.itemID = counter++;
     }
 
-    public PromotionalSetPackage(double price){
+    //creating a constructor with a parameter
+    public PromotionalSetPackage(double price, String description, String name){
+        super();
+        this.price = price;
+        this.itemID = counter++;
+        this.description = description;
+        this.name = name;
+    }
+
+    //creating getters and setters
+    public double getPrice(){
+        return this.price;
+    }
+
+    public void setPrice(double price){
         this.price = price;
     }
 
-    public double getPrice() {
-        return price;
+    public int getItemID(){
+        return this.itemID;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public String getName(){
+        return this.name;
     }
 
-    public double getDescription() {
-        return description;
+    public void setName(String name){
+        this.name = name;
     }
 
-    public void setDescription(double description) {
+    public String getDescription(){
+        return this.description;
+    }
+
+    public void setDescription(String description){
         this.description = description;
     }
 
-    public Hashtable<MenuItem, Integer> getSet() {
-        return set;
-    }
-
-    public Hashtable<String, Integer> getTypeSet() {
-        return typeSet;
-    }
-
-    public void addItem(MenuItem item, int quantity){
-        // adding the item into the promo set.
-        set.put(item, quantity);
-    }
-
-    public void addItem(String type, int quantity){
-        // adding the "type" of the item into the promo set.
-        typeSet.put(type, quantity);
-    }
-
-    public boolean removeItem(MenuItem item, int quantity){
-        // item not in promo set
-        if(!set.containsKey(item)) return false;
-        else{
-            // quantity of item in promo set less than given quantity
-            if(set.get(item) < quantity) return false;
-            // if quanity is same, remove from promo set entirely.
-            else if(set.get(item) == quantity){
-                set.remove(item);
-                return true;
-            }
+    public void addItem(int itemID, int quantity) {
+        if(this.set.containsKey(itemID)){
+            this.set.replace(itemID, this.set.get(itemID) + quantity);
         }
-        // reduce the quantity.
-        set.put(item, set.get(item) - quantity);
-        return true;
-    }
-
-    public boolean removeItem(String type, int quantity){
-        // item not in promo set
-        if(!typeSet.containsKey(type)) return false;
         else{
-            // quantity of item in promo set less than given quantity
-            if(typeSet.get(type) < quantity) return false;
-            // if quanity is same, remove from promo set entirely.
-            else if(typeSet.get(type) == quantity){
-                typeSet.remove(type);
-                return true;
-            }
+            this.set.put(itemID, quantity);
         }
-        // reduce the quantity.
-        typeSet.put(type, typeSet.get(type) - quantity);
-        return true;
     }
 
-    public boolean equals(Object o){
-        // return true if either hashtable of the classes match.
-        return ((PromotionalSetPackage) o).getSet().equals(this.set) || 
-                    ((PromotionalSetPackage) o).getTypeSet().equals(this.typeSet);
+    // remove item from the set
+    public void removeItem(int itemID, int quantity) {
+        if(this.set.containsKey(itemID) && this.set.get(itemID) >= quantity){
+            this.set.replace(itemID, this.set.get(itemID) - quantity);
+        }
     }
 }

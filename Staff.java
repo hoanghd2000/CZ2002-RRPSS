@@ -42,4 +42,4 @@ public class Staff extends Order{
   public String setJobTitle(String jobTitle){
     this.jobTitle=jobTitle;
   }
-  
+}  
