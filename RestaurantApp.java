@@ -77,9 +77,35 @@ public class RestaurantApp {
 				case 5: 
 					//TODO - place an order
 					// set the status of the table from which the order is from VACANT/RESERVED to OCCUPIED
-					break;
-				default:
-					break;
+					public Order createOrder(){
+						Order order=new Order();
+						System.out.println("Enter Staff ID");
+						int staffID = s.nextInt();
+						order.setStaffID(staffID);
+						System.out.println("(1) Add Item");
+		                                System.out.println("(2) Remove Item");
+						System.out.println("(3) Exit");
+						int n = s.nextInt();
+						while (1 <= n && n <= 3) {
+							switch(n) {
+								case 1:
+									System.out.println("Enter ItemID to add");
+									int itemID = s.nextInt();
+									System.out.println("Enter Quantity");
+									int quantity = s.nextInt();
+									order.addItem(itemID,quantity);
+									break;
+								case 2:
+									System.out.println("Enter ItemID to remove");
+									int itemID = s.nextInt();
+									System.out.println("Enter Quantity");
+									int quantity = s.nextInt();
+									order.removeItem(itemID,quantity);
+									break;
+								case 3:
+									
+							}
+						}
 			}
 			
 			System.out.println("(1) Create reservation booking");
