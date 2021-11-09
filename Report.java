@@ -1,7 +1,5 @@
 import java.util.ArrayList;
-
-import java.util.List;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Report {
 
@@ -15,18 +13,21 @@ public class Report {
         orders.add(order);
     }
 
-    public void printReport(Date startDate, Date endDate){
+    public void printReport(LocalDateTime startDateTime, LocalDateTime endDateTime){
         double totalRevenue = 0;
 
         for(Order order : orders){
-            if(order.getDate().after(startDate) && order.getDate().before(endDate)){
+            if(isWithinRange(order.getDateTime(), startDateTime, endDateTime)){
                 System.out.println(order.printOrderInvoice());
-                totalRevenue += order.getTotalPrice();
+                totalRevenue += order.getPrice();
             }
         }
 
-        System.out.println("Total revenue: " + totalRevenue);
+        System.out.printf("Total revenue: %.2f\n", totalRevenue);
         
     }
     
+    boolean isWithinRange(LocalDateTime dt, LocalDateTime start, LocalDateTime end) {
+        return (dt.isBefore(start) || orderDateTime.isAfter(end));
+    }
 }
