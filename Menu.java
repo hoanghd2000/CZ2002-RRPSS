@@ -30,6 +30,16 @@ public class Menu {
             System.out.println("Item not found");
         }
     }
+    
+    public Double getItemPrice(int itemID) {
+        for (OrderableItems item : orderableItems) {
+            if (item.getItemID() == itemID) {
+                return item.getPrice();
+            }
+        }
+        
+        return null;
+    }
 
     public void printMenu(){
         System.out.println("Menu Items");
