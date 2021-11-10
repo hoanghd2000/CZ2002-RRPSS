@@ -4,8 +4,8 @@ import java.util.Hashtable;
 import java.util.Set;
 
 public class Order {
-    final float discount = 0.1; // Discount on final price for members
-    final float tax = 0.07;     // GST
+    static final float MEM_DISCOUNT = 0.1; // Discount on final price for members
+    static final float TAX = 0.07;     // GST
     private static int counter = 0;
     private int orderID;
     private Hashtable<OrderableItems, int> set;
@@ -79,9 +79,9 @@ public class Order {
 
     public double getSubtotal() { return price; }
 
-    public double getTax() { return price * tax; }
+    public double getTax() { return price * TAX; }
 
-    public double getDiscount() { return (price + getTax()) * discount; }
+    public double getDiscount() { return (price + getTax()) * MEM_DISCOUNT; }
 
     public double getFinalPrice() {        
         double p = price + getTax();
