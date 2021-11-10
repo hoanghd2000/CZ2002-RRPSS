@@ -74,6 +74,8 @@ public class Order {
         System.out.println("Specified item not currently in order.");
         return false;
     }
+    
+    public HashTable<OrderableItems, int> getItemSet() { return set; }
 
     public LocalDateTime getDateTime() { return dateTime; }
 
