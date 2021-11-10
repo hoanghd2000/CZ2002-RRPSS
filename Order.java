@@ -8,7 +8,7 @@ public class Order {
     final float tax = 0.07;     // GST
     private static int counter = 0;
     private int orderID;
-    private Hashtable<OrderableItems item, int quantity> set;
+    private Hashtable<OrderableItems, int> set;
     private double price;
     private int staffID;
     private LocalDateTime dateTime;
