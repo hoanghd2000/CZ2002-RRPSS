@@ -76,6 +76,15 @@ public class Order {
     }
     
     public HashTable<OrderableItems, int> getItemSet() { return set; }
+    
+    public int getItemQty(int itemID) {
+        for (OrderableItems i : set.keySet()) {
+            if (i.getItemID() == itemID) {
+                return set.get(i);
+            }
+        }
+        return 0;
+    }
 
     public LocalDateTime getDateTime() { return dateTime; }
 
