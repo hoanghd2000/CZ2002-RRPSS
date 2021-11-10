@@ -16,6 +16,7 @@ public class Menu {
         orderableItems.add(setPackage);
     }
 
+    // generate javadoc for this method
     public void removeItem(int itemID){
         boolean removed = false;
         for(OrderableItems item : orderableItems){
