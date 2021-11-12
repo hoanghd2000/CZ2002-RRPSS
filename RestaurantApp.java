@@ -110,14 +110,10 @@ public class RestaurantApp {
 					createOrder();
 					break;
 				case 6:
-					System.out.printf("Input the size of the new table: ");
-					int size = Integer.parseInt(s.next());
-					tableList.addTable(size);
+					tableList.addTable();
 					break;
 				case 7:
-					System.out.printf("Input the ID of the table to be removed: ");
-					int rID = Integer.parseInt(s.next());
-					tableList.removeTable(rID);
+					tableList.removeTable();
 					break;
 				case 8:
 					tableList.print();

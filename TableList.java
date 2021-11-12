@@ -5,6 +5,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 
 public class TableList implements Serializable {
 
@@ -30,7 +31,15 @@ public class TableList implements Serializable {
 	 * 
 	 * @param size
 	 */
-	public void addTable(int size) {
+	public void addTable() {
+		Scanner sc = new Scanner(System.in);
+		System.out.printf("Input the size of the new table: ");
+		int size = Integer.parseInt(sc.next());
+		while (size % 2 == 1 || size < 2 || size > 10) {
+			System.out.println("Table size must be an even number, min 2, max 10");
+			System.out.printf("Input the size of the new table: ");
+			size = Integer.parseInt(sc.next());
+		}
 		Table t = new Table(size);
 		this.tableList.put(t.getTableID(), t);
 	}
@@ -39,7 +48,10 @@ public class TableList implements Serializable {
 	 * 
 	 * @param tableID
 	 */
-	public void removeTable(int tableID) {
+	public void removeTable() {
+		Scanner sc = new Scanner(System.in);
+		System.out.printf("Input the ID of the table to be removed: ");
+		int tableID = Integer.parseInt(sc.next());
 		this.tableList.remove(tableID);
 	}
 
