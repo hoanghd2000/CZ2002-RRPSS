@@ -39,7 +39,7 @@ public class Staff extends Order{
     return jobTitle;
   }
   
-  public String setJobTitle(String jobTitle){
+  public void setJobTitle(String jobTitle){
     this.jobTitle=jobTitle;
   }
 }  
