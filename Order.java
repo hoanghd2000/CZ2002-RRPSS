@@ -4,21 +4,22 @@ import java.util.Hashtable;
 import java.util.Set;
 
 public class Order {
-    static final float MEM_DISCOUNT = 0.1; // Discount on final price for members
-    static final float TAX = 0.07;     // GST
+    static final float MEM_DISCOUNT = (float) 0.1; // Discount on final price for members
+    static final float TAX = (float) 0.07;     // GST
     private static int counter = 0;
     private int orderID;
-    private Hashtable<OrderableItems, int> set;
+    private Hashtable<OrderableItems, Integer> set;
     private double price;
     private int staffID;
+    private String staffName;
     private LocalDateTime dateTime;
     private boolean isMember;
     private int tableID;
 
-    public Order(int staffID, int tableID, boolean isMember) {
+    public Order(int staffID, int tableID, boolean isMember, String staffName) {
+        this.staffName = staffName;
         orderID = counter++;
-
-        set = new Hashtable<OrderableItems, int>();
+        set = new Hashtable<OrderableItems, Integer>();
         dateTime = LocalDateTime.now();
         price = 0;
         this.staffID = staffID;
@@ -75,7 +76,7 @@ public class Order {
         return false;
     }
     
-    public HashTable<OrderableItems, int> getItemSet() { return set; }
+    public Hashtable<OrderableItems, Integer> getItemSet() { return set; }
     
     public int getItemQty(int itemID) {
         for (OrderableItems i : set.keySet()) {
@@ -113,7 +114,7 @@ public class Order {
 
         System.out.println("======== Order Invoice ========");
         System.out.println("Order No: " + orderID + "\t\t" + dateTime.format(formatter));
-        System.out.println("Server: " + "\t\t\tTable No: " + tableID);    // TODO: Get Staff name (string) from ID
+        System.out.println("Server: " + staffName + "\t\t\tTable No: " + tableID);
         System.out.println("-------------------------------");
 
         // Print details of all items ordered

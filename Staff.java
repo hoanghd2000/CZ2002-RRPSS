@@ -1,15 +1,15 @@
-public class Staff extends Order{
+public class Staff{
   private String name;
   private char gender;
   private int employeeID;
   private String jobTitle;
   
   public Staff(String name, char gender, int employeeID, String jobTitle) {
-        this.name = name;
-        this.gender = gender;
-        this.employeeID = employeeID;
-        this.jobTitle = jobTitle;
-   }
+    this.name = name;
+    this.gender = gender;
+    this.employeeID = employeeID;
+    this.jobTitle = jobTitle;
+  }
   
   public String getName(){
     return name;

@@ -1,5 +1,6 @@
 import java.util.ArrayList;
-import java.util.HashTable;
+import java.util.Hashtable;
+import java.util.Set;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,21 +17,24 @@ public class Report {
     }
 
     public void printReport(LocalDateTime startDateTime, LocalDateTime endDateTime){
-        HashTable<OrderableItems, int> itemSet = new HashTable<OrderableItems, int>();
-        ArrayList<int> itemIDs = new ArrayList<int>;
+        Hashtable<OrderableItems, Integer> itemSet = new Hashtable<OrderableItems, Integer>();
+        ArrayList<Integer> itemIDs = new ArrayList<Integer>();
         double totalRevenue = 0;
         int qty;
+
+        Set<OrderableItems> orderItems = null;
+        Set<OrderableItems> reportItems = null;
         
         // Collate all items ordered within specified period
         for(Order order : orders){
             if(isWithinRange(order.getDateTime(), startDateTime, endDateTime)){
                 //order.printOrderInvoice();
-                Set<OrderableItems> orderItems = order.getItemSet().keySet();
-                Set<OrderableItems> reportItems = itemSet.keySet();
+                orderItems = order.getItemSet().keySet();
+                reportItems = itemSet.keySet();
                 
                 // For each item in current order, check if it is already included in report's set
                 for (OrderableItems i : orderItems) {
-                    qty = order.getItemQty(i.getItemID);
+                    qty = order.getItemQty(i.getItemID());
                     if (itemIDs.contains(i.getItemID())) {
                         // Add specified quantity of item to itemSet
                         itemSet.replace(i, itemSet.get(i) + qty);
@@ -57,13 +61,13 @@ public class Report {
         // Print a la carte items
         for (OrderableItems i : reportItems) {
             if (i.getItemID() < 200) {
-                System.out.printf("%-4d %-20s\n", set.get(i), i.getName());
+                System.out.printf("%-4d %-20s\n", itemSet.get(i), i.getName());
             }
         }
         // Print promo set items
         for (OrderableItems i : reportItems) {
             if (i.getItemID() >= 200) {
-                System.out.printf("%-4d %-20s\n", set.get(i), i.getName());
+                System.out.printf("%-4d %-20s\n", itemSet.get(i), i.getName());
             }
         }
         System.out.println("-------------------------------");
@@ -72,6 +76,6 @@ public class Report {
     }
     
     boolean isWithinRange(LocalDateTime dt, LocalDateTime start, LocalDateTime end) {
-        return (dt.isBefore(start) || orderDateTime.isAfter(end));
+        return (dt.isBefore(start) || dt.isAfter(end));
     }
 }

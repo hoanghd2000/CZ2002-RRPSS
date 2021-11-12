@@ -176,7 +176,7 @@ public class TableList implements Serializable {
 			Table table = tableList.get(tableId);
 			
 			// Print out each table's availability
-			System.out.printf("Table %d: Size: %d, Count: %d \n", table.getTableID(), table.getSize(), table.getCount());
+			System.out.printf("Table %d: Size: %d, Count: %d \n", table.getTableID(), table.getSize(), Table.getCount());
 		}
 	}
 }
