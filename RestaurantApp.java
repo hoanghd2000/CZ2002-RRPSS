@@ -14,14 +14,23 @@ public class RestaurantApp {
 		
 		initializeTableList();
 		tableList.print();
-		System.out.println("(1) Create reservation booking");
-		System.out.println("(2) Check/Remove reservation booking");
-		System.out.println("(3) Check table availability");
-		System.out.println("(4) Print order invoice");
-		System.out.println("(5) Place an order");
-		System.out.println("(6) Add a table");
-		System.out.println("(7) Remove a table");
-		System.out.println("(8) Print tableList");
+		System.out.println("(1) Configure restaurant");
+		// ADD AS SUB MENU
+		// System.out.println("(9) Print Menu");
+		// System.out.println("(10) Add Menu Item");
+		// System.out.println("(11) Remove Menu Item");
+		// System.out.println("(12) Add Promo Menu Item");
+		// System.out.println("(13) Remove Promo Menu Item");
+		// System.out.println("(6) Add a table");
+		// System.out.println("(7) Remove a table");
+		// System.out.println("(8) Print tableList");
+		System.out.println("(2) Reservations");
+		// System.out.println("(1) Create reservation booking");
+		// System.out.println("(2) Check/Remove reservation booking");
+		System.out.println("(3) Order");
+		// System.out.println("(3) Check table availability");
+		// System.out.println("(5) Place an order");
+		// System.out.println("(4) Print order invoice");
 		System.out.println("(9) Exit");
 		System.out.print("Enter the number of your choice: ");
 		int c = Integer.parseInt(s.next());
