@@ -1,5 +1,6 @@
 import java.io.*;
 import java.time.LocalDateTime;
+import java.util.Hashtable;
 import java.util.Scanner;
 
 enum TableStatus{OCCUPIED, VACANT, RESERVED;}
