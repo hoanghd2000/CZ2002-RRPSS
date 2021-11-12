@@ -26,11 +26,10 @@ public class Menu {
             System.out.println("Item not found");
         }
         System.out.println("Item removed");
-        
     }
     
     public Double getItemPrice(int itemID) {
-        OrderableItems item = orderableItems.remove(itemID);
+        OrderableItems item = orderableItems.get(itemID);
         if(item == null){
             System.out.println("Item not found");
             return null;
