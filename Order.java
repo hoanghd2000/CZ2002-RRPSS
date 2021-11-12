@@ -109,6 +109,36 @@ public class Order {
 
     public void setStaffID(int staffID) { this.staffID = staffID; }
 
+    public void viewOrder() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE dd/MM/yyyy h:mm a");
+        System.out.println("=== View Order (Payment Pending) ===");
+        System.out.println("Order No: " + orderID + "\t\t" + dateTime.format(formatter));
+        System.out.println("Server: " + staffName + "\t\t\tTable No: " + tableID);
+        System.out.println("-------------------------------");
+
+        // Print details of all items ordered
+        Set<OrderableItems> keys = set.keySet();
+        System.out.printf("%-4s %-20s %6s\n", "Qty", "Item", "Price");
+        System.out.printf("%-4s %-20s %6s\n", "---", "----", "-----");
+
+        // Print a la carte items
+        for (OrderableItems i : keys) {
+            if (i.getItemID() < 200) {
+                System.out.printf("%-4d %-20s %6.2f\n", set.get(i), i.getName(), i.getPrice());
+            }
+        }
+        // Print promo set items
+        for (OrderableItems i : keys) {
+            if (i.getItemID() >= 200) {
+                System.out.printf("%-4d %-20s %6.2f\n", set.get(i), i.getName(), i.getPrice());
+            }
+        }
+        System.out.println("-------------------------------");
+
+        // Print subtotal only
+        System.out.printf("%22s %9.2f\n", "Subtotal", getSubtotal());
+    }
+    
     public void printOrderInvoice() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE dd/MM/yyyy h:mm a");
 
