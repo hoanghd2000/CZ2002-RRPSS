@@ -41,6 +41,10 @@ public class Menu {
     public OrderableItems getItem(int itemID) {
         return orderableItems.get(itemID);
     }
+    
+    public OrderableItems getItem(int item) {
+    	return null;
+    }
 
     public void printMenu(){
         System.out.println("Menu Items");

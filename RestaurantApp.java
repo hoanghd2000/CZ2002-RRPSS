@@ -9,10 +9,11 @@ enum TableStatus{OCCUPIED, VACANT, RESERVED;}
 
 public class RestaurantApp {
 
-	public static Hashtable<Integer, Order> currentOrders = new Hashtable<Integer, Order>();
-	public static TableList tableList = new TableList();
-	public static StaffList staffList = new StaffList();
-	public static Menu menu = new Menu();
+	private static Hashtable<Integer, Order> currentOrders = new Hashtable<Integer, Order>();
+	private static TableList tableList = new TableList();
+	private static StaffList staffList = new StaffList();
+	private static Menu menu = new Menu();
+	private static Report report = new Report();
 	
 	public static void main(String args[]) {
 		
@@ -102,7 +103,7 @@ public class RestaurantApp {
 					Order order = currentOrders.get(tableID);
 					order.printOrderInvoice();
 					Table table = tableList.getTableList().get(tableID);
-					Report.addOrder(order);
+					report.addOrder(order);
                     table.setStatus(TableStatus.VACANT);
 					break;
 				case 5: 
@@ -142,25 +143,28 @@ public class RestaurantApp {
 	}
 
 	public static void createOrder(){
+		Scanner s = new Scanner(System.in);
 		System.out.println("Enter Staff ID");
 		int staffID = s.nextInt();
 		System.out.println("Member?");
 		boolean isMember = s.nextBoolean();
-		System.out.println("Do you have a reservation?");
-		boolean reserved = s.nextBoolean();
+		System.out.println("Do you have a reservation? Y/N");
+		boolean reserved = s.next().equalsIgnoreCase("Y")? true:false;
+		int tableID;
+		Order order;
 		if(reserved)
 		{
-			contact = s.next();
-			 Reservation rez = tableList.findRez(contact);
-			int tableID=rez.getTableNumber();
-			Order order=new Order(staffID,tableID,isMember, staffList.getStaff(staffID).getName());
+			String contact = s.next();
+			Reservation rez = tableList.findRez(contact);
+			tableID = rez.getTableNumber();
+			order = new Order(staffID,tableID,isMember, staffList.getStaff(staffID).getName());
 		}
 		else
 		{
 			tableList.checkTableAvailability();
 			System.out.println("Enter Table ID?");
-			int tableID= s.next();
-			Order order=new Order(staffID, tableID, isMember, staffList.getStaff(staffID).getName());
+			tableID = s.nextInt();
+			order = new Order(staffID, tableID, isMember, staffList.getStaff(staffID).getName());
 		}
 		currentOrders.put(tableID, order);
 		Table table = tableList.getTableList().get(tableID);
@@ -174,18 +178,22 @@ public class RestaurantApp {
 				case 1:
 					System.out.println("Enter ItemID to add");
 					int itemID = s.nextInt();
+					OrderableItems orderableItem = menu.getItem(itemID);
 					System.out.println("Enter Quantity");
 					int quantity = s.nextInt();
-					order.addItem(itemID,quantity);
+					
+					order.addItem(orderableItem, quantity);
 					System.out.println("Next Choice");
 					n = s.nextInt();
 					break;
 				case 2:
 					System.out.println("Enter ItemID to remove");
-					int itemID = s.nextInt();
+					itemID = s.nextInt();
+					orderableItem = menu.getItem(itemID);
 					System.out.println("Enter Quantity");
-					int quantity = s.nextInt();
-					order.removeItem(itemID,quantity);
+					quantity = s.nextInt();
+					
+					order.removeItem(orderableItem,quantity);
 					System.out.println("Next Choice");
 					n = s.nextInt();
 					break;
@@ -193,8 +201,11 @@ public class RestaurantApp {
 					System.out.println("Order Created!");
 					n = -1;
 					break;
+				case 4:
+					menu.printMenu();
 			}
 		}
+		s.close();
 	}
 	
 	public static void initializeTableList() {
