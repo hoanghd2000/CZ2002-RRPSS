@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Table {
+public class Table implements Serializable{
 
 	private int tableID;
 	private int size;
@@ -35,6 +36,14 @@ public class Table {
 
 	public static int getCount() {
 		return count;
+	}
+	
+	/**
+	 * 
+	 * @param count
+	 */
+	public static void setCount(int n) {
+		count = n;
 	}
 
 	public int getSize() {

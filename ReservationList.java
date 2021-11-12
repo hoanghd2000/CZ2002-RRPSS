@@ -1,5 +1,5 @@
 
-
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,7 +7,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-public class ReservationList {
+public class ReservationList implements Serializable{
 
 	private List<Reservation> reservationList;
 
@@ -55,7 +55,7 @@ public class ReservationList {
 		Iterator<Reservation> rl = reservationList.iterator();
 		while(rl.hasNext()) {
 			Reservation r = rl.next();
-			if (r.getContact() == contact) {
+			if (r.getContact().compareTo(contact) == 0) {
 				return r;
 			}
 		}

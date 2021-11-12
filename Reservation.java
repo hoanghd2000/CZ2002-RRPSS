@@ -1,8 +1,8 @@
 
-
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Reservation {
+public class Reservation implements Serializable{
 
 	private LocalDateTime dateTime;
 	private int paxNumber;
@@ -87,8 +87,7 @@ public class Reservation {
 	}
 
 	public void print() {
-		System.out.printf("Reservation for %s, %s: Table %d, ${dateTime}, %d\n", name, contact, tableNumber, paxNumber);
-		
+		System.out.printf("Reservation for %s, %s: Table %d for %d pax at %s\n", name, contact, tableNumber, paxNumber, dateTime.toString());
 	}
 
 }
