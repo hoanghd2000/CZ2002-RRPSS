@@ -1,4 +1,5 @@
 import java.util.Hashtable;
+import java.util.Set;
 
 public class PromotionalSetPackage extends OrderableItems{
 
@@ -6,7 +7,7 @@ public class PromotionalSetPackage extends OrderableItems{
     private static int counter = 200;
 
     // This hashtable has the itemID mapped to the quantity of that itemID
-    Hashtable<Integer, Integer> set = new Hashtable<Integer, Integer>();
+    Hashtable<MenuItem, Integer> set = new Hashtable<MenuItem, Integer>();
 
     private double price;
 
@@ -61,19 +62,58 @@ public class PromotionalSetPackage extends OrderableItems{
         this.description = description;
     }
 
-    public void addItem(int itemID, int quantity) {
+    public void addItem(MenuItem item, int quantity) {
+        boolean found = false;
+        Set<MenuItem> keys = set.keySet();
+        for (MenuItem key : keys) {
+            if (key.getItemID() == item.getItemID()) {
+                int currentQuantity = set.get(key);
+                set.put(key, currentQuantity + quantity);
+                found = true;
+                System.out.println("Item already existed in the promo. Quantity has been increased!");
+            }
+        }
+        if (!found) {
+            set.put(item, quantity);
+            System.out.println("Item added to promo!");
+        }
+        /*
         if(this.set.containsKey(itemID)){
             this.set.replace(itemID, this.set.get(itemID) + quantity);
         }
         else{
             this.set.put(itemID, quantity);
         }
+        */
     }
 
     // remove item from the set
-    public void removeItem(int itemID, int quantity) {
+    public void removeItem(MenuItem item, int quantity) {
+        Set<MenuItem> keys = set.keySet();
+        boolean found = false;
+        for (MenuItem key : keys) {
+            if (key.getItemID() == item.getItemID()) {
+                int currentQuantity = set.get(key);
+                if (currentQuantity > quantity) {
+                    set.put(key, currentQuantity - quantity);
+                    System.out.println("Updated quantity for this item: " + (currentQuantity - quantity));
+                }
+                else if (currentQuantity == quantity) {
+                    set.remove(key);
+                    System.out.println("Item completely removed from promo!");
+                }
+                else {
+                    System.out.println("Not enough quantity to remove!");
+                }
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("Item not found in promo!");
+        }
+        /*
         if(this.set.containsKey(itemID) && this.set.get(itemID) >= quantity){
             this.set.replace(itemID, this.set.get(itemID) - quantity);
-        }
+        }*/
     }
 }

@@ -1,14 +1,25 @@
 public class Staff{
+  private static int count = 0;
   private String name;
   private char gender;
   private int employeeID;
   private String jobTitle;
   
-  public Staff(String name, char gender, int employeeID, String jobTitle) {
+  public Staff(String name, char gender, String jobTitle) {
     this.name = name;
     this.gender = gender;
-    this.employeeID = employeeID;
+    this.employeeID = count;
+    count++;
     this.jobTitle = jobTitle;
+  }
+
+  //getters and setter for count
+  public static int getCount(){
+    return count;
+  }
+
+  public static void setCount(int newCount){
+    count = newCount;
   }
   
   public String getName(){
