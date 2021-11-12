@@ -70,12 +70,23 @@ public class RestaurantApp {
 				case 4:
 					//TODO - print invoice
 					// set the status of the table from which the order is from OCCUPIED to VACANT
-					System.out.println("Enter TableID?");
+					System.out.print("Enter TableID: ");
 					int tableID = s.nextInt();
+					while (tableList.getTableList().get(tableID).getStatus() != TableStatus.OCCUPIED) {
+						System.out.println("Please input an OCCUPIED table!");
+						System.out.print("Enter TableID: ");
+						tableID = s.nextInt();
+					}
 					Order order = currentOrders.get(tableID);
+					
+					// Print invoice
 					order.printOrderInvoice();
-					Table table = tableList.getTableList().get(tableID);
+					
+					// Add the order to the report object
 					report.addOrder(order);
+					
+					// Change the TableStatus to VACANT
+					Table table = tableList.getTableList().get(tableID);
                     table.setStatus(TableStatus.VACANT);
 					break;
 				case 5: 
