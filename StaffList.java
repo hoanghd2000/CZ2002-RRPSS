@@ -15,9 +15,9 @@ public class StaffList implements Serializable{
         return staffList;
     }
 
-    public void addStaff(String name, char gender, int employeeID, String jobTitle) {
+    public void addStaff(String name, char gender, String jobTitle) {
         // create the staff object and add to array list
-        staffList.add(new Staff(name, gender, employeeID, jobTitle));
+        staffList.add(new Staff(name, gender, jobTitle));
     }
 
     public void removeStaff(int employeeID) {

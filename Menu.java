@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Set;
 
@@ -23,8 +24,16 @@ public class Menu implements Serializable{
         OrderableItems item = orderableItems.remove(itemID);
         if(item == null){
             System.out.println("Item not found");
+            return;
+        } else {
+            Collection<OrderableItems> items = orderableItems.values();
+            for(OrderableItems i : items){
+                if(i.getItemID() > 199 && ((PromotionalSetPackage) i).containsMenuItem((MenuItem) item)){
+                    orderableItems.remove(i.getItemID());
+                }
+            }
         }
-        System.out.println("Item removed");
+        System.out.println("Item and all promo packages containing the item removed successfully.");
     }
     
     public Double getItemPrice(int itemID) {
