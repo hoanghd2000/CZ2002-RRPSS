@@ -1,57 +1,60 @@
-import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Set;
 
 public class Menu {
     
-    private ArrayList<OrderableItems> orderableItems;
+    //private ArrayList<OrderableItems> orderableItems;
+
+    private Hashtable<Integer, OrderableItems> orderableItems;
 
     public Menu() {
-        orderableItems = new ArrayList<OrderableItems>();
+        orderableItems = new Hashtable<Integer, OrderableItems>();
     }
 
     public void addMenuItem(MenuItem item) {
-        orderableItems.add(item);
+        orderableItems.put(item.getItemID(), item);
     }
 
     public void addPromotionalSetPackage(PromotionalSetPackage setPackage) {
-        orderableItems.add(setPackage);
+        orderableItems.put(setPackage.getItemID(), setPackage);
     }
 
     // generate javadoc for this method
     public void removeItem(int itemID){
-        boolean removed = false;
-        for(OrderableItems item : orderableItems){
-            if(item.getItemID() == itemID){
-                orderableItems.remove(item);
-                System.out.println("Item removed");
-                removed = true;
-                break;
-            }
-        }
-        if(!removed){
+        OrderableItems item = orderableItems.remove(itemID);
+        if(item == null){
             System.out.println("Item not found");
         }
+        System.out.println("Item removed");
+        
     }
     
     public Double getItemPrice(int itemID) {
-        for (OrderableItems item : orderableItems) {
-            if (item.getItemID() == itemID) {
-                return item.getPrice();
-            }
+        OrderableItems item = orderableItems.remove(itemID);
+        if(item == null){
+            System.out.println("Item not found");
+            return null;
         }
-        
-        return null;
+        return item.getPrice();
+    }
+
+    public OrderableItems getItem(int itemID) {
+        return orderableItems.get(itemID);
     }
 
     public void printMenu(){
         System.out.println("Menu Items");
         System.out.println("Ala Carte");
-        for(OrderableItems item : orderableItems){
-            if(item.getItemID() < 200) System.out.println(item.getItemID() + " " + item.getName() + " " + item.getPrice());
+        Set<Integer> set = orderableItems.keySet();
+        for(Integer i : set){
+            if(orderableItems.get(i).getItemID() < 200)
+            System.out.println(orderableItems.get(i).getItemID() + " " + orderableItems.get(i).getName() + " " + orderableItems.get(i).getPrice());
         }
         System.out.println("================");
         System.out.println("Promotional Set Packages");
-        for(OrderableItems item : orderableItems){
-            if(item.getItemID() >= 200) System.out.println(item.getItemID() + " " + item.getName() + " " + item.getPrice());
+        for(Integer i : set){
+            if(orderableItems.get(i).getItemID() >= 200)
+            System.out.println(orderableItems.get(i).getItemID() + " " + orderableItems.get(i).getName() + " " + orderableItems.get(i).getPrice());
         }
     }
 }
