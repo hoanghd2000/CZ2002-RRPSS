@@ -5,8 +5,6 @@ import java.util.Scanner;
 
 enum TableStatus{OCCUPIED, VACANT, RESERVED;}
 
-/* TODO - Create the staffList for this class */
-
 public class RestaurantApp {
 
 	private static Hashtable<Integer, Order> currentOrders = new Hashtable<Integer, Order>();
@@ -16,20 +14,18 @@ public class RestaurantApp {
 	private static Report report = new Report();
 	
 	public static void main(String args[]) {
+		// Load data from files/Create files to store data
+		initializeData();
+		
 		Scanner s = new Scanner(System.in);
-		initializeTableList();
-		tableList.print();
-		System.out.println("(1) Configure restaurant");
+		System.out.println("(1) Configure Restaurant");
 		System.out.println("(2) Reservations");
 		System.out.println("(3) Order");
-		// System.out.println("(3) Check table availability");
-		// System.out.println("(5) Place an order");
-		// System.out.println("(4) Print order invoice");
-		System.out.println("(9) Exit");
+		System.out.println("(5) Exit");
 		System.out.print("Choose an option: ");
 		int c = s.nextInt();
 		
-		while (1 <= c && c <= 9) {
+		while (1 <= c && c <= 3) {
 			switch(c) {
 				case 1:
 					subMenuOne();
@@ -38,58 +34,24 @@ public class RestaurantApp {
 					subMenuTwo();
 					break;
 				case 3:
-					tableList.checkTableAvailability();
+					subMenuThree();
 					break;
-				case 4:
-					//TODO - print invoice
-					// set the status of the table from which the order is from OCCUPIED to VACANT
-					System.out.print("Enter TableID: ");
-					int tableID = s.nextInt();
-					while (tableList.getTableList().get(tableID).getStatus() != TableStatus.OCCUPIED) {
-						System.out.println("Please input an OCCUPIED table!");
-						System.out.print("Enter TableID: ");
-						tableID = s.nextInt();
-					}
-					Order order = currentOrders.get(tableID);
-					
-					// Print invoice
-					order.printOrderInvoice();
-					
-					// Add the order to the report object
-					report.addOrder(order);
-					
-					// Change the TableStatus to VACANT
-					Table table = tableList.getTableList().get(tableID);
-                    table.setStatus(TableStatus.VACANT);
-					break;
-				case 5: 
-					createOrder();
-					break;
-				case 9:
-					// menu.addMenuItem(new MenuItem("test1", "just a trial object", 9.99, "dessert"));
-					// System.out.println("Item added!");
-					menu.printMenu();
-					// menu.removeItem(0);
-
 				default:
 					System.out.println("Invalid input!");
 					break;
 			}
 			
-			System.out.println("(1) Create reservation booking");
-			System.out.println("(2) Check/Remove reservation booking");
-			System.out.println("(3) Check table availability");
-			System.out.println("(4) Print order invoice");
-			System.out.println("(5) Place an order");
-			System.out.println("(6) Add a table");
-			System.out.println("(7) Remove a table");
-			System.out.println("(8) Print tableList");
-			System.out.println("(9) Exit");
-			System.out.print("Enter the number of your choice: ");
-			c = Integer.parseInt(s.next());
+			System.out.println("(1) Configure Restaurant");
+			System.out.println("(2) Reservations");
+			System.out.println("(3) Order");
+			System.out.println("(5) Exit");
+			System.out.print("Choose an option: ");
+			c = s.nextInt();
 		}
-		saveTableList();
 		s.close();
+		
+		// Save data to file
+		saveData();
 	}
 
 	public static void subMenuOne(){
@@ -399,6 +361,7 @@ public class RestaurantApp {
 				 		 			tableList.removeRez(rez);
 				 	 			}
 				 	 		}
+				 	 		break;
 				 	 	default:
 							break;
 				 	}
@@ -415,7 +378,40 @@ public class RestaurantApp {
 			c = s.nextInt();
 		}
 	}
-
+	
+	public static void subMenuThree() {
+		Scanner s = new Scanner(System.in);
+		System.out.println("(1) Check table availability");
+		System.out.println("(2) Place an order");
+		System.out.println("(3) Print order invoice");
+		System.out.println("(4) Exit");
+		System.out.print("Choose an option: ");
+		int c = s.nextInt();
+		
+		while (1 <= c && c <= 3) {
+			switch(c) {
+				case 1:
+					tableList.checkTableAvailability();
+					break;
+				 case 2:
+					 createOrder();
+				 	break;
+				 case 3:
+					 printInvoice();
+					 break;
+				default:
+					System.out.println("Invalid input!");
+					break;
+			}
+			
+			System.out.println("(1) Check table availability");
+			System.out.println("(2) Place an order");
+			System.out.println("(3) Print order invoice");
+			System.out.println("(4) Exit");
+			System.out.print("Choose an option: ");
+			c = s.nextInt();
+		}
+	}
 	public static void createOrder(){
 		Scanner s = new Scanner(System.in);
 		
@@ -504,8 +500,31 @@ public class RestaurantApp {
 		System.out.println("Order Created!");
 	}
 	
-	public static void initializeTableList() {
-		String tableFile = "table";
+	public static void printInvoice() {
+		Scanner s = new Scanner(System.in);
+		
+		System.out.print("Enter TableID: ");
+		int tableID = s.nextInt();
+		while (tableList.getTableList().get(tableID).getStatus() != TableStatus.OCCUPIED) {
+			System.out.println("Please input an OCCUPIED table!");
+			System.out.print("Enter TableID: ");
+			tableID = s.nextInt();
+		}
+		Order order = currentOrders.get(tableID);
+		
+		// Print invoice
+		order.printOrderInvoice();
+		
+		// Add the order to the report object
+		report.addOrder(order);
+		
+		// Change the TableStatus to VACANT
+		Table table = tableList.getTableList().get(tableID);
+        table.setStatus(TableStatus.VACANT);
+	}
+	
+	public static void initializeData() {
+		String tableFile = "tables";
 		String menuFile = "menu";
 		String staffFile = "staff";
 
@@ -545,6 +564,10 @@ public class RestaurantApp {
 			try {
 				FileOutputStream foStream = new FileOutputStream(tableFile);
 				foStream.close();
+				foStream = new FileOutputStream(menuFile);
+				foStream.close();
+				foStream = new FileOutputStream(staffFile);
+				foStream.close();
 			}
 			catch (FileNotFoundException er) {
 				System.out.println("IOError: File not found!" + tableFile);
@@ -563,8 +586,8 @@ public class RestaurantApp {
 		}
 	}
 	
-	public static void saveTableList() {
-		String tableFile = "table";
+	public static void saveData() {
+		String tableFile = "tables";
 		String menuFile = "menu";
 		String staffFile = "staff";
 
