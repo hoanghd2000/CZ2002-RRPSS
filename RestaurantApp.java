@@ -401,7 +401,7 @@ public class RestaurantApp {
 				tableID = s.nextInt();
 		}
 		Order order = new Order(staffID, tableID, isMember, staffList.getStaff(staffID).getName());
-		currentOrders.put(tableID, order); // needa check
+		currentOrders.put(tableID, order);
 		
 		// Set TableStatus to OCCUPIED after order
 		Table table = tableList.getTableList().get(tableID);
