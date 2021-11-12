@@ -178,7 +178,10 @@ public class RestaurantApp {
 						System.out.println("Enter the quantity of the item you wish to add to the promo: ");
 						int quantity = scanner.nextInt();
 						OrderableItems itemToAdd = menu.getItem(itemID);
-						newPromo.addItem((MenuItem) itemToAdd, quantity);
+						if(itemToAdd == null){
+							System.out.println("Please enter a valid itemID!");
+							continue;
+						} else newPromo.addItem((MenuItem) itemToAdd, quantity);
 					}
 					menu.addPromotionalSetPackage(newPromo);
 					System.out.println("Item added!");

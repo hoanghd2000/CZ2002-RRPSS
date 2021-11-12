@@ -77,14 +77,6 @@ public class PromotionalSetPackage extends OrderableItems{
             set.put(item, quantity);
             System.out.println("Item added to promo!");
         }
-        /*
-        if(this.set.containsKey(itemID)){
-            this.set.replace(itemID, this.set.get(itemID) + quantity);
-        }
-        else{
-            this.set.put(itemID, quantity);
-        }
-        */
     }
 
     // remove item from the set
@@ -111,9 +103,15 @@ public class PromotionalSetPackage extends OrderableItems{
         if (!found) {
             System.out.println("Item not found in promo!");
         }
-        /*
-        if(this.set.containsKey(itemID) && this.set.get(itemID) >= quantity){
-            this.set.replace(itemID, this.set.get(itemID) - quantity);
-        }*/
+    }
+
+    public boolean containsMenuItem(MenuItem item) {
+        Set<MenuItem> keys = set.keySet();
+        for (MenuItem key : keys) {
+            if (key.getItemID() == item.getItemID()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
