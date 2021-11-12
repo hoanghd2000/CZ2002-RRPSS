@@ -7,10 +7,10 @@ enum TableStatus{OCCUPIED, VACANT, RESERVED;}
 
 public class RestaurantApp {
 
+	private static Hashtable<Integer, Order> currentOrders = new Hashtable<Integer, Order>();
 	private static TableList tableList = new TableList();
 	private static StaffList staffList = new StaffList();
 	private static Menu menu = new Menu();
-	private static Hashtable<Integer, Order> currentOrders = new Hashtable<Integer, Order>();
 	private static Report report = new Report();
 	
 	public static void main(String args[]) {
@@ -159,6 +159,7 @@ public class RestaurantApp {
 			System.out.println("(10) Exit Submenu");
 			choice = scanner.nextInt();
 		} while(choice != 10);
+		scanner.close();
 		System.out.println("Returning to main menu...");
 		System.out.println("=========================");
 	}
@@ -299,6 +300,7 @@ public class RestaurantApp {
 			System.out.println("(3) Return to restaurant configuration menu");
 			choice = scanner.nextInt();
 		} while (choice != 3);
+		scanner.close();
 		System.out.println("Returning to restaurant configuration submenu");
 	}
 	
@@ -381,22 +383,30 @@ public class RestaurantApp {
 		Scanner s = new Scanner(System.in);
 		System.out.println("(1) Check table availability");
 		System.out.println("(2) Place an order");
-		System.out.println("(3) Print order invoice");
-		System.out.println("(4) Exit");
+		System.out.println("(3) Update an order");
+		System.out.println("(4) View a current order");
+		System.out.println("(5) Print order invoice");
+		System.out.println("(6) Exit");
 		System.out.print("Choose an option: ");
 		int c = s.nextInt();
 		
-		while (1 <= c && c <= 3) {
+		while (1 <= c && c <= 5) {
 			switch(c) {
 				case 1:
 					tableList.checkTableAvailability();
 					break;
-				 case 2:
-					 createOrder();
+				case 2:
+					createOrder();
 				 	break;
-				 case 3:
-					 printInvoice();
-					 break;
+				case 3:
+					updateOrder();
+					break;
+				case 4:
+					viewOrder();
+					break
+				case 5:
+					printInvoice();
+					break;
 				default:
 					System.out.println("Invalid input!");
 					break;
@@ -498,16 +508,84 @@ public class RestaurantApp {
 		System.out.println("Order Created!");
 	}
 	
+	public static void updateOrder() {
+		Scanner s = new Scanner(System.in);
+		
+		System.out.print("Enter TableID: ");
+		int tableID = s.nextInt();
+		if (tableList.getTableList().get(tableID).getStatus() != TableStatus.OCCUPIED) {
+			System.out.println("No orders currently being served at this table!");
+			return;
+		}
+		
+		Order order = currentOrders.get(tableID);
+		int n;
+		
+		do {
+			System.out.println("UPDATE ORDER");
+			System.out.println("(1) Add Item");
+			System.out.println("(2) Remove Item");
+			System.out.println("(3) Print Menu");
+			System.out.println("(4) Done! Confirm Order Update");
+			System.out.print("Enter a choice: ");
+			n = s.nextInt();
+			switch(n) {
+				case 1:
+					System.out.print("Enter ItemID to add: ");
+					int itemID = s.nextInt();
+					OrderableItems orderableItem = menu.getItem(itemID);
+					System.out.println("Enter Quantity: ");
+					int quantity = s.nextInt();
+					
+					order.addItem(orderableItem, quantity);
+					// System.out.println("Item Added!");
+					break;
+				case 2:
+					System.out.println("Enter ItemID to remove: ");
+					itemID = s.nextInt();
+					orderableItem = menu.getItem(itemID);
+					System.out.println("Enter Quantity: ");
+					quantity = s.nextInt();
+					
+					order.removeItem(orderableItem, quantity);
+					// System.out.println("Item Removed!");
+					break;
+				case 3:
+					menu.printMenu();
+					break;
+				case 4:
+					System.out.println("Order updated!");
+					break;
+				default:
+					System.out.println("Invalid input!");
+					break;
+			}
+		} while (1 <= n && n <= 3);
+	}
+	
+	public static void viewOrder() {
+		Scanner s = new Scanner(System.in);
+		
+		System.out.print("Enter TableID: ");
+		if (tableList.getTableList().get(tableID).getStatus() != TableStatus.OCCUPIED) {
+			System.out.println("No orders currently being served at this table!");
+			return;
+		}
+		
+		Order order = currentOrders.get(tableID);
+		order.viewOrder();
+	}
+	
 	public static void printInvoice() {
 		Scanner s = new Scanner(System.in);
 		
 		System.out.print("Enter TableID: ");
 		int tableID = s.nextInt();
-		while (tableList.getTableList().get(tableID).getStatus() != TableStatus.OCCUPIED) {
-			System.out.println("Please input an OCCUPIED table!");
-			System.out.print("Enter TableID: ");
-			tableID = s.nextInt();
+		if (tableList.getTableList().get(tableID).getStatus() != TableStatus.OCCUPIED) {
+			System.out.println("No orders currently being served at this table!");
+			return;
 		}
+		
 		Order order = currentOrders.get(tableID);
 		
 		// Print invoice
@@ -518,7 +596,7 @@ public class RestaurantApp {
 		
 		// Change the TableStatus to VACANT
 		Table table = tableList.getTableList().get(tableID);
-        table.setStatus(TableStatus.VACANT);
+        	table.setStatus(TableStatus.VACANT);
 	}
 	
 	public static void initializeData() {
