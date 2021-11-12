@@ -88,6 +88,7 @@ public class RestaurantApp {
 					Order order = currentOrders.get(tableID);
 					order.printOrderInvoice();
 					Table table = tableList.getTableList().get(tableID);
+					Report.addOrder(order);
                                         table.setStatus(TableStatus.VACANT);
 					break;
 				case 5: 
