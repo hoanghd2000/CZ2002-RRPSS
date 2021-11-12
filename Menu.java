@@ -1,10 +1,9 @@
+import java.io.Serializable;
 import java.util.Hashtable;
 import java.util.Set;
 
-public class Menu {
+public class Menu implements Serializable{
     
-    //private ArrayList<OrderableItems> orderableItems;
-
     private Hashtable<Integer, OrderableItems> orderableItems;
 
     public Menu() {

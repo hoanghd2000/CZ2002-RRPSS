@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StaffList {
+public class StaffList implements Serializable{
     
     // create a private arraylist of staff objects
     private ArrayList<Staff> staffList;

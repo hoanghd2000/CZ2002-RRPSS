@@ -1,4 +1,6 @@
-abstract class OrderableItems {
+import java.io.Serializable;
+
+abstract class OrderableItems implements Serializable{
 
     // returns the price of the item
     public abstract double getPrice();

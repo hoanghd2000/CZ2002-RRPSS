@@ -42,7 +42,7 @@ public class RestaurantApp {
 		System.out.print("Enter the number of your choice: ");
 		int c = Integer.parseInt(s.next());
 		
-		while (1 <= c && c <= 8) {
+		while (1 <= c && c <= 9) {
 			switch(c) {
 				case 1:
 					System.out.print("Enter date (YYYY-MM-DD): ");
@@ -122,6 +122,12 @@ public class RestaurantApp {
 				case 8:
 					tableList.print();
 					break;
+				case 9:
+					// menu.addMenuItem(new MenuItem("test1", "just a trial object", 9.99, "dessert"));
+					// System.out.println("Item added!");
+					menu.printMenu();
+					// menu.removeItem(0);
+
 				default:
 					break;
 			}
@@ -210,14 +216,31 @@ public class RestaurantApp {
 	
 	public static void initializeTableList() {
 		String tableFile = "table";
-		
+		String menuFile = "menu";
+		String staffFile = "staff";
+
 		try {
+			/* FOR TABLES */
 			FileInputStream fiStream = new FileInputStream(tableFile);
 			BufferedInputStream biStream = new BufferedInputStream(fiStream);
 			ObjectInputStream diStream = new ObjectInputStream(biStream);
 			tableList = (TableList)diStream.readObject();
 			Table.setCount(diStream.readInt());
 			diStream.close();
+
+			/* FOR MENU */
+			FileInputStream fiStreamMenu = new FileInputStream(menuFile);
+			BufferedInputStream biStreamMenu = new BufferedInputStream(fiStreamMenu);
+			ObjectInputStream diStreamMenu = new ObjectInputStream(biStreamMenu);
+			menu = (Menu)diStreamMenu.readObject();
+			diStreamMenu.close();
+
+			/* FOR STAFF */
+			FileInputStream fiStreamStaff = new FileInputStream(staffFile);
+			BufferedInputStream biStreamStaff = new BufferedInputStream(fiStreamStaff);
+			ObjectInputStream diStreamStaff = new ObjectInputStream(biStreamStaff);
+			staffList = (StaffList)diStreamStaff.readObject();
+			diStreamStaff.close();
 			
 		}
 		catch (ClassNotFoundException e) {
@@ -251,21 +274,38 @@ public class RestaurantApp {
 	
 	public static void saveTableList() {
 		String tableFile = "table";
-		
+		String menuFile = "menu";
+		String staffFile = "staff";
+
 		try {
+			/* FOR TABLES */
 			FileOutputStream foStream = new FileOutputStream(tableFile);
 			BufferedOutputStream boStream = new BufferedOutputStream(foStream);
 			ObjectOutputStream doStream = new ObjectOutputStream(boStream);
 			doStream.writeObject(tableList);
 			doStream.writeInt(Table.getCount());
 			doStream.close();
+
+			/* FOR MENU */
+			FileOutputStream foStreamMenu = new FileOutputStream(menuFile);
+			BufferedOutputStream boStreamMenu = new BufferedOutputStream(foStreamMenu);
+			ObjectOutputStream doStreamMenu = new ObjectOutputStream(boStreamMenu);
+			doStreamMenu.writeObject(menu);
+			doStreamMenu.close();
+
+			/* FOR STAFF*/
+			FileOutputStream foStreamStaff = new FileOutputStream(staffFile);
+			BufferedOutputStream boStreamStaff = new BufferedOutputStream(foStreamStaff);
+			ObjectOutputStream doStreamStaff = new ObjectOutputStream(boStreamStaff);
+			doStreamStaff.writeObject(staffList);
+			doStreamStaff.close();
 		}
 		catch (FileNotFoundException e) {
 			System.out.println("IOError: File not found!" + tableFile);
 			System.exit(0);
 		}
 		catch (IOException e) {
-			System.out.println("File IO Error!" + e.getMessage());
+			System.out.println("File IO Error! " + e.getMessage());
 			System.exit(0);
 		}
 	}
