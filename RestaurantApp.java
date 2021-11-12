@@ -159,7 +159,6 @@ public class RestaurantApp {
 			System.out.println("(10) Exit Submenu");
 			choice = scanner.nextInt();
 		} while(choice != 10);
-		scanner.close();
 		System.out.println("Returning to main menu...");
 		System.out.println("=========================");
 	}
@@ -300,7 +299,6 @@ public class RestaurantApp {
 			System.out.println("(3) Return to restaurant configuration menu");
 			choice = scanner.nextInt();
 		} while (choice != 3);
-		scanner.close();
 		System.out.println("Returning to restaurant configuration submenu");
 	}
 	
