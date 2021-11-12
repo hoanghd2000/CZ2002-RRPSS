@@ -192,14 +192,10 @@ public class RestaurantApp {
 					menu.printMenu();
 					break;
 				case 6:
-					System.out.printf("Input the size of the new table: ");
-					int size = Integer.parseInt(scanner.next());
-					tableList.addTable(size);
+					tableList.addTable();
 					break;
 				case 7:
-					System.out.printf("Input the ID of the table to be removed: ");
-					int rID = Integer.parseInt(scanner.next());
-					tableList.removeTable(rID);
+					tableList.removeTable();
 					break;
 				case 8:
 					tableList.print();
@@ -372,68 +368,87 @@ public class RestaurantApp {
 
 	public static void createOrder(){
 		Scanner s = new Scanner(System.in);
+		
+		// Create an order object
 		System.out.println("Enter Staff ID");
 		int staffID = s.nextInt();
 		System.out.println("Member?");
 		boolean isMember = s.nextBoolean();
-		System.out.println("Do you have a reservation? Y/N");
+		System.out.println("Does the customer have a reservation? Y/N");
 		boolean reserved = s.next().equalsIgnoreCase("Y")? true:false;
 		int tableID;
-		Order order;
-		if(reserved)
+		
+		if (reserved)
 		{
+			Reservation rez;
+			System.out.print("Enter customer's contact no.: ");
 			String contact = s.next();
-			Reservation rez = tableList.findRez(contact);
+			while ((rez = tableList.findRez(contact)) == null) {
+				System.out.print("Cannot find the reservation. Please enter a valid customer's contact no.: ");
+				contact = s.next();
+			}
 			tableID = rez.getTableNumber();
-			order = new Order(staffID,tableID,isMember, staffList.getStaff(staffID).getName());
 		}
 		else
 		{
 			tableList.checkTableAvailability();
-			System.out.println("Enter Table ID?");
+			System.out.print("Assign to table ID: ");
 			tableID = s.nextInt();
-			order = new Order(staffID, tableID, isMember, staffList.getStaff(staffID).getName());
+			while (tableList.getTableList().get(tableID).getStatus() != TableStatus.VACANT)
+				System.out.println("Please select a vacant table!");
+				tableList.checkTableAvailability();
+				System.out.print("Assign to table ID: ");
+				tableID = s.nextInt();
 		}
-		currentOrders.put(tableID, order);
+		Order order = new Order(staffID, tableID, isMember, staffList.getStaff(staffID).getName());
+		currentOrders.put(tableID, order); // needa check
+		
+		// Set TableStatus to OCCUPIED after order
 		Table table = tableList.getTableList().get(tableID);
-								table.setStatus(TableStatus.OCCUPIED);
+		table.setStatus(TableStatus.OCCUPIED);
+		
+		// Add/Remove items from an order object
+		System.out.println("ADD/REMOVE ITEMS FROM ORDER");
 		System.out.println("(1) Add Item");
 		System.out.println("(2) Remove Item");
-		System.out.println("(3) Exit");
+		System.out.println("(3) Print Menu");
+		System.out.println("(4) Done! Create Order");
+		System.out.print("Enter a choice: ");
 		int n = s.nextInt();
 		while (1 <= n && n <= 3) {
 			switch(n) {
 				case 1:
-					System.out.println("Enter ItemID to add");
+					System.out.print("Enter ItemID to add: ");
 					int itemID = s.nextInt();
 					OrderableItems orderableItem = menu.getItem(itemID);
-					System.out.println("Enter Quantity");
+					System.out.println("Enter Quantity: ");
 					int quantity = s.nextInt();
 					
 					order.addItem(orderableItem, quantity);
-					System.out.println("Next Choice");
-					n = s.nextInt();
+					// System.out.println("Item Added!");
 					break;
 				case 2:
-					System.out.println("Enter ItemID to remove");
+					System.out.println("Enter ItemID to remove: ");
 					itemID = s.nextInt();
 					orderableItem = menu.getItem(itemID);
-					System.out.println("Enter Quantity");
+					System.out.println("Enter Quantity: ");
 					quantity = s.nextInt();
 					
-					order.removeItem(orderableItem,quantity);
-					System.out.println("Next Choice");
-					n = s.nextInt();
+					order.removeItem(orderableItem, quantity);
+					// System.out.println("Item Removed!");
 					break;
 				case 3:
-					System.out.println("Order Created!");
-					n = -1;
-					break;
-				case 4:
 					menu.printMenu();
+					break;
 			}
+			System.out.println("(1) Add Item");
+			System.out.println("(2) Remove Item");
+			System.out.println("(3) Print Menu");
+			System.out.println("(4) Done! Create Order");
+			System.out.print("Enter a choice: ");
+			n = s.nextInt();
 		}
-		s.close();
+		System.out.println("Order Created!");
 	}
 	
 	public static void initializeTableList() {
