@@ -3,6 +3,7 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 enum TableStatus{OCCUPIED, VACANT, RESERVED;}
+Hashtable<Order, int> currentOrders = new Hashtable<>();
 
 /* TODO - Create the staffList for this class */
 
@@ -91,41 +92,71 @@ public class RestaurantApp {
 				case 4:
 					//TODO - print invoice
 					// set the status of the table from which the order is from OCCUPIED to VACANT
+					System.out.println("Enter TableID?");
+					int tableID = s.nextInt();
+					Order order = currentOrders.get(tableID);
+					order.printOrderInvoice();
+					Table table = tableList.getTableList().get(tableID);
+					Report.addOrder(order);
+                                        table.setStatus(TableStatus.VACANT);
 					break;
-				// case 5: 
-				// 	//TODO - place an order
-				// 	// set the status of the table from which the order is from VACANT/RESERVED to OCCUPIED
-				// 	public Order createOrder(){
-				// 		Order order=new Order();
-				// 		System.out.println("Enter Staff ID");
-				// 		int staffID = s.nextInt();
-				// 		order.setStaffID(staffID);
-				// 		System.out.println("(1) Add Item");
-		        //                         System.out.println("(2) Remove Item");
-				// 		System.out.println("(3) Exit");
-				// 		int n = s.nextInt();
-				// 		while (1 <= n && n <= 3) {
-				// 			switch(n) {
-				// 				case 1:
-				// 					System.out.println("Enter ItemID to add");
-				// 					int itemID = s.nextInt();
-				// 					System.out.println("Enter Quantity");
-				// 					int quantity = s.nextInt();
-				// 					order.addItem(itemID,quantity);
-				// 					break;
-				// 				case 2:
-				// 					System.out.println("Enter ItemID to remove");
-				// 					int itemID = s.nextInt();
-				// 					System.out.println("Enter Quantity");
-				// 					int quantity = s.nextInt();
-				// 					order.removeItem(itemID,quantity);
-				// 					break;
-				// 				case 3:
-									
-				// 			}
-				// 		}
-				// 	}
-				// 	break;
+				case 5: 
+					public Order createOrder(){
+						System.out.println("Enter Staff ID");
+						int staffID = s.nextInt();
+						System.out.println("Member?");
+						boolean isMember = s.nextBoolean();
+					        System.out.println("Do you have a reservation?");
+						boolean reserved = s.nextBoolean();
+						if(reserved)
+						{
+							contact = s.next();
+					 		Reservation rez = tableList.findRez(contact);
+							int tableID=rez.getTableNumber();
+							Order order=new Order(staffID,tableID,isMember);
+						}
+						else
+						{
+							tableList.checkTableAvailability();
+							System.out.println("Enter Table ID?");
+							int tableID= s.next();
+							Order order=new Order(staffID,tableID,isMember);
+						}
+						currentOrders.put(order, tableID);
+						Table table = tableList.getTableList().get(tableID);
+                                                table.setStatus(TableStatus.OCCUPIED);
+						System.out.println("(1) Add Item");
+		                                System.out.println("(2) Remove Item");
+						System.out.println("(3) Exit");
+						int n = s.nextInt();
+						while (1 <= n && n <= 3) {
+							switch(n) {
+								case 1:
+									System.out.println("Enter ItemID to add");
+									int itemID = s.nextInt();
+									System.out.println("Enter Quantity");
+									int quantity = s.nextInt();
+									order.addItem(itemID,quantity);
+									System.out.println("Next Choice");
+									n = s.nextInt();
+									break;
+								case 2:
+									System.out.println("Enter ItemID to remove");
+									int itemID = s.nextInt();
+									System.out.println("Enter Quantity");
+									int quantity = s.nextInt();
+									order.removeItem(itemID,quantity);
+									System.out.println("Next Choice");
+									n = s.nextInt();
+									break;
+								case 3:
+									System.out.println("Order Created!");
+									n = -1;
+									break;
+							}
+						}
+			}
+					break;
 				case 6:
 					System.out.printf("Input the size of the new table: ");
 					int size = Integer.parseInt(s.next());
