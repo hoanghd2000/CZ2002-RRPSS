@@ -85,10 +85,28 @@ public class RestaurantApp {
 					//TODO - place an order
 					// set the status of the table from which the order is from VACANT/RESERVED to OCCUPIED
 					public Order createOrder(){
-						Order order=new Order();
 						System.out.println("Enter Staff ID");
 						int staffID = s.nextInt();
-						order.setStaffID(staffID);
+						System.out.println("Member?");
+						boolean isMember = s.nextBoolean();
+					        System.out.println("Do you have a reservation?");
+						boolean reserved = s.nextBoolean();
+						if(reserved)
+						{
+							contact = s.next();
+					 		Reservation rez = tableList.findRez(contact);
+							int tableID=rez.getTableNumber();
+							Order order=new Order(staffID,tableID,isMember);
+						}
+						else
+						{
+							tableList.checkTableAvailability();
+							System.out.println("Enter Table ID?");
+							int tableID= s.next();
+							Order order=new Order(staffID,tableID,isMember);
+						}
+						Table table = tableList.getTableList().get(tableID);
+                                                table.setStatus(TableStatus.OCCUPIED);
 						System.out.println("(1) Add Item");
 		                                System.out.println("(2) Remove Item");
 						System.out.println("(3) Exit");
@@ -101,6 +119,8 @@ public class RestaurantApp {
 									System.out.println("Enter Quantity");
 									int quantity = s.nextInt();
 									order.addItem(itemID,quantity);
+									System.out.println("Next Choice");
+									n = s.nextInt();
 									break;
 								case 2:
 									System.out.println("Enter ItemID to remove");
@@ -108,12 +128,16 @@ public class RestaurantApp {
 									System.out.println("Enter Quantity");
 									int quantity = s.nextInt();
 									order.removeItem(itemID,quantity);
+									System.out.println("Next Choice");
+									n = s.nextInt();
 									break;
 								case 3:
-									
+									System.out.println("Order Created!");
+									n = -1;
+									break;
 							}
 						}
-					break;
+			}
 				case 6:
 					System.out.printf("Input the size of the new table: ");
 					int size = Integer.parseInt(s.next());
