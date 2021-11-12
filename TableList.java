@@ -128,13 +128,17 @@ public class TableList implements Serializable {
 	}
 	
 	public void printAllRezs() {
+		boolean empty = true;
 		Enumeration<Integer> tableIds = tableList.keys();
 		while(tableIds.hasMoreElements()) { // iterate through each table
 			int tableId = tableIds.nextElement();
 			Table table = tableList.get(tableId);
 			
 			table.getReservationList().printReservationList();
+			empty = table.getReservationList().getReservationList().isEmpty() ? empty : false;
 		}
+		if (empty)
+			System.out.println("No reservation has been made");
 	}
 	
 	public void updateAllRezs() { // implement the 'expiry period'

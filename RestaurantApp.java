@@ -7,10 +7,10 @@ enum TableStatus{OCCUPIED, VACANT, RESERVED;}
 
 public class RestaurantApp {
 
-	private static Hashtable<Integer, Order> currentOrders = new Hashtable<Integer, Order>();
 	private static TableList tableList = new TableList();
 	private static StaffList staffList = new StaffList();
 	private static Menu menu = new Menu();
+	private static Hashtable<Integer, Order> currentOrders = new Hashtable<Integer, Order>();
 	private static Report report = new Report();
 	
 	public static void main(String args[]) {
