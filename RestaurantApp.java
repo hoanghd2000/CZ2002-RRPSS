@@ -21,49 +21,22 @@ public class RestaurantApp {
 		tableList.print();
 		System.out.println("(1) Configure restaurant");
 		System.out.println("(2) Reservations");
-		// System.out.println("(1) Create reservation booking");
-		// System.out.println("(2) Check/Remove reservation booking");
 		System.out.println("(3) Order");
 		// System.out.println("(3) Check table availability");
 		// System.out.println("(5) Place an order");
 		// System.out.println("(4) Print order invoice");
 		System.out.println("(9) Exit");
-		System.out.print("Enter the number of your choice: ");
-		int c = Integer.parseInt(s.next());
+		System.out.print("Choose an option: ");
+		int c = s.nextInt();
 		
 		while (1 <= c && c <= 9) {
 			switch(c) {
 				case 1:
 					subMenuOne();
-				// case 2:
-				// 	tableList.updateAllRezs();
-				// 	System.out.println("(1) Display all current reservations");
-				// 	System.out.println("(2) Check/Remove a reservation");
-				// 	int d = Integer.parseInt(s.next());
-				// 	switch(d) {
-				// 	 	case 1:
-				// 	 		tableList.printAllRezs();
-				// 	 		break;
-				// 	 	case 2:
-				// 	 		System.out.print("Retrieve reservation for customer of contact no.: ");
-				// 	 		contact = s.next();
-				// 	 		Reservation rez = tableList.findRez(contact);
-				// 	 		if (rez == null)
-				// 	 			System.out.println("No reservation created for that contact no.");
-				// 	 		else {
-				// 	 			rez.print();
-				// 	 			System.out.println("Do you want to remove this reservation? (Y/N)");
-				// 	 			String choice = s.next();
-				// 	 			if (choice.equalsIgnoreCase("Y")) {
-				// 	 				Table table = tableList.getTableList().get(rez.getTableNumber());
-				// 		 			if (rez.getDateTime().compareTo(LocalDateTime.now().plusHours(1)) <= 0)
-				// 						if (table.getStatus() == TableStatus.RESERVED)
-				// 							table.setStatus(TableStatus.VACANT);
-				// 		 			tableList.removeRez(rez);
-				// 	 			}
-				// 	 		}
-				// 	}
-				// 	break;
+					break;
+				case 2:
+					subMenuTwo();
+					break;
 				case 3:
 					tableList.checkTableAvailability();
 					break;
@@ -92,15 +65,6 @@ public class RestaurantApp {
 				case 5: 
 					createOrder();
 					break;
-				case 6:
-					tableList.addTable();
-					break;
-				case 7:
-					tableList.removeTable();
-					break;
-				case 8:
-					tableList.print();
-					break;
 				case 9:
 					// menu.addMenuItem(new MenuItem("test1", "just a trial object", 9.99, "dessert"));
 					// System.out.println("Item added!");
@@ -108,6 +72,7 @@ public class RestaurantApp {
 					// menu.removeItem(0);
 
 				default:
+					System.out.println("Invalid input!");
 					break;
 			}
 			
@@ -376,6 +341,80 @@ public class RestaurantApp {
 		scanner.close();
 		System.out.println("Returning to restaurant configuration submenu");
 	}
+	
+	public static void subMenuTwo() {
+		Scanner s = new Scanner(System.in);
+		System.out.println("(1) Create reservation booking");
+		System.out.println("(2) Check/Remove reservation booking");
+		System.out.println("(3) Exit");
+		System.out.print("Choose an option: ");
+		int c = s.nextInt();
+		
+		while (1 <= c && c <= 2) {
+			switch(c) {
+				case 1:
+					System.out.print("Enter date (YYYY-MM-DD): ");
+					String date = s.next();
+					System.out.print("Enter time (hh:mm): ");
+					String time = s.next();
+					time = time + ":00";
+					System.out.print("Enter number of pax: ");
+					int paxNumber = s.nextInt();
+					System.out.print("Enter customer's name: ");
+					String name = s.next();
+					System.out.print("Enter customer's contact no.: ");
+					String contact = s.next();
+					String dateTime = date + "T" + time;
+					LocalDateTime dateTime1 = LocalDateTime.parse(dateTime);
+					int tableId = tableList.createNewRez(dateTime1, paxNumber, name, contact);
+					if (tableId == -1)
+						System.out.println("No available table");
+					else
+						System.out.printf("Reservation created successfully! Table reserved: %d\n", tableId);
+					break;
+				 case 2:
+				 	tableList.updateAllRezs();
+				 	System.out.println("(1) Display all current reservations");
+				 	System.out.println("(2) Check/Remove a reservation");
+				 	int d = s.nextInt();
+				 	switch(d) {
+				 	 	case 1:
+				 	 		tableList.printAllRezs();
+				 	 		break;
+				 	 	case 2:
+				 	 		System.out.print("Retrieve reservation for customer of contact no.: ");
+				 	 		contact = s.next();
+				 	 		Reservation rez = tableList.findRez(contact);
+				 	 		if (rez == null)
+				 	 			System.out.println("No reservation created for that contact no.");
+				 	 		else {
+				 	 			rez.print();
+				 	 			System.out.println("Do you want to remove this reservation? (Y/N)");
+				 	 			String choice = s.next();
+				 	 			if (choice.equalsIgnoreCase("Y")) {
+				 	 				Table table = tableList.getTableList().get(rez.getTableNumber());
+				 		 			if (rez.getDateTime().compareTo(LocalDateTime.now().plusHours(1)) <= 0)
+				 						if (table.getStatus() == TableStatus.RESERVED)
+				 							table.setStatus(TableStatus.VACANT);
+				 		 			tableList.removeRez(rez);
+				 	 			}
+				 	 		}
+				 	 	default:
+							break;
+				 	}
+				 	break;
+				default:
+					System.out.println("Invalid input!");
+					break;
+			}
+			
+			System.out.println("(1) Create reservation booking");
+			System.out.println("(2) Check/Remove reservation booking");
+			System.out.println("(3) Exit");
+			System.out.print("Choose an option: ");
+			c = s.nextInt();
+		}
+	}
 
 	public static void createOrder(){
 		Scanner s = new Scanner(System.in);
@@ -450,6 +489,9 @@ public class RestaurantApp {
 					break;
 				case 3:
 					menu.printMenu();
+					break;
+				default:
+					System.out.println("Invalid input!");
 					break;
 			}
 			System.out.println("(1) Add Item");

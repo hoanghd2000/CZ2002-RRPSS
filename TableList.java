@@ -27,10 +27,6 @@ public class TableList implements Serializable {
 		this.tableList = new Hashtable<Integer, Table>();
 	}
 
-	/**
-	 * 
-	 * @param size
-	 */
 	public void addTable() {
 		Scanner sc = new Scanner(System.in);
 		System.out.printf("Input the size of the new table: ");
@@ -44,10 +40,6 @@ public class TableList implements Serializable {
 		this.tableList.put(t.getTableID(), t);
 	}
 
-	/**
-	 * 
-	 * @param tableID
-	 */
 	public void removeTable() {
 		Scanner sc = new Scanner(System.in);
 		System.out.printf("Input the ID of the table to be removed: ");
