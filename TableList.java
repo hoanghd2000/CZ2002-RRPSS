@@ -91,7 +91,7 @@ public class TableList implements Serializable {
 					while(rezs.hasNext()) {
 						Reservation rez = rezs.next();
 						// Cannot make reservation if it is within 1.5 hr from/to an existing reservation
-						if (rez.getDateTime().compareTo(dateTime) < 0 && rez.getDateTime().compareTo(dateTime.minusMinutes(90)) > 0)
+						if (rez.getDateTime().compareTo(dateTime) <= 0 && rez.getDateTime().compareTo(dateTime.minusMinutes(90)) > 0)
 							break;
 						else if (rez.getDateTime().compareTo(dateTime) > 0 && rez.getDateTime().compareTo(dateTime.plusMinutes(90)) < 0)
 							break;
