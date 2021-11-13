@@ -4,8 +4,9 @@ import java.util.Hashtable;
 import java.util.Set;
 
 public class Order {
-    static final float MEM_DISCOUNT = (float) 0.1; // Discount on final price for members
-    static final float TAX = (float) 0.07;     // GST
+    static final float MEM_DISCOUNT = (float) 0.1;  // 10% Discount on final price for members
+    static final float SERV_CHARGE = (float) 0.1;   // 10% Service charge
+    static final float GST = (float) 0.07;          // 7% GST
     private static int counter = 0;
     private int orderID;
     private Hashtable<OrderableItems, Integer> set;
@@ -96,13 +97,15 @@ public class Order {
     public LocalDateTime getDateTime() { return dateTime; }
 
     public double getSubtotal() { return price; }
+    
+    public double getServCharge() { return price * SERV_CHARGE; }
 
-    public double getTax() { return price * TAX; }
+    public double getGST() { return (price + getServCharge()) * GST; }
 
-    public double getDiscount() { return (price + getTax()) * MEM_DISCOUNT; }
+    public double getDiscount() { return (price + getServCharge() + getGST()) * MEM_DISCOUNT; }
 
     public double getFinalPrice() {        
-        double p = price + getTax();
+        double p = price + getServCharge() + getGST();
         if (isMember) {
             // Orders made by a member will receive a fixed discount on final price
             p -= getDiscount();
@@ -176,9 +179,10 @@ public class Order {
 
         // Print prices
         System.out.printf("%22s %9.2f\n", "Subtotal", getSubtotal());
-        System.out.printf("%22s %9.2f\n", "7% GST", getTax());
+        System.out.printf("%22s %9.2f\n", "10% Service Charge", getServCharge());
+        System.out.printf("%22s %9.2f\n", "7% GST", getGST());
         if (isMember) {
-            System.out.printf("%22s -%8.2f\n", "10% Mem Discount", getDiscount());
+            System.out.printf("%22s  -%7.2f\n", "10% Mem Discount", getDiscount());
         }
         System.out.printf("%22s %9.2f\n", "Total", getFinalPrice());
         System.out.println("-------------------------------");
