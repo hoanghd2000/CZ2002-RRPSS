@@ -12,10 +12,19 @@ public class Report {
         orders = new ArrayList<Order>();
     }
 
+    
+    /** 
+     * @param order
+     */
     public void addOrder(Order order){
         orders.add(order);
     }
 
+    
+    /** 
+     * @param startDateTime
+     * @param endDateTime
+     */
     public void printReport(LocalDateTime startDateTime, LocalDateTime endDateTime){
         Hashtable<OrderableItems, Integer> itemSet = new Hashtable<OrderableItems, Integer>();
         ArrayList<Integer> itemIDs = new ArrayList<Integer>();
@@ -75,6 +84,13 @@ public class Report {
         
     }
     
+    
+    /** 
+     * @param dt
+     * @param start
+     * @param end
+     * @return boolean
+     */
     boolean isWithinRange(LocalDateTime dt, LocalDateTime start, LocalDateTime end) {
         return (dt.isBefore(start) || dt.isAfter(end));
     }

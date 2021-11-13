@@ -10,16 +10,30 @@ public class StaffList implements Serializable{
         staffList = new ArrayList<Staff>();
     }
 
+    
+    /** 
+     * @return ArrayList<Staff>
+     */
     // add getters and setters for stafflist
     public ArrayList<Staff> getStaffList() {
         return staffList;
     }
 
+    
+    /** 
+     * @param name
+     * @param gender
+     * @param jobTitle
+     */
     public void addStaff(String name, char gender, String jobTitle) {
         // create the staff object and add to array list
         staffList.add(new Staff(name, gender, jobTitle));
     }
 
+    
+    /** 
+     * @param employeeID
+     */
     public void removeStaff(int employeeID) {
         // loop through list and remove object whose employeeID matches input
         for(int i = 0 ; i < staffList.size() ; i++) {
@@ -29,6 +43,11 @@ public class StaffList implements Serializable{
         }
     }
 
+    
+    /** 
+     * @param employeeID
+     * @return Staff
+     */
     public Staff getStaff(int employeeID) {
         // loop through list and return object whose employeeID matches input
         for(int i = 0 ; i < staffList.size() ; i++) {

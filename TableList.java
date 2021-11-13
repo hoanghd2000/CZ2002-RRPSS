@@ -9,6 +9,10 @@ public class TableList implements Serializable {
 
 	private Hashtable<Integer, Table> tableList;
 
+	
+	/** 
+	 * @return Hashtable<Integer, Table>
+	 */
 	public Hashtable<Integer, Table> getTableList() {
 		return this.tableList;
 	}
@@ -138,6 +142,10 @@ public class TableList implements Serializable {
 			System.out.println("No reservation has been made");
 	}
 	
+	
+	/** 
+	 * @param 0
+	 */
 	public void updateAllRezs() { // implement the 'expiry period'
 		Enumeration<Integer> tableIds = tableList.keys();
 		while(tableIds.hasMoreElements()) { // iterate through each table
@@ -177,6 +185,11 @@ public class TableList implements Serializable {
 		}
 	}
 	
+	
+	/** 
+	 * @param table.getReservationList().getReservationList().get(0).getDateTime().compareTo(LocalDateTime.ofInstant(RestaurantApp.clockat.instant()
+	 * @param 0
+	 */
 	public void updateAllRezsTest() { // implement the 'expiry period'
 		Enumeration<Integer> tableIds = tableList.keys();
 		while(tableIds.hasMoreElements()) { // iterate through each table

@@ -12,14 +12,26 @@ public class Menu implements Serializable{
         orderableItems = new Hashtable<Integer, OrderableItems>();
     }
 
+    
+    /** 
+     * @param item
+     */
     public void addMenuItem(MenuItem item) {
         orderableItems.put(item.getItemID(), item);
     }
 
+    
+    /** 
+     * @param setPackage
+     */
     public void addPromotionalSetPackage(PromotionalSetPackage setPackage) {
         orderableItems.put(setPackage.getItemID(), setPackage);
     }
 
+    
+    /** 
+     * @param itemID
+     */
     // generate javadoc for this method
     public void removeItem(int itemID){
         ArrayList<Integer> indexes = new ArrayList<Integer>();
@@ -41,6 +53,11 @@ public class Menu implements Serializable{
         System.out.println("Item and all promo packages containing the item removed successfully.");
     }
     
+    
+    /** 
+     * @param itemID
+     * @return Double
+     */
     public Double getItemPrice(int itemID) {
         OrderableItems item = orderableItems.get(itemID);
         if(item == null){
@@ -50,6 +67,11 @@ public class Menu implements Serializable{
         return item.getPrice();
     }
 
+    
+    /** 
+     * @param itemID
+     * @return OrderableItems
+     */
     public OrderableItems getItem(int itemID) {
         return orderableItems.get(itemID);
     }

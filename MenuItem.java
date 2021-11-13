@@ -27,39 +27,75 @@ public class MenuItem extends OrderableItems{
         this.type = type;
     }
 
+    
+    /** 
+     * @return String
+     */
     // creating getters and setters
     public String getName() {
         return name;
     }
 
+    
+    /** 
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getDescription() {
         return description;
     }
 
+    
+    /** 
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }   
 
+    
+    /** 
+     * @return double
+     */
     public double getPrice() {
         return price;
     }
 
+    
+    /** 
+     * @param price
+     */
     public void setPrice(double price) {
         this.price = price;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getItemID() {
         return itemID;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getType() {
         return type;
     }
 
+    
+    /** 
+     * @param type
+     */
     public void setType(String type) {
         this.type = type;
     }

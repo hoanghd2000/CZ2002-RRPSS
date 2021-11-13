@@ -26,6 +26,10 @@ public class Reservation implements Serializable{
 		this.contact = contact;
 	}
 
+	
+	/** 
+	 * @return LocalDateTime
+	 */
 	public LocalDateTime getDateTime() {
 		return this.dateTime;
 	}
@@ -38,6 +42,10 @@ public class Reservation implements Serializable{
 		this.dateTime = dateTime;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	public int getPaxNumber() {
 		return this.paxNumber;
 	}
@@ -50,6 +58,10 @@ public class Reservation implements Serializable{
 		this.paxNumber = paxNumber;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	public int getTableNumber() {
 		return this.tableNumber;
 	}
@@ -62,6 +74,10 @@ public class Reservation implements Serializable{
 		this.tableNumber = tableNumber;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getName() {
 		return this.name;
 	}
@@ -74,6 +90,10 @@ public class Reservation implements Serializable{
 		this.name = name;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getContact() {
 		return this.contact;
 	}

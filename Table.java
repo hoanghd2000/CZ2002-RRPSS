@@ -18,10 +18,18 @@ public class Table implements Serializable{
 		this.reservationList = new ReservationList();
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	public int getTableID() {
 		return this.tableID;
 	}
 
+	
+	/** 
+	 * @return TableStatus
+	 */
 	public TableStatus getStatus() {
 		return this.status;
 	}
@@ -34,6 +42,10 @@ public class Table implements Serializable{
 		this.status = status;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	public static int getCount() {
 		return count;
 	}
@@ -46,6 +58,10 @@ public class Table implements Serializable{
 		count = n;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	public int getSize() {
 		return this.size;
 	}
@@ -58,6 +74,10 @@ public class Table implements Serializable{
 		this.size = size;
 	}
 	
+	
+	/** 
+	 * @return ReservationList
+	 */
 	public ReservationList getReservationList() {
 		return this.reservationList;
 	}

@@ -33,35 +33,68 @@ public class PromotionalSetPackage extends OrderableItems{
         this.name = name;
     }
 
+    
+    /** 
+     * @return double
+     */
     //creating getters and setters
     public double getPrice(){
         return this.price;
     }
 
+    
+    /** 
+     * @param price
+     */
     public void setPrice(double price){
         this.price = price;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getItemID(){
         return this.itemID;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getName(){
         return this.name;
     }
 
+    
+    /** 
+     * @param name
+     */
     public void setName(String name){
         this.name = name;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getDescription(){
         return this.description;
     }
 
+    
+    /** 
+     * @param description
+     */
     public void setDescription(String description){
         this.description = description;
     }
 
+    
+    /** 
+     * @param item
+     * @param quantity
+     */
     public void addItem(MenuItem item, int quantity) {
         boolean found = false;
         Set<MenuItem> keys = set.keySet();
@@ -79,6 +112,11 @@ public class PromotionalSetPackage extends OrderableItems{
         }
     }
 
+    
+    /** 
+     * @param item
+     * @param quantity
+     */
     // remove item from the set
     public void removeItem(MenuItem item, int quantity) {
         Set<MenuItem> keys = set.keySet();
@@ -105,6 +143,11 @@ public class PromotionalSetPackage extends OrderableItems{
         }
     }
 
+    
+    /** 
+     * @param item
+     * @return boolean
+     */
     public boolean containsMenuItem(MenuItem item) {
         Set<MenuItem> keys = set.keySet();
         for (MenuItem key : keys) {

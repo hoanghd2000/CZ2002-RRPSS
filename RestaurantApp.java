@@ -21,6 +21,10 @@ public class RestaurantApp {
 	public static Clock clockat = Clock.offset(Clock.systemDefaultZone(), Duration.ofMinutes(1935));
 	public static Scanner s = new Scanner(System.in);
 
+	
+	/** 
+	 * @param args[]
+	 */
 	public static void main(String args[]) {
 		// Load data from files/Create files to store data
 		initializeData();
@@ -29,7 +33,7 @@ public class RestaurantApp {
 			System.out.println("(1) Configure Restaurant");
 			System.out.println("(2) Reservations");
 			System.out.println("(3) Order");
-			System.out.println("(4) Print Revenue Report);
+			System.out.println("(4) Print Revenue Report");
 			System.out.println("(5) Test");
 			System.out.println("(6) Exit");
 			System.out.print("Choose an option: ");
@@ -47,7 +51,7 @@ public class RestaurantApp {
 					break;
 				case 4:
 					printRevenueReport();
-					break
+					break;
 				case 5:
 					testSubMenu();
 					break;
