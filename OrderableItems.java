@@ -1,3 +1,11 @@
+/**
+ * This class represents an orderable item.
+ * 
+ * @author SS10 G5
+ * @version 1.0
+ * @since 2021-10-25
+ */
+
 import java.io.Serializable;
 
 abstract class OrderableItems implements Serializable{

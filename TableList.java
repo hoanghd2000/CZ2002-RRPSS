@@ -1,3 +1,11 @@
+/**
+ * Represents an HashTable of Table objects. This class ensures the removal of
+ * Reservation after XX minutes. A tableList must have at least 1 table object.
+ * @author  SS10G5
+ * @version 1.0
+ * @since   2021-10-25
+*/
+
 import java.io.Serializable;
 import java.time.*;
 import java.time.format.DateTimeFormatter;

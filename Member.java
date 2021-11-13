@@ -1,3 +1,11 @@
+/**
+ * Member class
+ * 
+ * @author SS10 G5
+ * @version 7.0
+ * @since 2021-10-25
+ */
+
 import java.io.Serializable;
 
 public class Member implements Serializable{

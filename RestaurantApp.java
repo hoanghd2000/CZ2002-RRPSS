@@ -1,3 +1,11 @@
+/**
+ * Represents the main driver class for the RestaurantApp containing 
+ * essential classes required to ensure smooth flow in the console app.
+ * @author  SS10G5
+ * @version 12.0
+ * @since   2021-10-25
+*/
+
 import java.io.*;
 import java.time.Clock;
 import java.time.Duration;

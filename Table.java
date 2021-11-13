@@ -1,3 +1,10 @@
+/**
+ * This class holds attributes concerning the Table class.
+ * @author  SS10G5
+ * @version 1.0
+ * @since   2021-10-25
+*/
+
 import java.io.Serializable;
 
 public class Table implements Serializable{

@@ -1,3 +1,11 @@
+/**
+ * MemberList class
+ * 
+ * @author SS10 G5 
+ * @version 3.0
+ * @since 2021-11-02
+ */
+
 import java.io.Serializable;
 import java.util.Hashtable;
 

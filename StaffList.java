@@ -1,3 +1,11 @@
+/**
+ * Represents an arrayList of Staff objects.
+ * A staffList must have at least 1 staff object.
+ * @author  SS10G5
+ * @version 1.0
+ * @since   2021-10-25
+*/
+
 import java.io.Serializable;
 import java.util.ArrayList;
 

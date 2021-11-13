@@ -1,3 +1,11 @@
+/**
+ * This class represents a menu.
+ * 
+ * @author SS10 G5
+ * @version 11.0
+ * @since 2021-10-27
+ */
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;

@@ -1,3 +1,11 @@
+/**
+ * Represents the staff class. Count ensures that when the staffList is 
+ * printed it is printed in a descending order.
+ * @author  SS10G5
+ * @version 1.0
+ * @since   2021-10-25
+*/
+
 import java.io.Serializable;
 
 public class Staff implements Serializable{
