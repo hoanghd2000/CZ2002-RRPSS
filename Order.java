@@ -28,6 +28,12 @@ public class Order {
     }
 
     public void addItem(OrderableItems item, int quantity) {
+        // Check if item exists on menu
+        if (item == null) {
+            System.out.println("No such item on the menu. Please input a valid itemID!");
+            return;
+        }
+        
         // Update total price of order
         price += ((double)quantity * item.getPrice());
         
@@ -102,7 +108,7 @@ public class Order {
             p -= getDiscount();
         }
 
-        return Math.round(p * 100) / 100;
+        return Math.round(p * 100) / 100.0;
     }
 
     public int getStaffID() { return staffID; }
@@ -112,8 +118,8 @@ public class Order {
     public void viewOrder() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE dd/MM/yyyy h:mm a");
         System.out.println("=== View Order (Payment Pending) ===");
-        System.out.println("Order No: " + orderID + "\t\t" + dateTime.format(formatter));
-        System.out.println("Server: " + staffName + "\t\t\tTable No: " + tableID);
+        System.out.println("Order No: " + orderID + "\t" + dateTime.format(formatter));
+        System.out.println("Server: " + staffName + "\t\tTable No: " + tableID);
         System.out.println("-------------------------------");
 
         // Print details of all items ordered
@@ -137,19 +143,21 @@ public class Order {
 
         // Print subtotal only
         System.out.printf("%22s %9.2f\n", "Subtotal", getSubtotal());
+        System.out.println("-------------------------------");
+
     }
     
     public void printOrderInvoice() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE dd/MM/yyyy h:mm a");
 
         System.out.println("======== Order Invoice ========");
-        System.out.println("Order No: " + orderID + "\t\t" + dateTime.format(formatter));
-        System.out.println("Server: " + staffName + "\t\t\tTable No: " + tableID);
+        System.out.println("Order No: " + orderID + "\t" + dateTime.format(formatter));
+        System.out.println("Server: " + staffName + "\t\tTable No: " + tableID);
         System.out.println("-------------------------------");
 
         // Print details of all items ordered
         Set<OrderableItems> keys = set.keySet();
-        System.out.printf("%-4s %-20s %6s\n", "Qty", "Item", "Price");
+        System.out.printf("%-4s %-20s %6s\n", "Qty", "Item", "Price(S$");
         System.out.printf("%-4s %-20s %6s\n", "---", "----", "-----");
 
         // Print a la carte items
