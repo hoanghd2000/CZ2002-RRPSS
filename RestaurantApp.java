@@ -218,6 +218,10 @@ public class RestaurantApp {
 						System.out.println("Please enter a valid itemID for promo items!");
 						index = Integer.parseInt(s.nextLine());
 					}
+					if(menu.getItem(index) == null){
+						System.out.println("This promo pckage doesn't exist");
+						continue;
+					}
 					System.out.println("Select what you want to edit for this item: ");
 					System.out.println("(1) Name");
 					System.out.println("(2) Description");
