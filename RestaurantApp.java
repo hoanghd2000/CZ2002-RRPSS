@@ -1,8 +1,8 @@
 import java.io.*;
 import java.time.Clock;
 import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.*;
+import java.time.format.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Scanner;
@@ -87,7 +87,7 @@ public class RestaurantApp {
 			System.out.println("(8) Print tableList");
 			System.out.println("(9) Edit individual menu items/ promotional set packages");
 			System.out.println("(10) Staff Submenu");
-			System.out.println("(11) Exit this submenu");
+			System.out.println("(11) To Main Menu");
 			choice = Integer.parseInt(s.nextLine());
 			switch(choice){
 				case 1:
@@ -357,18 +357,45 @@ public class RestaurantApp {
 	public static void subMenuTwo() {
 		System.out.println("(1) Create reservation booking");
 		System.out.println("(2) Check/Remove reservation booking");
-		System.out.println("(3) Exit");
+		System.out.println("(3) To Main Menu");
 		System.out.print("Choose an option: ");
 		int c = Integer.parseInt(s.nextLine());
 		
 		while (c != 3) {
 			switch(c) {
 				case 1:
-					System.out.print("Enter date (YYYY-MM-DD): ");
-					String date = s.nextLine();
-					System.out.print("Enter time (hh:mm): ");
-					String time = s.nextLine();
-					time = time + ":00";
+					// Input date
+					boolean correctInput = false;
+					String date = null;
+					while (!correctInput) {
+						System.out.print("Enter date (YYYY-MM-DD): ");
+						date = s.nextLine();
+						try {
+							correctInput = true;
+							LocalDate.parse(date);
+						}
+						catch(DateTimeParseException e) {
+							System.out.println("Please enter the correct date format!");
+							correctInput = false;
+						}
+					}
+					// Input time
+					correctInput = false;
+					String time = null;
+					while (!correctInput) {
+						System.out.print("Enter time (hh:mm): ");
+						time = s.nextLine();
+						time = time + ":00";
+						try {
+							correctInput = true;
+							LocalTime.parse(time);
+						}
+						catch(DateTimeParseException e) {
+							System.out.println("Please enter the correct time format!");
+							correctInput = false;
+						}
+					}
+
 					System.out.print("Enter number of pax: ");
 					int paxNumber = Integer.parseInt(s.nextLine());
 					System.out.print("Enter customer's name: ");
@@ -426,7 +453,7 @@ public class RestaurantApp {
 			
 			System.out.println("(1) Create reservation booking");
 			System.out.println("(2) Check/Remove reservation booking");
-			System.out.println("(3) Exit");
+			System.out.println("(3) To Main Menu");
 			System.out.print("Choose an option: ");
 			c = Integer.parseInt(s.nextLine());
 		}
@@ -441,7 +468,7 @@ public class RestaurantApp {
 			System.out.println("(3) Update an order");
 			System.out.println("(4) View a current order");
 			System.out.println("(5) Print order invoice");
-			System.out.println("(6) Exit");
+			System.out.println("(6) To Main Menu");
 			System.out.print("Choose an option: ");
 			c = Integer.parseInt(s.nextLine());
 			switch(c) {
@@ -819,10 +846,10 @@ public class RestaurantApp {
 		
 		do {
 			System.out.println("SIMULATE TIME");
-			System.out.println("(1) Check table availability 1 hour before a reservation");
-			System.out.println("(2) Check reservation 15 minutes after the reserved time");
-			System.out.println("(3) Check table availability 15 minutes after the reserved time");
-			System.out.println("(4) Exit");
+			System.out.println("(1) Check table availability 23 hours way from now");
+			System.out.println("(2) Check reservation 1 day and 15 minutes from now");
+			System.out.println("(3) Check table availability 1 day and 15 minutes from now");
+			System.out.println("(4) To Main Menu");
 			System.out.print("Enter a choice: ");
 			n = Integer.parseInt(s.nextLine());
 			switch(n) {
