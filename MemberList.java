@@ -3,7 +3,7 @@ import java.util.Hashtable;
 
 public class MemberList implements Serializable {
     
-    Hashtable<Integer, Member> members;
+    private Hashtable<Integer, Member> members;
 
     public MemberList() {
         members = new Hashtable<Integer, Member>();

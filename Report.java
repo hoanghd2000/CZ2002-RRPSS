@@ -59,11 +59,17 @@ public class Report {
             }
         }
 
+        // If nothing to print, display error message
+        if (reportItems == null) {
+            System.out.println("No orders found during this period!");
+            return;
+        }
+
         // Print consolidated sales report
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE dd/MM/yyyy");
         
         System.out.println("===== Revenue Report =====");
-        System.out.printf(startDateTime.format(formatter) + " - " + endDateTime.format(formatter));
+        System.out.println(startDateTime.format(formatter) + " - " + endDateTime.format(formatter));
         System.out.printf("%-4s %-20s\n", "Qty", "Item");
         System.out.printf("%-4s %-20s\n", "---", "----");
 
@@ -81,7 +87,7 @@ public class Report {
         }
         System.out.println("-------------------------------");
         System.out.printf("Total revenue: S$ %.2f\n", totalRevenue);
-        
+        System.out.println("-------------------------------");
     }
     
     
@@ -92,6 +98,6 @@ public class Report {
      * @return boolean
      */
     boolean isWithinRange(LocalDateTime dt, LocalDateTime start, LocalDateTime end) {
-        return (dt.isBefore(start) || dt.isAfter(end));
+        return (!(dt.isBefore(start) || dt.isAfter(end)));
     }
 }

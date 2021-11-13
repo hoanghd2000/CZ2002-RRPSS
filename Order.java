@@ -127,7 +127,7 @@ public class Order {
 
         // Print details of all items ordered
         Set<OrderableItems> keys = set.keySet();
-        System.out.printf("%-4s %-20s %6s\n", "Qty", "Item", "Price");
+        System.out.printf("%-4s %-20s %6s\n", "Qty", "Item", "Price(S$)");
         System.out.printf("%-4s %-20s %6s\n", "---", "----", "-----");
 
         // Print a la carte items
@@ -160,7 +160,7 @@ public class Order {
 
         // Print details of all items ordered
         Set<OrderableItems> keys = set.keySet();
-        System.out.printf("%-4s %-20s %6s\n", "Qty", "Item", "Price(S$");
+        System.out.printf("%-4s %-20s %6s\n", "Qty", "Item", "Price(S$)");
         System.out.printf("%-4s %-20s %6s\n", "---", "----", "-----");
 
         // Print a la carte items

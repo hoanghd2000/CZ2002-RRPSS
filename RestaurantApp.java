@@ -409,7 +409,7 @@ public class RestaurantApp {
 					System.out.println("Invalid input!");
 			}
 		}while(choice != 4);
-		System.out.println("Returning to main menu...");
+		System.out.println("Returning to restaurant configuration submenu...");
 	}
 	
 	// Sub-menu 2
@@ -657,9 +657,10 @@ public class RestaurantApp {
 					if (order.getItemSet().isEmpty()) {
 						System.out.println("No items have been added! Cancelling this order.");
 						currentOrders.remove(tableID);
+						table.setStatus(TableStatus.VACANT);
 					}
 					else {
-						System.out.println("Order created!");
+						System.out.println("Order Created!");
 					}
 					break;
 				default:
@@ -667,8 +668,6 @@ public class RestaurantApp {
 					break;
 			}
 		} while (n != 4);
-		
-		System.out.println("Order Created!");
 	}
 	
 	private static void updateOrder() {
@@ -680,8 +679,9 @@ public class RestaurantApp {
 			System.out.println("No table with this tableID currently exists!");
 			return;
 		}
-		
-		if (tableList.getTableList().get(tableID).getStatus() != TableStatus.OCCUPIED) {
+
+		Table table = tableList.getTableList().get(tableID);
+		if (table.getStatus() != TableStatus.OCCUPIED) {
 			System.out.println("No orders currently being served at this table!");
 			return;
 		}
@@ -725,6 +725,7 @@ public class RestaurantApp {
 					if (order.getItemSet().isEmpty()) {
 						System.out.println("Order now contains no items! Cancelling this order.");
 						currentOrders.remove(tableID);
+						table.setStatus(TableStatus.VACANT);
 					}
 					else {
 						System.out.println("Order updated!");
@@ -789,12 +790,12 @@ public class RestaurantApp {
 				   
 	// Print revenue report
 	private static void printRevenueReport() {
-		DateTimeFormatter reportDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter reportDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		System.out.println("Choose period to view revenue report for");
 		System.out.print("Enter start date (YYYY-MM-DD): ");
-		String startDateStr = s.nextLine();
+		String startDateStr = s.nextLine() + " 00:00";
 		System.out.print("Enter end date (YYYY-MM-DD): ");
-		String endDateStr = s.nextLine();
+		String endDateStr = s.nextLine() + " 00:00";
 		LocalDateTime startDate = LocalDateTime.parse(startDateStr, reportDateFormatter);
 		LocalDateTime endDate = LocalDateTime.parse(endDateStr, reportDateFormatter);
 		
