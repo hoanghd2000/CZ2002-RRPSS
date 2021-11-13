@@ -13,17 +13,19 @@ public class RestaurantApp {
 	private static Menu menu = new Menu();
 	private static Report report = new Report();
 	
+
+	public static Scanner s = new Scanner(System.in);
+
 	public static void main(String args[]) {
 		// Load data from files/Create files to store data
 		initializeData();
 		
-		Scanner s = new Scanner(System.in);
 		System.out.println("(1) Configure Restaurant");
 		System.out.println("(2) Reservations");
 		System.out.println("(3) Order");
 		System.out.println("(5) Exit");
 		System.out.print("Choose an option: ");
-		int c = s.nextInt();
+		int c = Integer.parseInt(s.nextLine());
 		
 		while (1 <= c && c <= 3) {
 			switch(c) {
@@ -46,7 +48,7 @@ public class RestaurantApp {
 			System.out.println("(3) Order");
 			System.out.println("(5) Exit");
 			System.out.print("Choose an option: ");
-			c = s.nextInt();
+			c = Integer.parseInt(s.nextLine());
 		}
 		s.close();
 		
@@ -55,7 +57,7 @@ public class RestaurantApp {
 	}
 
 	public static void subMenuOne(){
-		Scanner scanner = new Scanner(System.in);
+		//Scanner scanner = new Scanner(System.in);
 		int choice;
 		System.out.println("Choose one of the following options to configure the restaurant!");
 		System.out.println("(1) Add Menu Item");
@@ -68,49 +70,49 @@ public class RestaurantApp {
 		System.out.println("(8) Print tableList");
 		System.out.println("(9) Edit individual menu items/ promotional set packages");
 		System.out.println("(10) Exit Submenu");
-		choice = scanner.nextInt();
+		choice = Integer.parseInt(s.nextLine());
 		do{
 			switch(choice){
 				case 1:
 					System.out.print("Enter the name of the new dish: ");
-					String name = scanner.next();
+					String name = s.nextLine();
 					System.out.print("Enter the description of the new dish: ");
-					String description = scanner.next();
+					String description = s.nextLine();
 					System.out.print("Enter the price of the new dish: ");
-					double price = scanner.nextDouble();
+					double price = Double.parseDouble(s.nextLine());
 					System.out.print("Enter the type of the new dish (starter/ main course/ dessert): ");
-					String type = scanner.next();
+					String type = s.nextLine();
 					menu.addMenuItem(new MenuItem(name, description, price, type));
 					System.out.println("Item added!");
 					break;
 				case 2:
 					System.out.println("To remove a menu item, please enter its unique itemID. The menu is printed for reference.");
 					menu.printMenu();
-					int index = scanner.nextInt();
+					int index = Integer.parseInt(s.nextLine());
 					menu.removeItem(index);
 					break;
 				case 3:
 					System.out.print("Enter the name of the new promo package: ");
-					name = scanner.next();
+					name = s.nextLine();
 					System.out.print("Enter the description of the new promo package: ");
-					description = scanner.next();
+					description = s.nextLine();
 					System.out.print("Enter the price of the new promo package: ");
-					price = scanner.nextDouble();
+					price = Double.parseDouble(s.nextLine());
 					PromotionalSetPackage newPromo = new PromotionalSetPackage(price, description, name);
 					System.out.println("Please choose the Menu Items that you wish to add to the promo.");
 					System.out.println("To do so, you can key in the item's itemID and the quantity!");
 					while(true){
 						System.out.println("Enter the itemID of the item you wish to add to the promo (-1 to stop adding): ");
-						int itemID = scanner.nextInt();
+						int itemID = Integer.parseInt(s.nextLine());
 						if(itemID == -1){
 							break;
 						}
 						while(itemID > 199){
 							System.out.println("Please enter a valid itemID!");
-							itemID = scanner.nextInt();
+							itemID = Integer.parseInt(s.nextLine());
 						}
 						System.out.println("Enter the quantity of the item you wish to add to the promo: ");
-						int quantity = scanner.nextInt();
+						int quantity = Integer.parseInt(s.nextLine());;
 						OrderableItems itemToAdd = menu.getItem(itemID);
 						if(itemToAdd == null){
 							System.out.println("Please enter a valid itemID!");
@@ -123,7 +125,7 @@ public class RestaurantApp {
 				case 4:
 					System.out.println("To remove a promo package, please enter its unique itemID. The menu is printed for reference.");
 					menu.printMenu();
-					index = scanner.nextInt();
+					index = Integer.parseInt(s.nextLine());
 					menu.removeItem(index);
 					break;
 				case 5:
@@ -157,9 +159,8 @@ public class RestaurantApp {
 			System.out.println("(8) Print tableList");
 			System.out.println("(9) Edit individual menu items/ promotional set packages");
 			System.out.println("(10) Exit Submenu");
-			choice = scanner.nextInt();
+			choice = Integer.parseInt(s.nextLine());
 		} while(choice != 10);
-		scanner.close();
 		System.out.println("Returning to main menu...");
 		System.out.println("=========================");
 	}
@@ -169,39 +170,39 @@ public class RestaurantApp {
 		System.out.println("(1) Edit Menu Item");
 		System.out.println("(2) Edit Promotional Set Item");
 		System.out.println("(3) Return to restaurant configuration menu");
-		Scanner scanner = new Scanner(System.in);
-		int choice = scanner.nextInt();
+		//Scanner scanner = new Scanner(System.in);
+		int choice = Integer.parseInt(s.nextLine());
 		do{
 			switch(choice){
 				case 1:
 					System.out.println("To edit a menu item, please enter its unique itemID. The menu is printed for reference.");
 					menu.printMenu();
-					int index = scanner.nextInt();
+					int index = Integer.parseInt(s.nextLine());;
 					while(index > 199){
 						System.out.println("Please enter a valid itemID for Menu Items!");
-						index = scanner.nextInt();
+						index = Integer.parseInt(s.nextLine());;
 					}
 					System.out.println("Select what you want to edit for this item: ");
 					System.out.println("(1) Name");
 					System.out.println("(2) Description");
 					System.out.println("(3) Price");
 					System.out.println("(4) Type");
-					int editChoice = scanner.nextInt();
+					int editChoice = Integer.parseInt(s.nextLine());
 					MenuItem itemToEdit = (MenuItem) menu.getItem(index);
 					switch(editChoice){
 						case 1:
 							System.out.print("Enter the new name: ");
-							String newName = scanner.next();
+							String newName = s.nextLine();
 							itemToEdit.setName(newName);
 							break;
 						case 2:
 							System.out.print("Enter the new description: ");
-							String newDescription = scanner.next();
+							String newDescription = s.nextLine();
 							itemToEdit.setDescription(newDescription);
 							break;
 						case 3:
 							System.out.print("Enter the new price: ");
-							double newPrice = scanner.nextDouble();
+							double newPrice = Double.parseDouble(s.nextLine());
 							itemToEdit.setPrice(newPrice);
 							break;
 						case 4:
@@ -210,7 +211,7 @@ public class RestaurantApp {
 							System.out.println("(2) Starter");
 							System.out.println("(3) Main Course");
 							System.out.println("(4) Dessert");
-							String newType = scanner.next();
+							String newType = s.next();
 							itemToEdit.setType(newType);
 							break;
 						default:
@@ -221,10 +222,10 @@ public class RestaurantApp {
 				case 2:
 					System.out.println("To edit a promotional set item, please enter its unique itemID. The menu is printed for reference.");
 					menu.printMenu();
-					index = scanner.nextInt();
+					index = Integer.parseInt(s.nextLine());
 					while(index < 200){
 						System.out.println("Please enter a valid itemID for promo items!");
-						index = scanner.nextInt();
+						index = Integer.parseInt(s.nextLine());
 					}
 					System.out.println("Select what you want to edit for this item: ");
 					System.out.println("(1) Name");
@@ -232,34 +233,34 @@ public class RestaurantApp {
 					System.out.println("(3) Price");
 					System.out.println("(4) Add new item");
 					System.out.println("(5) Remove menu item");
-					editChoice = scanner.nextInt();
+					editChoice = Integer.parseInt(s.nextLine());
 					PromotionalSetPackage promoToEdit = (PromotionalSetPackage) menu.getItem(index);
 					switch(editChoice){
 						case 1:
 							System.out.print("Enter the new name: ");
-							String newName = scanner.next();
+							String newName = s.next();
 							promoToEdit.setName(newName);
 							break;
 						case 2:
 							System.out.print("Enter the new description: ");
-							String newDescription = scanner.next();
+							String newDescription = s.next();
 							promoToEdit.setDescription(newDescription);
 							break;
 						case 3:
 							System.out.print("Enter the new price: ");
-							double newPrice = scanner.nextDouble();
+							double newPrice = Double.parseDouble(s.nextLine());
 							promoToEdit.setPrice(newPrice);
 							break;
 						case 4:
 							System.out.println("Select the itemID of the menu item to add (Menu printed for reference): ");
 							menu.printMenu();
-							int newItemID = scanner.nextInt();
+							int newItemID = Integer.parseInt(s.nextLine());
 							while(newItemID > 199){
 								System.out.println("Please enter a valid itemID for Menu Items!");
-								newItemID = scanner.nextInt();
+								newItemID = Integer.parseInt(s.nextLine());
 							}
 							System.out.println("Enter the quantity for this item: ");
-							int newQuantity = scanner.nextInt();
+							int newQuantity = Integer.parseInt(s.nextLine());;
 							MenuItem menuItemToAdd = (MenuItem) menu.getItem(newItemID);
 							if(menuItemToAdd == null){
 								System.out.println("Invalid itemID!");
@@ -271,10 +272,10 @@ public class RestaurantApp {
 						case 5:
 							System.out.println("Select the itemID of the menu item to remove (Menu printed for reference): ");
 							menu.printMenu();
-							newItemID = scanner.nextInt();
+							newItemID = Integer.parseInt(s.nextLine());
 							while(newItemID > 199){
 								System.out.println("Please enter a valid itemID for Menu Items!");
-								newItemID = scanner.nextInt();
+								newItemID = Integer.parseInt(s.nextLine());
 							}
 							MenuItem menuItemToRemove = (MenuItem) menu.getItem(newItemID);
 							if(menuItemToRemove == null){
@@ -282,7 +283,7 @@ public class RestaurantApp {
 							}
 							else{
 								System.out.println("How many of quantities of the item do you wish to remove?");
-								newQuantity = scanner.nextInt();
+								newQuantity = Integer.parseInt(s.nextLine());
 								promoToEdit.removeItem(menuItemToRemove, newQuantity);
 							}
 							break;
@@ -298,19 +299,17 @@ public class RestaurantApp {
 			System.out.println("(1) Edit Menu Item");
 			System.out.println("(2) Edit Promotional Set Item");
 			System.out.println("(3) Return to restaurant configuration menu");
-			choice = scanner.nextInt();
+			choice = Integer.parseInt(s.nextLine());
 		} while (choice != 3);
-		scanner.close();
 		System.out.println("Returning to restaurant configuration submenu");
 	}
 	
 	public static void subMenuTwo() {
-		Scanner s = new Scanner(System.in);
 		System.out.println("(1) Create reservation booking");
 		System.out.println("(2) Check/Remove reservation booking");
 		System.out.println("(3) Exit");
 		System.out.print("Choose an option: ");
-		int c = s.nextInt();
+		int c = Integer.parseInt(s.nextLine());
 		
 		while (1 <= c && c <= 2) {
 			switch(c) {
@@ -321,7 +320,7 @@ public class RestaurantApp {
 					String time = s.next();
 					time = time + ":00";
 					System.out.print("Enter number of pax: ");
-					int paxNumber = s.nextInt();
+					int paxNumber = Integer.parseInt(s.nextLine());
 					System.out.print("Enter customer's name: ");
 					String name = s.next();
 					System.out.print("Enter customer's contact no.: ");
@@ -338,7 +337,7 @@ public class RestaurantApp {
 				 	tableList.updateAllRezs();
 				 	System.out.println("(1) Display all current reservations");
 				 	System.out.println("(2) Check/Remove a reservation");
-				 	int d = s.nextInt();
+				 	int d = Integer.parseInt(s.nextLine());
 				 	switch(d) {
 				 	 	case 1:
 				 	 		tableList.printAllRezs();
@@ -375,12 +374,11 @@ public class RestaurantApp {
 			System.out.println("(2) Check/Remove reservation booking");
 			System.out.println("(3) Exit");
 			System.out.print("Choose an option: ");
-			c = s.nextInt();
+			c = Integer.parseInt(s.nextLine());
 		}
 	}
 	
 	public static void subMenuThree() {
-		Scanner s = new Scanner(System.in);
 		System.out.println("(1) Check table availability");
 		System.out.println("(2) Place an order");
 		System.out.println("(3) Update an order");
@@ -388,7 +386,7 @@ public class RestaurantApp {
 		System.out.println("(5) Print order invoice");
 		System.out.println("(6) Exit");
 		System.out.print("Choose an option: ");
-		int c = s.nextInt();
+		int c = Integer.parseInt(s.nextLine());
 		
 		while (1 <= c && c <= 5) {
 			switch(c) {
@@ -403,7 +401,7 @@ public class RestaurantApp {
 					break;
 				case 4:
 					viewOrder();
-					break
+					break;
 				case 5:
 					printInvoice();
 					break;
@@ -417,15 +415,13 @@ public class RestaurantApp {
 			System.out.println("(3) Print order invoice");
 			System.out.println("(4) Exit");
 			System.out.print("Choose an option: ");
-			c = s.nextInt();
+			c = Integer.parseInt(s.nextLine());
 		}
 	}
 	public static void createOrder(){
-		Scanner s = new Scanner(System.in);
-		
 		// Create an order object
 		System.out.println("Enter Staff ID");
-		int staffID = s.nextInt();
+		int staffID = Integer.parseInt(s.nextLine());
 		System.out.println("Member?");
 		boolean isMember = s.nextBoolean();
 		System.out.println("Does the customer have a reservation? Y/N");
@@ -447,12 +443,12 @@ public class RestaurantApp {
 		{
 			tableList.checkTableAvailability();
 			System.out.print("Assign to table ID: ");
-			tableID = s.nextInt();
+			tableID = Integer.parseInt(s.nextLine());
 			while (tableList.getTableList().get(tableID).getStatus() != TableStatus.VACANT)
 				System.out.println("Please select a vacant table!");
 				tableList.checkTableAvailability();
 				System.out.print("Assign to table ID: ");
-				tableID = s.nextInt();
+				tableID = Integer.parseInt(s.nextLine());
 		}
 		Order order = new Order(staffID, tableID, isMember, staffList.getStaff(staffID).getName());
 		currentOrders.put(tableID, order);
@@ -468,25 +464,25 @@ public class RestaurantApp {
 		System.out.println("(3) Print Menu");
 		System.out.println("(4) Done! Create Order");
 		System.out.print("Enter a choice: ");
-		int n = s.nextInt();
+		int n = Integer.parseInt(s.nextLine());
 		while (1 <= n && n <= 3) {
 			switch(n) {
 				case 1:
 					System.out.print("Enter ItemID to add: ");
-					int itemID = s.nextInt();
+					int itemID = Integer.parseInt(s.nextLine());
 					OrderableItems orderableItem = menu.getItem(itemID);
 					System.out.println("Enter Quantity: ");
-					int quantity = s.nextInt();
+					int quantity = Integer.parseInt(s.nextLine());
 					
 					order.addItem(orderableItem, quantity);
 					// System.out.println("Item Added!");
 					break;
 				case 2:
 					System.out.println("Enter ItemID to remove: ");
-					itemID = s.nextInt();
+					itemID = Integer.parseInt(s.nextLine());
 					orderableItem = menu.getItem(itemID);
 					System.out.println("Enter Quantity: ");
-					quantity = s.nextInt();
+					quantity = Integer.parseInt(s.nextLine());
 					
 					order.removeItem(orderableItem, quantity);
 					// System.out.println("Item Removed!");
@@ -503,16 +499,14 @@ public class RestaurantApp {
 			System.out.println("(3) Print Menu");
 			System.out.println("(4) Done! Create Order");
 			System.out.print("Enter a choice: ");
-			n = s.nextInt();
+			n = Integer.parseInt(s.nextLine());
 		}
 		System.out.println("Order Created!");
 	}
 	
 	public static void updateOrder() {
-		Scanner s = new Scanner(System.in);
-		
 		System.out.print("Enter TableID: ");
-		int tableID = s.nextInt();
+		int tableID = Integer.parseInt(s.nextLine());
 		if (tableList.getTableList().get(tableID).getStatus() != TableStatus.OCCUPIED) {
 			System.out.println("No orders currently being served at this table!");
 			return;
@@ -528,24 +522,24 @@ public class RestaurantApp {
 			System.out.println("(3) Print Menu");
 			System.out.println("(4) Done! Confirm Order Update");
 			System.out.print("Enter a choice: ");
-			n = s.nextInt();
+			n = Integer.parseInt(s.nextLine());
 			switch(n) {
 				case 1:
 					System.out.print("Enter ItemID to add: ");
-					int itemID = s.nextInt();
+					int itemID = Integer.parseInt(s.nextLine());
 					OrderableItems orderableItem = menu.getItem(itemID);
 					System.out.println("Enter Quantity: ");
-					int quantity = s.nextInt();
+					int quantity = Integer.parseInt(s.nextLine());
 					
 					order.addItem(orderableItem, quantity);
 					// System.out.println("Item Added!");
 					break;
 				case 2:
 					System.out.println("Enter ItemID to remove: ");
-					itemID = s.nextInt();
+					itemID = Integer.parseInt(s.nextLine());
 					orderableItem = menu.getItem(itemID);
 					System.out.println("Enter Quantity: ");
-					quantity = s.nextInt();
+					quantity = Integer.parseInt(s.nextLine());
 					
 					order.removeItem(orderableItem, quantity);
 					// System.out.println("Item Removed!");
@@ -564,9 +558,9 @@ public class RestaurantApp {
 	}
 	
 	public static void viewOrder() {
-		Scanner s = new Scanner(System.in);
 		
 		System.out.print("Enter TableID: ");
+		int tableID = Integer.parseInt(s.nextLine());
 		if (tableList.getTableList().get(tableID).getStatus() != TableStatus.OCCUPIED) {
 			System.out.println("No orders currently being served at this table!");
 			return;
@@ -577,10 +571,9 @@ public class RestaurantApp {
 	}
 	
 	public static void printInvoice() {
-		Scanner s = new Scanner(System.in);
 		
 		System.out.print("Enter TableID: ");
-		int tableID = s.nextInt();
+		int tableID = Integer.parseInt(s.nextLine());
 		if (tableList.getTableList().get(tableID).getStatus() != TableStatus.OCCUPIED) {
 			System.out.println("No orders currently being served at this table!");
 			return;

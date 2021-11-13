@@ -1,5 +1,5 @@
 public class Staff{
-  private static int count = 0;
+  private static int count = 1;
   private String name;
   private char gender;
   private int employeeID;

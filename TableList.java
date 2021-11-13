@@ -11,6 +11,8 @@ public class TableList implements Serializable {
 
 	private Hashtable<Integer, Table> tableList;
 
+	private Scanner sc = RestaurantApp.s;
+
 	public Hashtable<Integer, Table> getTableList() {
 		return this.tableList;
 	}
@@ -28,7 +30,7 @@ public class TableList implements Serializable {
 	}
 
 	public void addTable() {
-		Scanner sc = new Scanner(System.in);
+		
 		System.out.printf("Input the size of the new table: ");
 		int size = Integer.parseInt(sc.next());
 		while (size % 2 == 1 || size < 2 || size > 10) {
@@ -41,7 +43,6 @@ public class TableList implements Serializable {
 	}
 
 	public void removeTable() {
-		Scanner sc = new Scanner(System.in);
 		System.out.printf("Input the ID of the table to be removed: ");
 		int tableID = Integer.parseInt(sc.next());
 		this.tableList.remove(tableID);

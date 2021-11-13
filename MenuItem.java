@@ -1,7 +1,7 @@
 public class MenuItem extends OrderableItems{
 
     // this variable will help with auto incrementing itemID when adding new items
-    private static int count = 0;
+    private static int count = 1;
 
     private String name;
     private String description;
