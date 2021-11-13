@@ -340,25 +340,25 @@ public class RestaurantApp {
 					break;
 				case 2:
 					System.out.println("To remove a customer as a member, please enter their unique memberID");
-					String number = s.nextLine();
+					int memberID = Integer.parseInt(s.nextLine());
 					memberList.removeMember(memberID);
 					break;
 				case 3:
 					System.out.print("Enter the new name of the customer member : ");
-					String name = s.nextLine();
+					name = s.nextLine();
 					System.out.print("Enter the number of the customer member : ");
-					String number = s.nextLine();
+				        number = s.nextLine();
 					System.out.print("Enter the memberID of the customer member: ");
 					int memberID = Integer.parseInt(s.nextLine());
 					memberList.changeName(memberID, name, number);
 					break;
 				case 4:
 					System.out.print("Enter the name of the customer member : ");
-					String name = s.nextLine();
+					name = s.nextLine();
 					System.out.print("Enter the new number of the customer member : ");
-					String number = s.nextLine();
+					number = s.nextLine();
 					System.out.print("Enter the memberID of the customer member: ");
-					int memberID = Integer.parseInt(s.nextLine());
+					memberID = Integer.parseInt(s.nextLine());
 					memberList.changeNumber(memberID, name, number);
 					break;
 				case 5:
