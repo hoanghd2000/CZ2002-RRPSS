@@ -48,6 +48,15 @@ public class TableList implements Serializable {
 		int tableID = Integer.parseInt(RestaurantApp.s.nextLine());
 		this.tableList.remove(tableID);
 	}
+	
+	/**
+	 * 
+	 * @param tableID
+	 */
+	
+	public boolean exists(int tableID) {
+		return tableList.containsKey(tableID);
+	}
 
 	/**
 	 * 
