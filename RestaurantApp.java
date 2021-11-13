@@ -87,7 +87,7 @@ public class RestaurantApp {
 			System.out.println("(8) Print tableList");
 			System.out.println("(9) Edit individual menu items/ promotional set packages");
 			System.out.println("(10) Staff Submenu");
-			System.out.println("(11) Exit this submenu");
+			System.out.println("(11) To Main Menu");
 			choice = Integer.parseInt(s.nextLine());
 			switch(choice){
 				case 1:
@@ -357,7 +357,7 @@ public class RestaurantApp {
 	public static void subMenuTwo() {
 		System.out.println("(1) Create reservation booking");
 		System.out.println("(2) Check/Remove reservation booking");
-		System.out.println("(3) Exit");
+		System.out.println("(3) To Main Menu");
 		System.out.print("Choose an option: ");
 		int c = Integer.parseInt(s.nextLine());
 		
@@ -426,7 +426,7 @@ public class RestaurantApp {
 			
 			System.out.println("(1) Create reservation booking");
 			System.out.println("(2) Check/Remove reservation booking");
-			System.out.println("(3) Exit");
+			System.out.println("(3) To Main Menu");
 			System.out.print("Choose an option: ");
 			c = Integer.parseInt(s.nextLine());
 		}
@@ -441,7 +441,7 @@ public class RestaurantApp {
 			System.out.println("(3) Update an order");
 			System.out.println("(4) View a current order");
 			System.out.println("(5) Print order invoice");
-			System.out.println("(6) Exit");
+			System.out.println("(6) To Main Menu");
 			System.out.print("Choose an option: ");
 			c = Integer.parseInt(s.nextLine());
 			switch(c) {
@@ -819,10 +819,10 @@ public class RestaurantApp {
 		
 		do {
 			System.out.println("SIMULATE TIME");
-			System.out.println("(1) Check table availability 1 hour before a reservation");
-			System.out.println("(2) Check reservation 15 minutes after the reserved time");
-			System.out.println("(3) Check table availability 15 minutes after the reserved time");
-			System.out.println("(4) Exit");
+			System.out.println("(1) Check table availability 23 hours way from now");
+			System.out.println("(2) Check reservation 1 day and 15 minutes from now");
+			System.out.println("(3) Check table availability 1 day and 15 minutes from now");
+			System.out.println("(4) To Main Menu");
 			System.out.print("Enter a choice: ");
 			n = Integer.parseInt(s.nextLine());
 			switch(n) {
