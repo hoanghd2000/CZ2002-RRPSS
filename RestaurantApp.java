@@ -174,7 +174,7 @@ public class RestaurantApp {
 					System.out.println("Invalid input!");
 					break;
 			}
-		} while(choice != 11);
+		} while(choice != 12);
 		System.out.println("Returning to main menu...");
 		System.out.println("=========================");
 	}
@@ -348,7 +348,7 @@ public class RestaurantApp {
 					System.out.print("Enter the new name of the customer member : ");
 					name = s.nextLine();
 					System.out.print("Enter the number of the customer member : ");
-				    	number = s.nextLine();
+				    number = s.nextLine();
 					System.out.print("Enter the memberID of the customer member: ");
 					memberID = Integer.parseInt(s.nextLine());
 					memberList.changeName(memberID, number, name);
@@ -368,7 +368,7 @@ public class RestaurantApp {
 					System.out.println("Invalid input!");
 			}
 		}while(choice != 5);
-		System.out.println("Returning to main menu...");
+		System.out.println("Returning to restaurant configuration submenu...");
 	}
 			
 	private static void staffSubMenu(){
@@ -406,7 +406,7 @@ public class RestaurantApp {
 					System.out.println("Invalid input!");
 			}
 		}while(choice != 4);
-		System.out.println("Returning to main menu...");
+		System.out.println("Returning to restaurant configuration submenu...");
 	}
 	
 	// Sub-menu 2
