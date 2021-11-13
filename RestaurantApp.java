@@ -227,12 +227,12 @@ public class RestaurantApp {
 					switch(editChoice){
 						case 1:
 							System.out.print("Enter the new name: ");
-							String newName = s.next();
+							String newName = s.nextLine();
 							promoToEdit.setName(newName);
 							break;
 						case 2:
 							System.out.print("Enter the new description: ");
-							String newDescription = s.next();
+							String newDescription = s.nextLine();
 							promoToEdit.setDescription(newDescription);
 							break;
 						case 3:
@@ -299,16 +299,16 @@ public class RestaurantApp {
 			switch(c) {
 				case 1:
 					System.out.print("Enter date (YYYY-MM-DD): ");
-					String date = s.next();
+					String date = s.nextLine();
 					System.out.print("Enter time (hh:mm): ");
-					String time = s.next();
+					String time = s.nextLine();
 					time = time + ":00";
 					System.out.print("Enter number of pax: ");
 					int paxNumber = Integer.parseInt(s.nextLine());
 					System.out.print("Enter customer's name: ");
-					String name = s.next();
+					String name = s.nextLine();
 					System.out.print("Enter customer's contact no.: ");
-					String contact = s.next();
+					String contact = s.nextLine();
 					String dateTime = date + "T" + time;
 					LocalDateTime dateTime1 = LocalDateTime.parse(dateTime);
 					int tableId = tableList.createNewRez(dateTime1, paxNumber, name, contact);
@@ -328,14 +328,14 @@ public class RestaurantApp {
 				 	 		break;
 				 	 	case 2:
 				 	 		System.out.print("Retrieve reservation for customer of contact no.: ");
-				 	 		contact = s.next();
+				 	 		contact = s.nextLine();
 				 	 		Reservation rez = tableList.findRez(contact);
 				 	 		if (rez == null)
 				 	 			System.out.println("No reservation created for that contact no.");
 				 	 		else {
 				 	 			rez.print();
 				 	 			System.out.println("Do you want to remove this reservation? (Y/N)");
-				 	 			String choice = s.next();
+				 	 			String choice = s.nextLine();
 				 	 			if (choice.equalsIgnoreCase("Y")) {
 				 	 				Table table = tableList.getTableList().get(rez.getTableNumber());
 				 		 			if (rez.getDateTime().compareTo(LocalDateTime.now().plusHours(1)) <= 0)
@@ -407,19 +407,19 @@ public class RestaurantApp {
 		System.out.println("Enter Staff ID");
 		int staffID = Integer.parseInt(s.nextLine());
 		System.out.println("Member?");
-		boolean isMember = s.nextBoolean();
+		boolean isMember = s.nextLine().equalsIgnoreCase("Y")? true:false;
 		System.out.println("Does the customer have a reservation? Y/N");
-		boolean reserved = s.next().equalsIgnoreCase("Y")? true:false;
+		boolean reserved = s.nextLine().equalsIgnoreCase("Y")? true:false;
 		int tableID;
 		
 		if (reserved)
 		{
 			Reservation rez;
 			System.out.print("Enter customer's contact no.: ");
-			String contact = s.next();
+			String contact = s.nextLine();
 			while ((rez = tableList.findRez(contact)) == null) {
 				System.out.print("Cannot find the reservation. Please enter a valid customer's contact no.: ");
-				contact = s.next();
+				contact = s.nextLine();
 			}
 			tableID = rez.getTableNumber();
 		}
