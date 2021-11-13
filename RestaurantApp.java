@@ -53,7 +53,7 @@ public class RestaurantApp {
 			System.out.println("(1) Configure Restaurant");
 			System.out.println("(2) Reservations");
 			System.out.println("(3) Order");
-			System.out.println("(5) Exit");
+			System.out.println("(4) Exit");
 			System.out.print("Choose an option: ");
 			c = Integer.parseInt(s.nextLine());
 		}
@@ -77,7 +77,8 @@ public class RestaurantApp {
 			System.out.println("(7) Remove a table");
 			System.out.println("(8) Print tableList");
 			System.out.println("(9) Edit individual menu items/ promotional set packages");
-			System.out.println("(10) Exit Submenu");
+			System.out.println("(10) Staff Submenu");
+			System.out.println("(11) Exit this submenu");
 			choice = Integer.parseInt(s.nextLine());
 			switch(choice){
 				case 1:
@@ -151,14 +152,55 @@ public class RestaurantApp {
 					editIndividualItems();
 					break;
 				case 10:
+					staffSubMenu();
+					break;
+				case 11:
 					break;
 				default:
 					System.out.println("Invalid input!");
 					break;
 			}
-		} while(choice != 10);
+		} while(choice != 11);
 		System.out.println("Returning to main menu...");
 		System.out.println("=========================");
+	}
+
+	public static void staffSubMenu(){
+		int choice;
+		do{
+			System.out.println("Choose one of the following options to configure the restaurant!");
+			System.out.println("(1) Add Staff Member");
+			System.out.println("(2) Remove Staff Member");
+			System.out.println("(3) Print Staff List");
+			System.out.println("(4) Exit Submenu");
+			choice = Integer.parseInt(s.nextLine());
+			switch(choice){
+				case 1:
+					System.out.print("Enter the name of the new staff member: ");
+					String name = s.nextLine();
+					System.out.print("Enter the gender of the new staff member(M/F): ");
+					char gender = s.nextLine().charAt(0);
+					System.out.print("Enter the job title of the new staff member: ");
+					String title = s.nextLine();
+					staffList.addStaff(name, gender, title);
+					System.out.println("Staff enrolled!");
+					break;
+				case 2:
+					System.out.println("To remove a staff member, please enter their unique staffID. The staff list is printed for reference");
+					staffList.printStaffList();
+					int index = Integer.parseInt(s.nextLine());
+					staffList.removeStaff(index);
+					break;
+				case 3:
+					staffList.printStaffList();
+					break;
+				case 4:
+					break;
+				default:
+					System.out.println("Invalid input!");
+			}
+		}while(choice != 4);
+		System.out.println("Returning to main menu...");
 	}
 
 	public static void editIndividualItems(){
@@ -183,6 +225,7 @@ public class RestaurantApp {
 					System.out.println("(2) Description");
 					System.out.println("(3) Price");
 					System.out.println("(4) Type");
+					System.out.print("Choose an option: ");
 					int editChoice = Integer.parseInt(s.nextLine());
 					MenuItem itemToEdit = (MenuItem) menu.getItem(index);
 					switch(editChoice){
@@ -207,6 +250,7 @@ public class RestaurantApp {
 							System.out.println("(2) Starter");
 							System.out.println("(3) Main Course");
 							System.out.println("(4) Dessert");
+							System.out.print("Enter the type: ");
 							String newType = s.next();
 							itemToEdit.setType(newType);
 							break;
@@ -223,12 +267,17 @@ public class RestaurantApp {
 						System.out.println("Please enter a valid itemID for promo items!");
 						index = Integer.parseInt(s.nextLine());
 					}
+					if(menu.getItem(index) == null){
+						System.out.println("This promo pckage doesn't exist");
+						continue;
+					}
 					System.out.println("Select what you want to edit for this item: ");
 					System.out.println("(1) Name");
 					System.out.println("(2) Description");
 					System.out.println("(3) Price");
 					System.out.println("(4) Add new item");
 					System.out.println("(5) Remove menu item");
+					System.out.print("Choose an option: ");
 					editChoice = Integer.parseInt(s.nextLine());
 					PromotionalSetPackage promoToEdit = (PromotionalSetPackage) menu.getItem(index);
 					switch(editChoice){
@@ -660,7 +709,7 @@ public class RestaurantApp {
 			doStream.writeObject(tableList);
 			doStream.writeInt(Table.getCount());
 			doStream.close();
-
+			
 			/* FOR MENU */
 			FileOutputStream foStreamMenu = new FileOutputStream(menuFile);
 			BufferedOutputStream boStreamMenu = new BufferedOutputStream(foStreamMenu);
@@ -668,7 +717,7 @@ public class RestaurantApp {
 			doStreamMenu.writeObject(menu);
 			doStreamMenu.close();
 
-			/* FOR STAFF*/
+			/* FOR STAFF */
 			FileOutputStream foStreamStaff = new FileOutputStream(staffFile);
 			BufferedOutputStream boStreamStaff = new BufferedOutputStream(foStreamStaff);
 			ObjectOutputStream doStreamStaff = new ObjectOutputStream(boStreamStaff);

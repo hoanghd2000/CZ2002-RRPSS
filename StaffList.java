@@ -38,4 +38,11 @@ public class StaffList implements Serializable{
         }
         return null;
     }
+
+    public void printStaffList(){
+        System.out.println("StaffID" + "\tName\tPosition");
+        for(int i = 0 ; i < staffList.size() ; i++) {
+            System.out.println(staffList.get(i).getEmployeeID() + "\t" + staffList.get(i).getName() + "\t" + staffList.get(i).getJobTitle());
+        }
+    }
 }
