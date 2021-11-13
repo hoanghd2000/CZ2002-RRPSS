@@ -23,7 +23,7 @@ public class RestaurantApp {
 		System.out.println("(1) Configure Restaurant");
 		System.out.println("(2) Reservations");
 		System.out.println("(3) Order");
-		System.out.println("(5) Exit");
+		System.out.println("(4) Exit");
 		System.out.print("Choose an option: ");
 		int c = Integer.parseInt(s.nextLine());
 		
@@ -46,7 +46,7 @@ public class RestaurantApp {
 			System.out.println("(1) Configure Restaurant");
 			System.out.println("(2) Reservations");
 			System.out.println("(3) Order");
-			System.out.println("(5) Exit");
+			System.out.println("(4) Exit");
 			System.out.print("Choose an option: ");
 			c = Integer.parseInt(s.nextLine());
 		}
