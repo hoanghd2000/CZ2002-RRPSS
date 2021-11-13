@@ -1,3 +1,12 @@
+/**
+ * This class contains the arrayList of orders to be accessed
+ * to print the total Revenue earned.
+ * 
+ * @author SS10 G5
+ * @version 1.0
+ * @since 2021-10-25
+ */
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Set;

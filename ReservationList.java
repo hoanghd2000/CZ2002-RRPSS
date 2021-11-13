@@ -1,3 +1,12 @@
+/**
+ * Represents the List of Reservations and the create,
+ * remove,delete functions surrounding it.
+ * 
+ * @author SS10 G5
+ * @version 1.0
+ * @since 2021-10-25
+ */
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
