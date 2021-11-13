@@ -9,7 +9,15 @@ public class MemberList implements Serializable {
         members = new Hashtable<Integer, Member>();
     }
 
-    public void addMember(String name, String phoneNumber) {
+    public Hashtable<Integer, Member> getMembers() {
+		return members;
+	}
+
+	public void setMembers(Hashtable<Integer, Member> members) {
+		this.members = members;
+	}
+
+	public void addMember(String name, String phoneNumber) {
         Member member = new Member(name, phoneNumber);
         members.put(member.getMemberID(), member);
     }

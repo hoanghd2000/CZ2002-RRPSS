@@ -807,6 +807,7 @@ public class RestaurantApp {
 		String tableFile = "tables";
 		String menuFile = "menu";
 		String staffFile = "staff";
+		String memberFile = "members";
 
 		try {
 			/* FOR TABLES */
@@ -827,6 +828,8 @@ public class RestaurantApp {
 			@SuppressWarnings("unchecked")
 			Hashtable<Integer, OrderableItems> m = (Hashtable<Integer, OrderableItems>)diStreamMenu.readObject();
 			menu.setOrderableItems(m);
+			MenuItem.setCount(diStreamMenu.readInt());
+			PromotionalSetPackage.setCounter(diStreamMenu.readInt());
 			diStreamMenu.close();
 
 			/* FOR STAFF */
@@ -839,6 +842,17 @@ public class RestaurantApp {
 			staffList.setStaffList(s);
 			Staff.setCount(diStreamStaff.readInt());
 			diStreamStaff.close();
+			
+			/* FOR MEMBERS */
+			FileInputStream fiStreamMember = new FileInputStream(memberFile);
+			BufferedInputStream biStreamMember = new BufferedInputStream(fiStreamMember);
+			ObjectInputStream diStreamMember = new ObjectInputStream(biStreamMember);
+			// staffList = (StaffList)diStreamStaff.readObject();
+			@SuppressWarnings("unchecked")
+			Hashtable<Integer, Member> me = (Hashtable<Integer, Member>)diStreamMember.readObject();
+			memberList.setMembers(me);
+			Member.setCount(diStreamMember.readInt());
+			diStreamMember.close();
 			
 		}
 		catch (ClassNotFoundException e) {
@@ -855,6 +869,8 @@ public class RestaurantApp {
 				foStream = new FileOutputStream(menuFile);
 				foStream.close();
 				foStream = new FileOutputStream(staffFile);
+				foStream.close();
+				foStream = new FileOutputStream(memberFile);
 				foStream.close();
 			}
 			catch (FileNotFoundException er) {
@@ -878,6 +894,7 @@ public class RestaurantApp {
 		String tableFile = "tables";
 		String menuFile = "menu";
 		String staffFile = "staff";
+		String memberFile = "members";
 
 		try {
 			/* FOR TABLES */
@@ -893,6 +910,8 @@ public class RestaurantApp {
 			BufferedOutputStream boStreamMenu = new BufferedOutputStream(foStreamMenu);
 			ObjectOutputStream doStreamMenu = new ObjectOutputStream(boStreamMenu);
 			doStreamMenu.writeObject(menu.getOrderableItems());
+			doStreamMenu.writeInt(MenuItem.getCount());
+			doStreamMenu.writeInt(PromotionalSetPackage.getCounter());
 			doStreamMenu.close();
 
 			/* FOR STAFF */
@@ -902,6 +921,14 @@ public class RestaurantApp {
 			doStreamStaff.writeObject(staffList.getStaffList());
 			doStreamStaff.writeInt(Staff.getCount());
 			doStreamStaff.close();
+			
+			/* FOR MEMBER */
+			FileOutputStream foStreamMember = new FileOutputStream(memberFile);
+			BufferedOutputStream boStreamMember = new BufferedOutputStream(foStreamMember);
+			ObjectOutputStream doStreamMember = new ObjectOutputStream(boStreamMember);
+			doStreamMember.writeObject(memberList.getMembers());
+			doStreamMember.writeInt(Member.getCount());
+			doStreamMember.close();
 		}
 		catch (FileNotFoundException e) {
 			System.out.println("IOError: File not found!" + tableFile);

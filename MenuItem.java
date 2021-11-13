@@ -28,7 +28,15 @@ public class MenuItem extends OrderableItems{
     }
 
     
-    /** 
+    public static int getCount() {
+		return count;
+	}
+
+	public static void setCount(int count) {
+		MenuItem.count = count;
+	}
+
+	/** 
      * @return String
      */
     // creating getters and setters
