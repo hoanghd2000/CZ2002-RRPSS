@@ -1,8 +1,8 @@
 import java.io.*;
 import java.time.Clock;
 import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.*;
+import java.time.format.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Scanner;
@@ -364,11 +364,38 @@ public class RestaurantApp {
 		while (c != 3) {
 			switch(c) {
 				case 1:
-					System.out.print("Enter date (YYYY-MM-DD): ");
-					String date = s.nextLine();
-					System.out.print("Enter time (hh:mm): ");
-					String time = s.nextLine();
-					time = time + ":00";
+					// Input date
+					boolean correctInput = false;
+					String date = null;
+					while (!correctInput) {
+						System.out.print("Enter date (YYYY-MM-DD): ");
+						date = s.nextLine();
+						try {
+							correctInput = true;
+							LocalDate.parse(date);
+						}
+						catch(DateTimeParseException e) {
+							System.out.println("Please enter the correct date format!");
+							correctInput = false;
+						}
+					}
+					// Input time
+					correctInput = false;
+					String time = null;
+					while (!correctInput) {
+						System.out.print("Enter time (hh:mm): ");
+						time = s.nextLine();
+						time = time + ":00";
+						try {
+							correctInput = true;
+							LocalTime.parse(time);
+						}
+						catch(DateTimeParseException e) {
+							System.out.println("Please enter the correct time format!");
+							correctInput = false;
+						}
+					}
+
 					System.out.print("Enter number of pax: ");
 					int paxNumber = Integer.parseInt(s.nextLine());
 					System.out.print("Enter customer's name: ");
