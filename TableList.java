@@ -1,6 +1,5 @@
-import java.time.LocalDateTime;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.*;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -147,10 +146,11 @@ public class TableList implements Serializable {
 			Table table = tableList.get(tableId);
 			
 			// After 'expiry period = 15mins', remove the expired reservation and update table status to VACANT
-			if (table.getReservationList().getReservationList().size() > 0 && table.getReservationList().getReservationList().get(0).getDateTime().compareTo(LocalDateTime.now().minusMinutes(15)) <= 0)
+			if (table.getReservationList().getReservationList().size() > 0 && table.getReservationList().getReservationList().get(0).getDateTime().compareTo(LocalDateTime.now().minusMinutes(15)) <= 0) {
 				table.getReservationList().getReservationList().remove(0);
 				if (table.getStatus() == TableStatus.RESERVED)
 					table.setStatus(TableStatus.VACANT);
+			}
 		}
 	}
 
@@ -161,16 +161,87 @@ public class TableList implements Serializable {
 			Table table = tableList.get(tableId);
 			
 			// Update table status to RESERVED if reservation coming up within 1 hour
-			if (table.getReservationList().getReservationList().size() > 0 && table.getReservationList().getReservationList().get(0).getDateTime().compareTo(LocalDateTime.now().plusHours(1)) <= 0)
+			if (table.getReservationList().getReservationList().size() > 0 && table.getReservationList().getReservationList().get(0).getDateTime().compareTo(LocalDateTime.now().plusHours(1)) <= 0) {
 				if (table.getStatus() == TableStatus.VACANT)
 					table.setStatus(TableStatus.RESERVED);
+			}
 			
 			// After 'expiry period = 15mins', remove the expired reservation and update table status to VACANT
-			if (table.getReservationList().getReservationList().size() > 0 && table.getReservationList().getReservationList().get(0).getDateTime().compareTo(LocalDateTime.now().minusMinutes(15)) <= 0)
+			if (table.getReservationList().getReservationList().size() > 0 && table.getReservationList().getReservationList().get(0).getDateTime().compareTo(LocalDateTime.now().minusMinutes(15)) <= 0) {
 				table.getReservationList().getReservationList().remove(0);
 				if (table.getStatus() == TableStatus.RESERVED)
 					table.setStatus(TableStatus.VACANT);
+			}
 			
+			// Print out each table's availability
+			System.out.printf("Table %d: %s\n", table.getTableID(), table.getStatus().toString());
+		}
+	}
+	
+	public void updateAllRezsTest() { // implement the 'expiry period'
+		Enumeration<Integer> tableIds = tableList.keys();
+		while(tableIds.hasMoreElements()) { // iterate through each table
+			int tableId = tableIds.nextElement();
+			Table table = tableList.get(tableId);
+			
+			// After 'expiry period = 15mins', remove the expired reservation and update table status to VACANT
+			if (table.getReservationList().getReservationList().size() > 0 && table.getReservationList().getReservationList().get(0).getDateTime().compareTo(LocalDateTime.ofInstant(RestaurantApp.clockat.instant(), ZoneOffset.UTC).minusMinutes(15)) <= 0) {
+				table.getReservationList().getReservationList().remove(0);
+				if (table.getStatus() == TableStatus.RESERVED)
+					table.setStatus(TableStatus.VACANT);
+			}
+		}
+	}
+
+	public void checkTableAvailabilityTest1() {
+//		System.out.println(RestaurantApp.clock.instant());
+//		System.out.println(RestaurantApp.clockbf.instant());
+//		System.out.println(LocalDateTime.ofInstant(RestaurantApp.clockbf.instant(), ZoneOffset.UTC));
+		
+		Enumeration<Integer> tableIds = tableList.keys();
+		while(tableIds.hasMoreElements()) { // iterate through each table
+			int tableId = tableIds.nextElement();
+			Table table = tableList.get(tableId);
+			
+			// Update table status to RESERVED if reservation coming up within 1 hour
+			if (table.getReservationList().getReservationList().size() > 0 && table.getReservationList().getReservationList().get(0).getDateTime().compareTo(LocalDateTime.ofInstant(RestaurantApp.clockbf.instant(), ZoneOffset.UTC).plusHours(1)) <= 0) {
+				if (table.getStatus() == TableStatus.VACANT)
+					table.setStatus(TableStatus.RESERVED);
+			}
+			
+			// After 'expiry period = 15mins', remove the expired reservation and update table status to VACANT
+			if (table.getReservationList().getReservationList().size() > 0 && table.getReservationList().getReservationList().get(0).getDateTime().compareTo(LocalDateTime.ofInstant(RestaurantApp.clockbf.instant(), ZoneOffset.UTC).minusMinutes(15)) <= 0) {
+				table.getReservationList().getReservationList().remove(0);
+				if (table.getStatus() == TableStatus.RESERVED)
+					table.setStatus(TableStatus.VACANT);
+			}
+			// Print out each table's availability
+			System.out.printf("Table %d: %s\n", table.getTableID(), table.getStatus().toString());
+		}
+	}
+	
+	public void checkTableAvailabilityTest2() {
+//		System.out.println(RestaurantApp.clock.instant());
+//		System.out.println(RestaurantApp.clockbf.instant());
+//		System.out.println(LocalDateTime.ofInstant(RestaurantApp.clockbf.instant(), ZoneOffset.UTC));
+		
+		Enumeration<Integer> tableIds = tableList.keys();
+		while(tableIds.hasMoreElements()) { // iterate through each table
+			int tableId = tableIds.nextElement();
+			Table table = tableList.get(tableId);
+			
+			// Update table status to RESERVED if reservation coming up within 1 hour
+			if (table.getReservationList().getReservationList().size() > 0 && table.getReservationList().getReservationList().get(0).getDateTime().compareTo(LocalDateTime.ofInstant(RestaurantApp.clockat.instant(), ZoneOffset.UTC).plusHours(1)) <= 0) {
+				if (table.getStatus() == TableStatus.VACANT)
+					table.setStatus(TableStatus.RESERVED);
+			}
+			
+			// After 'expiry period = 15mins', remove the expired reservation and update table status to VACANT
+			if (table.getReservationList().getReservationList().size() > 0 && table.getReservationList().getReservationList().get(0).getDateTime().compareTo(LocalDateTime.ofInstant(RestaurantApp.clockat.instant(), ZoneOffset.UTC).minusMinutes(15)) <= 0) {
+				table.getReservationList().getReservationList().remove(0);
+				if (table.getStatus() == TableStatus.RESERVED)
+					table.setStatus(TableStatus.VACANT);
+			}
 			// Print out each table's availability
 			System.out.printf("Table %d: %s\n", table.getTableID(), table.getStatus().toString());
 		}

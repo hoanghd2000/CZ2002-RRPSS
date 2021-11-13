@@ -1,4 +1,6 @@
 import java.io.*;
+import java.time.Clock;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Hashtable;
 import java.util.Scanner;
@@ -13,7 +15,9 @@ public class RestaurantApp {
 	private static Menu menu = new Menu();
 	private static Report report = new Report();
 	
-
+	public static Clock clock = Clock.offset(Clock.systemDefaultZone(), Duration.ofHours(8));
+	public static Clock clockbf = Clock.offset(Clock.systemDefaultZone(), Duration.ofHours(31));
+	public static Clock clockat = Clock.offset(Clock.systemDefaultZone(), Duration.ofMinutes(1935));
 	public static Scanner s = new Scanner(System.in);
 
 	public static void main(String args[]) {
@@ -23,11 +27,12 @@ public class RestaurantApp {
 		System.out.println("(1) Configure Restaurant");
 		System.out.println("(2) Reservations");
 		System.out.println("(3) Order");
+		System.out.println("(4) Test");
 		System.out.println("(5) Exit");
 		System.out.print("Choose an option: ");
 		int c = Integer.parseInt(s.nextLine());
 		
-		while (1 <= c && c <= 3) {
+		while (1 <= c && c <= 4) {
 			switch(c) {
 				case 1:
 					subMenuOne();
@@ -38,6 +43,8 @@ public class RestaurantApp {
 				case 3:
 					subMenuThree();
 					break;
+				case 4:
+					testSubMenu();
 				default:
 					System.out.println("Invalid input!");
 					break;
@@ -338,6 +345,7 @@ public class RestaurantApp {
 				 	 			String choice = s.nextLine();
 				 	 			if (choice.equalsIgnoreCase("Y")) {
 				 	 				Table table = tableList.getTableList().get(rez.getTableNumber());
+				 	 				// Change the TableStatus from RESERVED to VACANT if reservation is canceled within 1hr before the reserved time
 				 		 			if (rez.getDateTime().compareTo(LocalDateTime.now().plusHours(1)) <= 0)
 				 						if (table.getStatus() == TableStatus.RESERVED)
 				 							table.setStatus(TableStatus.VACANT);
@@ -676,5 +684,36 @@ public class RestaurantApp {
 			System.out.println("File IO Error! " + e.getMessage());
 			System.exit(0);
 		}
+	}
+	
+	public static void testSubMenu() {
+		int n;
+		
+		do {
+			System.out.println("SIMULATE TIME");
+			System.out.println("(1) Check table availability 1 hour before a reservation");
+			System.out.println("(2) Check reservation 15 minutes after the reserved time");
+			System.out.println("(3) Check table availability 15 minutes after the reserved time");
+			System.out.println("(4) Exit");
+			System.out.print("Enter a choice: ");
+			n = Integer.parseInt(s.nextLine());
+			switch(n) {
+				case 1:
+					tableList.checkTableAvailabilityTest1();
+					break;
+				case 2:
+					tableList.updateAllRezsTest();
+					tableList.printAllRezs();
+					break;
+				case 3:
+					tableList.checkTableAvailabilityTest2();
+					break;
+				case 4:
+					break;
+				default:
+					System.out.println("Invalid input!");
+					break;
+			}
+		} while (1 <= n && n <= 3);
 	}
 }
