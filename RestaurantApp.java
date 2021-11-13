@@ -3,6 +3,7 @@ import java.time.Clock;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Scanner;
 
@@ -712,7 +713,9 @@ public class RestaurantApp {
 			FileInputStream fiStream = new FileInputStream(tableFile);
 			BufferedInputStream biStream = new BufferedInputStream(fiStream);
 			ObjectInputStream diStream = new ObjectInputStream(biStream);
-			tableList = (TableList)diStream.readObject();
+			@SuppressWarnings("unchecked") // The object saved is the tableList of the form Hashtable<Integer, Table>
+			Hashtable<Integer, Table> tl = (Hashtable<Integer, Table>)diStream.readObject();
+			tableList.setTableList(tl);
 			Table.setCount(diStream.readInt());
 			diStream.close();
 
@@ -720,14 +723,20 @@ public class RestaurantApp {
 			FileInputStream fiStreamMenu = new FileInputStream(menuFile);
 			BufferedInputStream biStreamMenu = new BufferedInputStream(fiStreamMenu);
 			ObjectInputStream diStreamMenu = new ObjectInputStream(biStreamMenu);
-			menu = (Menu)diStreamMenu.readObject();
+			// menu = (Menu)diStreamMenu.readObject();
+			@SuppressWarnings("unchecked")
+			Hashtable<Integer, OrderableItems> m = (Hashtable<Integer, OrderableItems>)diStreamMenu.readObject();
+			menu.setOrderableItems(m);
 			diStreamMenu.close();
 
 			/* FOR STAFF */
 			FileInputStream fiStreamStaff = new FileInputStream(staffFile);
 			BufferedInputStream biStreamStaff = new BufferedInputStream(fiStreamStaff);
 			ObjectInputStream diStreamStaff = new ObjectInputStream(biStreamStaff);
-			staffList = (StaffList)diStreamStaff.readObject();
+			// staffList = (StaffList)diStreamStaff.readObject();
+			@SuppressWarnings("unchecked")
+			ArrayList<Staff> s = (ArrayList<Staff>)diStreamStaff.readObject();
+			staffList.setStaffList(s);
 			Staff.setCount(diStreamStaff.readInt());
 			diStreamStaff.close();
 			
@@ -775,7 +784,7 @@ public class RestaurantApp {
 			FileOutputStream foStream = new FileOutputStream(tableFile);
 			BufferedOutputStream boStream = new BufferedOutputStream(foStream);
 			ObjectOutputStream doStream = new ObjectOutputStream(boStream);
-			doStream.writeObject(tableList);
+			doStream.writeObject(tableList.getTableList());
 			doStream.writeInt(Table.getCount());
 			doStream.close();
 			
@@ -783,14 +792,14 @@ public class RestaurantApp {
 			FileOutputStream foStreamMenu = new FileOutputStream(menuFile);
 			BufferedOutputStream boStreamMenu = new BufferedOutputStream(foStreamMenu);
 			ObjectOutputStream doStreamMenu = new ObjectOutputStream(boStreamMenu);
-			doStreamMenu.writeObject(menu);
+			doStreamMenu.writeObject(menu.getOrderableItems());
 			doStreamMenu.close();
 
 			/* FOR STAFF */
 			FileOutputStream foStreamStaff = new FileOutputStream(staffFile);
 			BufferedOutputStream boStreamStaff = new BufferedOutputStream(foStreamStaff);
 			ObjectOutputStream doStreamStaff = new ObjectOutputStream(boStreamStaff);
-			doStreamStaff.writeObject(staffList);
+			doStreamStaff.writeObject(staffList.getStaffList());
 			doStreamStaff.writeInt(Staff.getCount());
 			doStreamStaff.close();
 		}
