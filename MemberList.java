@@ -1,6 +1,14 @@
 import java.io.Serializable;
 import java.util.Hashtable;
 
+/**
+ * MemberList class
+ * 
+ * @author SS10 G5 
+ * @version 3.0
+ * @since 2021-11-02
+ */
+
 public class MemberList implements Serializable {
     
     private Hashtable<Integer, Member> members;

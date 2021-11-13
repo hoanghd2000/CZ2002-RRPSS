@@ -1,5 +1,13 @@
 import java.io.Serializable;
 
+/**
+ * This class represents an orderable item.
+ * 
+ * @author SS10 G5
+ * @version 1.0
+ * @since 2021-10-25
+ */
+
 abstract class OrderableItems implements Serializable{
 
     // returns the price of the item

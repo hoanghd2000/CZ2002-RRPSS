@@ -4,6 +4,14 @@ import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Set;
 
+/**
+ * This class represents a menu.
+ * 
+ * @author SS10 G5
+ * @version 11.0
+ * @since 2021-10-27
+ */
+
 public class Menu implements Serializable{
     
     private Hashtable<Integer, OrderableItems> orderableItems;

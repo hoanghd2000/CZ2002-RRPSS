@@ -1,3 +1,9 @@
+/**
+ * This class denotes a menu item.
+ * @author SS10 G5
+ * @version 1.0
+ * @since 2021-10-25
+ */
 public class MenuItem extends OrderableItems{
 
     // this variable will help with auto incrementing itemID when adding new items

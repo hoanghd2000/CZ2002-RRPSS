@@ -1,5 +1,13 @@
 import java.io.Serializable;
 
+/**
+ * Member class
+ * 
+ * @author SS10 G5
+ * @version 7.0
+ * @since 2021-10-25
+ */
+
 public class Member implements Serializable{
     
     private static int count = 1;

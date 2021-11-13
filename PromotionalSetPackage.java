@@ -1,6 +1,14 @@
 import java.util.Hashtable;
 import java.util.Set;
 
+/**
+ * This class represents a set of items that can be purchased together.
+ * 
+ * @author SS10 G5
+ * @version 1.0
+ * @since 2021-10-25
+ */
+
 public class PromotionalSetPackage extends OrderableItems{
 
     // this counter makes itemID autoincrement 
