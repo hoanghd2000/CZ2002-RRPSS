@@ -32,7 +32,7 @@ public class TableList implements Serializable {
 	public void addTable() {
 		
 		System.out.printf("Input the size of the new table: ");
-		int size = Integer.parseInt(sc.next());
+		int size = Integer.parseInt(sc.nextLine());
 		while (size % 2 == 1 || size < 2 || size > 10) {
 			System.out.println("Table size must be an even number, min 2, max 10");
 			System.out.printf("Input the size of the new table: ");
@@ -44,7 +44,7 @@ public class TableList implements Serializable {
 
 	public void removeTable() {
 		System.out.printf("Input the ID of the table to be removed: ");
-		int tableID = Integer.parseInt(sc.next());
+		int tableID = Integer.parseInt(sc.nextLine());
 		this.tableList.remove(tableID);
 	}
 

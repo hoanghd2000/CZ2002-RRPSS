@@ -59,19 +59,19 @@ public class RestaurantApp {
 	public static void subMenuOne(){
 		//Scanner scanner = new Scanner(System.in);
 		int choice;
-		System.out.println("Choose one of the following options to configure the restaurant!");
-		System.out.println("(1) Add Menu Item");
-		System.out.println("(2) Remove Menu Item");
-		System.out.println("(3) Add Promo Menu Item");
-		System.out.println("(4) Remove Promo Menu Item");
-		System.out.println("(5) Print Menu");
-		System.out.println("(6) Add a table");
-		System.out.println("(7) Remove a table");
-		System.out.println("(8) Print tableList");
-		System.out.println("(9) Edit individual menu items/ promotional set packages");
-		System.out.println("(10) Exit Submenu");
-		choice = Integer.parseInt(s.nextLine());
 		do{
+			System.out.println("Choose one of the following options to configure the restaurant!");
+			System.out.println("(1) Add Menu Item");
+			System.out.println("(2) Remove Menu Item");
+			System.out.println("(3) Add Promo Menu Item");
+			System.out.println("(4) Remove Promo Menu Item");
+			System.out.println("(5) Print Menu");
+			System.out.println("(6) Add a table");
+			System.out.println("(7) Remove a table");
+			System.out.println("(8) Print tableList");
+			System.out.println("(9) Edit individual menu items/ promotional set packages");
+			System.out.println("(10) Exit Submenu");
+			choice = Integer.parseInt(s.nextLine());
 			switch(choice){
 				case 1:
 					System.out.print("Enter the name of the new dish: ");
@@ -149,30 +149,19 @@ public class RestaurantApp {
 					System.out.println("Invalid input!");
 					break;
 			}
-			System.out.println("(1) Add Menu Item");
-			System.out.println("(2) Remove Menu Item");
-			System.out.println("(3) Add Promo Menu Item");
-			System.out.println("(4) Remove Promo Menu Item");
-			System.out.println("(5) Print Menu");
-			System.out.println("(6) Add a table");
-			System.out.println("(7) Remove a table");
-			System.out.println("(8) Print tableList");
-			System.out.println("(9) Edit individual menu items/ promotional set packages");
-			System.out.println("(10) Exit Submenu");
-			choice = Integer.parseInt(s.nextLine());
 		} while(choice != 10);
 		System.out.println("Returning to main menu...");
 		System.out.println("=========================");
 	}
 
 	public static void editIndividualItems(){
-		System.out.println("Editing individual items submenu");
-		System.out.println("(1) Edit Menu Item");
-		System.out.println("(2) Edit Promotional Set Item");
-		System.out.println("(3) Return to restaurant configuration menu");
-		//Scanner scanner = new Scanner(System.in);
-		int choice = Integer.parseInt(s.nextLine());
+		int choice;
 		do{
+			System.out.println("Editing individual items submenu");
+			System.out.println("(1) Edit Menu Item");
+			System.out.println("(2) Edit Promotional Set Item");
+			System.out.println("(3) Return to restaurant configuration menu");
+			choice = Integer.parseInt(s.nextLine());
 			switch(choice){
 				case 1:
 					System.out.println("To edit a menu item, please enter its unique itemID. The menu is printed for reference.");
@@ -295,11 +284,6 @@ public class RestaurantApp {
 				case 3:
 					break;
 			}
-			System.out.println("Editing individual items submenu");
-			System.out.println("(1) Edit Menu Item");
-			System.out.println("(2) Edit Promotional Set Item");
-			System.out.println("(3) Return to restaurant configuration menu");
-			choice = Integer.parseInt(s.nextLine());
 		} while (choice != 3);
 		System.out.println("Returning to restaurant configuration submenu");
 	}
