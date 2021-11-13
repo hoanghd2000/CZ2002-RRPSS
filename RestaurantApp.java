@@ -528,7 +528,7 @@ public class RestaurantApp {
 			System.out.println("(3) Print Menu");
 			System.out.println("(4) Done! Create Order");
 			System.out.print("Enter a choice: ");
-			int n = Integer.parseInt(s.nextLine());
+			n = Integer.parseInt(s.nextLine());
 			switch(n) {
 				case 1:
 					System.out.print("Enter ItemID to add: ");
