@@ -662,14 +662,15 @@ public class RestaurantApp {
 						currentOrders.remove(tableID);
 						table.setStatus(TableStatus.VACANT);
 					}
+					else {
+						System.out.println("Order Created!");
+					}
 					break;
 				default:
 					System.out.println("Invalid input!");
 					break;
 			}
 		} while (n != 4);
-		
-		System.out.println("Order Created!");
 	}
 	
 	private static void updateOrder() {
