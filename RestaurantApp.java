@@ -70,6 +70,7 @@ public class RestaurantApp {
 		System.out.println("(8) Print tableList");
 		System.out.println("(9) Edit individual menu items/ promotional set packages");
 		System.out.println("(10) Exit Submenu");
+		System.out.print("Choose an option: ");
 		choice = Integer.parseInt(s.nextLine());
 		do{
 			switch(choice){
@@ -159,6 +160,7 @@ public class RestaurantApp {
 			System.out.println("(8) Print tableList");
 			System.out.println("(9) Edit individual menu items/ promotional set packages");
 			System.out.println("(10) Exit Submenu");
+			System.out.print("Choose an option: ");
 			choice = Integer.parseInt(s.nextLine());
 		} while(choice != 10);
 		System.out.println("Returning to main menu...");
@@ -170,7 +172,7 @@ public class RestaurantApp {
 		System.out.println("(1) Edit Menu Item");
 		System.out.println("(2) Edit Promotional Set Item");
 		System.out.println("(3) Return to restaurant configuration menu");
-		//Scanner scanner = new Scanner(System.in);
+		System.out.print("Choose an option: ");
 		int choice = Integer.parseInt(s.nextLine());
 		do{
 			switch(choice){
@@ -187,6 +189,7 @@ public class RestaurantApp {
 					System.out.println("(2) Description");
 					System.out.println("(3) Price");
 					System.out.println("(4) Type");
+					System.out.print("Choose an option: ");
 					int editChoice = Integer.parseInt(s.nextLine());
 					MenuItem itemToEdit = (MenuItem) menu.getItem(index);
 					switch(editChoice){
@@ -211,6 +214,7 @@ public class RestaurantApp {
 							System.out.println("(2) Starter");
 							System.out.println("(3) Main Course");
 							System.out.println("(4) Dessert");
+							System.out.print("Enter the type: ");
 							String newType = s.next();
 							itemToEdit.setType(newType);
 							break;
@@ -233,6 +237,7 @@ public class RestaurantApp {
 					System.out.println("(3) Price");
 					System.out.println("(4) Add new item");
 					System.out.println("(5) Remove menu item");
+					System.out.print("Choose an option: ");
 					editChoice = Integer.parseInt(s.nextLine());
 					PromotionalSetPackage promoToEdit = (PromotionalSetPackage) menu.getItem(index);
 					switch(editChoice){
@@ -299,6 +304,7 @@ public class RestaurantApp {
 			System.out.println("(1) Edit Menu Item");
 			System.out.println("(2) Edit Promotional Set Item");
 			System.out.println("(3) Return to restaurant configuration menu");
+			System.out.print("Choose an option: ");
 			choice = Integer.parseInt(s.nextLine());
 		} while (choice != 3);
 		System.out.println("Returning to restaurant configuration submenu");
