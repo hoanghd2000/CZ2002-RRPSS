@@ -70,7 +70,8 @@ public class RestaurantApp {
 			System.out.println("(7) Remove a table");
 			System.out.println("(8) Print tableList");
 			System.out.println("(9) Edit individual menu items/ promotional set packages");
-			System.out.println("(10) Exit Submenu");
+			System.out.println("(10) Staff Submenu");
+			System.out.println("(11) Exit this submenu");
 			choice = Integer.parseInt(s.nextLine());
 			switch(choice){
 				case 1:
@@ -144,14 +145,55 @@ public class RestaurantApp {
 					editIndividualItems();
 					break;
 				case 10:
+					staffSubMenu();
+					break;
+				case 11:
 					break;
 				default:
 					System.out.println("Invalid input!");
 					break;
 			}
-		} while(choice != 10);
+		} while(choice != 11);
 		System.out.println("Returning to main menu...");
 		System.out.println("=========================");
+	}
+
+	public static void staffSubMenu(){
+		int choice;
+		do{
+			System.out.println("Choose one of the following options to configure the restaurant!");
+			System.out.println("(1) Add Staff Member");
+			System.out.println("(2) Remove Staff Member");
+			System.out.println("(3) Print Staff List");
+			System.out.println("(4) Exit Submenu");
+			choice = Integer.parseInt(s.nextLine());
+			switch(choice){
+				case 1:
+					System.out.print("Enter the name of the new staff member: ");
+					String name = s.nextLine();
+					System.out.print("Enter the gender of the new staff member(M/F): ");
+					char gender = s.nextLine().charAt(0);
+					System.out.print("Enter the job title of the new staff member: ");
+					String title = s.nextLine();
+					staffList.addStaff(name, gender, title);
+					System.out.println("Staff enrolled!");
+					break;
+				case 2:
+					System.out.println("To remove a staff member, please enter their unique staffID. The staff list is printed for reference");
+					staffList.printStaffList();
+					int index = Integer.parseInt(s.nextLine());
+					staffList.removeStaff(index);
+					break;
+				case 3:
+					staffList.printStaffList();
+					break;
+				case 4:
+					break;
+				default:
+					System.out.println("Invalid input!");
+			}
+		}while(choice != 4);
+		System.out.println("Returning to main menu...");
 	}
 
 	public static void editIndividualItems(){
