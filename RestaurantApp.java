@@ -29,6 +29,7 @@ public class RestaurantApp {
 		// Load data from files/Create files to store data
 		initializeData();
 		
+		int c;
 		do {
 			System.out.println("(1) Configure Restaurant");
 			System.out.println("(2) Reservations");
@@ -37,7 +38,7 @@ public class RestaurantApp {
 			System.out.println("(5) Test");
 			System.out.println("(6) Exit");
 			System.out.print("Choose an option: ");
-			int c = Integer.parseInt(s.nextLine());
+			c = Integer.parseInt(s.nextLine());
 
 			switch(c) {
 				case 1:
@@ -61,7 +62,7 @@ public class RestaurantApp {
 					System.out.println("Invalid input!");
 					break;
 			}
-		} while (1 <= c && c <= 4);
+		} while (c != 6);
 
 		s.close();
 		
@@ -359,7 +360,7 @@ public class RestaurantApp {
 		System.out.print("Choose an option: ");
 		int c = Integer.parseInt(s.nextLine());
 		
-		while (1 <= c && c <= 2) {
+		while (c != 3) {
 			switch(c) {
 				case 1:
 					System.out.print("Enter date (YYYY-MM-DD): ");
@@ -407,6 +408,7 @@ public class RestaurantApp {
 				 						if (table.getStatus() == TableStatus.RESERVED)
 				 							table.setStatus(TableStatus.VACANT);
 				 		 			tableList.removeRez(rez);
+				 		 			System.out.println("Reservation removed!");
 				 	 			}
 				 	 		}
 				 	 		break;
@@ -414,6 +416,8 @@ public class RestaurantApp {
 							break;
 				 	}
 				 	break;
+				 case 3: 
+					 break;
 				default:
 					System.out.println("Invalid input!");
 					break;
@@ -461,16 +465,16 @@ public class RestaurantApp {
 					System.out.println("Invalid input!");
 					break;
 			}
-		} while (1 <= c && c <= 5);
+		} while (c != 6);
 	}
 	
 	public static void createOrder(){
 		// Create an order object
 		System.out.println("Enter Staff ID");
 		int staffID = Integer.parseInt(s.nextLine());
-		System.out.println("Member?");
+		System.out.println("Member? (Y/N)");
 		boolean isMember = s.nextLine().equalsIgnoreCase("Y")? true:false;
-		System.out.println("Does the customer have a reservation? Y/N");
+		System.out.println("Does the customer have a reservation? (Y/N)");
 		boolean reserved = s.nextLine().equalsIgnoreCase("Y")? true:false;
 		int tableID;
 		
@@ -512,7 +516,7 @@ public class RestaurantApp {
 		System.out.println("(4) Done! Create Order");
 		System.out.print("Enter a choice: ");
 		int n = Integer.parseInt(s.nextLine());
-		while (1 <= n && n <= 3) {
+		while (n != 4) {
 			switch(n) {
 				case 1:
 					System.out.print("Enter ItemID to add: ");
@@ -536,6 +540,8 @@ public class RestaurantApp {
 					break;
 				case 3:
 					menu.printMenu();
+					break;
+				case 4:
 					break;
 				default:
 					System.out.println("Invalid input!");
@@ -601,7 +607,7 @@ public class RestaurantApp {
 					System.out.println("Invalid input!");
 					break;
 			}
-		} while (1 <= n && n <= 3);
+		} while (n != 4);
 	}
 	
 	public static void viewOrder() {
@@ -756,6 +762,7 @@ public class RestaurantApp {
 		}
 	}
 	
+	// For testing purposes (with simulation of different time)
 	public static void testSubMenu() {
 		int n;
 		
@@ -784,6 +791,6 @@ public class RestaurantApp {
 					System.out.println("Invalid input!");
 					break;
 			}
-		} while (1 <= n && n <= 3);
+		} while (n != 4);
 	}
 }
