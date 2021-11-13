@@ -88,7 +88,8 @@ public class RestaurantApp {
 			System.out.println("(8) Print tableList");
 			System.out.println("(9) Edit individual menu items/ promotional set packages");
 			System.out.println("(10) Staff Submenu");
-			System.out.println("(11) To Main Menu");
+			System.out.println("(11) Staff Submenu");
+			System.out.println("(12) To Main Menu");
 			choice = Integer.parseInt(s.nextLine());
 			switch(choice){
 				case 1:
@@ -165,6 +166,9 @@ public class RestaurantApp {
 					staffSubMenu();
 					break;
 				case 11:
+					memberSubMenu();
+					break;
+				case 12:
 					break;
 				default:
 					System.out.println("Invalid input!");
@@ -315,7 +319,59 @@ public class RestaurantApp {
 		} while (choice != 3);
 		System.out.println("Returning to restaurant configuration submenu");
 	}
-					   
+	
+	public static void memberSubMenu(){
+		int choice;
+		do{
+			System.out.println("Choose one of the following options to configure the restaurant!");
+			System.out.println("(1) Add Customer Member");
+			System.out.println("(2) Remove Customer Member");
+			System.out.println("(3) Change Customer Name");
+			System.out.println("(4) Change Customer Number");
+			choice = Integer.parseInt(s.nextLine());
+			switch(choice){
+				case 1:
+					System.out.print("Enter the name of the new customer member: ");
+					String name = s.nextLine();
+					System.out.print("Enter the number of the new customer member: ");
+					String number = s.nextLine();
+					memberList.addMember(name, number);
+					System.out.println("Member enrolled!");
+					break;
+				case 2:
+					System.out.println("To remove a customer as a member, please enter their unique memberID");
+					String number = s.nextLine();
+					memberList.removeMember(memberID);
+					break;
+				case 3:
+					System.out.print("Enter the new name of the customer member : ");
+					String name = s.nextLine();
+					System.out.print("Enter the number of the customer member : ");
+					String number = s.nextLine();
+					System.out.print("Enter the memberID of the customer member: ");
+					int memberID = Integer.parseInt(s.nextLine());
+					memberList.changeName(memberID, name, number);
+					break;
+				case 4:
+					System.out.print("Enter the name of the customer member : ");
+					String name = s.nextLine();
+					System.out.print("Enter the new number of the customer member : ");
+					String number = s.nextLine();
+					System.out.print("Enter the memberID of the customer member: ");
+					int memberID = Integer.parseInt(s.nextLine());
+					memberList.changeNumber(memberID, name, number);
+					break;
+				case 5:
+					break;
+				default:
+					System.out.println("Invalid input!");
+			}
+		}while(choice != 4);
+		System.out.println("Returning to main menu...");
+	}
+			
+			
+			
 	public static void staffSubMenu(){
 		int choice;
 		do{
