@@ -28,7 +28,6 @@ public class RestaurantApp {
 	public static void main(String args[]) {
 		// Load data from files/Create files to store data
 		initializeData();
-		int c;
 		
 		int c;
 		do {
