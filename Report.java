@@ -71,7 +71,7 @@ public class Report {
             }
         }
         System.out.println("-------------------------------");
-        System.out.printf("Total revenue: %.2f\n", totalRevenue);
+        System.out.printf("Total revenue: S$ %.2f\n", totalRevenue);
         
     }
     
