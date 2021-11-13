@@ -419,17 +419,17 @@ public class RestaurantApp {
 		}
 	}
 	
-	public static void subMenuThree() {
-		System.out.println("(1) Check table availability");
-		System.out.println("(2) Place an order");
-		System.out.println("(3) Update an order");
-		System.out.println("(4) View a current order");
-		System.out.println("(5) Print order invoice");
-		System.out.println("(6) Exit");
-		System.out.print("Choose an option: ");
-		int c = Integer.parseInt(s.nextLine());
-		
-		while (1 <= c && c <= 5) {
+	public static void subMenuThree() {		
+		int c;
+		do {
+			System.out.println("(1) Check table availability");
+			System.out.println("(2) Place an order");
+			System.out.println("(3) Update an order");
+			System.out.println("(4) View a current order");
+			System.out.println("(5) Print order invoice");
+			System.out.println("(6) Exit");
+			System.out.print("Choose an option: ");
+			c = Integer.parseInt(s.nextLine());
 			switch(c) {
 				case 1:
 					tableList.checkTableAvailability();
@@ -446,19 +446,15 @@ public class RestaurantApp {
 				case 5:
 					printInvoice();
 					break;
+				case 6:
+					break;
 				default:
 					System.out.println("Invalid input!");
 					break;
 			}
-			
-			System.out.println("(1) Check table availability");
-			System.out.println("(2) Place an order");
-			System.out.println("(3) Print order invoice");
-			System.out.println("(4) Exit");
-			System.out.print("Choose an option: ");
-			c = Integer.parseInt(s.nextLine());
-		}
+		} while (1 <= c && c <= 5);
 	}
+	
 	public static void createOrder(){
 		// Create an order object
 		System.out.println("Enter Staff ID");
@@ -485,11 +481,12 @@ public class RestaurantApp {
 			tableList.checkTableAvailability();
 			System.out.print("Assign to table ID: ");
 			tableID = Integer.parseInt(s.nextLine());
-			while (tableList.getTableList().get(tableID).getStatus() != TableStatus.VACANT)
+			while (tableList.getTableList().get(tableID).getStatus() != TableStatus.VACANT) {
 				System.out.println("Please select a vacant table!");
 				tableList.checkTableAvailability();
 				System.out.print("Assign to table ID: ");
 				tableID = Integer.parseInt(s.nextLine());
+			}
 		}
 		Order order = new Order(staffID, tableID, isMember, staffList.getStaff(staffID).getName());
 		currentOrders.put(tableID, order);
