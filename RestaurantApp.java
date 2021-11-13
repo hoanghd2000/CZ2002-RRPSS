@@ -349,7 +349,7 @@ public class RestaurantApp {
 					System.out.print("Enter the number of the customer member : ");
 				        number = s.nextLine();
 					System.out.print("Enter the memberID of the customer member: ");
-					int memberID = Integer.parseInt(s.nextLine());
+					memberID = Integer.parseInt(s.nextLine());
 					memberList.changeName(memberID, name, number);
 					break;
 				case 4:
