@@ -793,12 +793,12 @@ public class RestaurantApp {
 				   
 	// Print revenue report
 	private static void printRevenueReport() {
-		DateTimeFormatter reportDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter reportDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		System.out.println("Choose period to view revenue report for");
 		System.out.print("Enter start date (YYYY-MM-DD): ");
-		String startDateStr = s.nextLine();
+		String startDateStr = s.nextLine() + " 00:00";
 		System.out.print("Enter end date (YYYY-MM-DD): ");
-		String endDateStr = s.nextLine();
+		String endDateStr = s.nextLine() + " 00:00";
 		LocalDateTime startDate = LocalDateTime.parse(startDateStr, reportDateFormatter);
 		LocalDateTime endDate = LocalDateTime.parse(endDateStr, reportDateFormatter);
 		
