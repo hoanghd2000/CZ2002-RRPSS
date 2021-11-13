@@ -65,7 +65,7 @@ public class Menu implements Serializable{
         } else {
             Collection<OrderableItems> items = orderableItems.values();
             for(OrderableItems i : items){
-                if(i.getItemID() > 199 && ((PromotionalSetPackage) i).containsMenuItem((MenuItem) item)){
+                if(item.getItemID()<200 && i.getItemID() > 199 && ((PromotionalSetPackage) i).containsMenuItem((MenuItem) item)){
                     indexes.add(i.getItemID());
                 }
             }
@@ -73,7 +73,8 @@ public class Menu implements Serializable{
                 orderableItems.remove(i);
             }
         }
-        System.out.println("Item and all promo packages containing the item removed successfully.");
+        if(item.getItemID()<200) System.out.println("Item and all promo packages containing the item removed successfully.");
+        else System.out.println("Promo package removed successfully.");
     }
     
     
