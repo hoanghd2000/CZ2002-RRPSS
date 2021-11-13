@@ -494,13 +494,23 @@ public class RestaurantApp {
 			tableList.checkTableAvailability();
 			System.out.print("Assign to table ID: ");
 			tableID = Integer.parseInt(s.nextLine());
-			while (tableList.getTableList().get(tableID).getStatus() != TableStatus.VACANT) {
-				System.out.println("Please select a vacant table!");
+
+			// Check if input tableID does not exist or is not occupied
+			while (!tableList.exists(tableID) || tableList.getTableList().get(tableID).getStatus() != TableStatus.VACANT) {
+				if (!tableList.exists(tableID)) {
+					System.out.println("No table with this tableID currently exists!");
+				}
+				else {
+					System.out.println("Please select a vacant table!");
+				}
+				
 				tableList.checkTableAvailability();
 				System.out.print("Assign to table ID: ");
 				tableID = Integer.parseInt(s.nextLine());
 			}
+			
 		}
+		
 		Order order = new Order(staffID, tableID, isMember, staffList.getStaff(staffID).getName());
 		currentOrders.put(tableID, order);
 		
@@ -509,14 +519,15 @@ public class RestaurantApp {
 		table.setStatus(TableStatus.OCCUPIED);
 		
 		// Add/Remove items from an order object
-		System.out.println("ADD/REMOVE ITEMS FROM ORDER");
-		System.out.println("(1) Add Item");
-		System.out.println("(2) Remove Item");
-		System.out.println("(3) Print Menu");
-		System.out.println("(4) Done! Create Order");
-		System.out.print("Enter a choice: ");
-		int n = Integer.parseInt(s.nextLine());
-		while (n != 4) {
+		int n;
+		do {
+			System.out.println("ADD/REMOVE ITEMS FROM ORDER");
+			System.out.println("(1) Add Item");
+			System.out.println("(2) Remove Item");
+			System.out.println("(3) Print Menu");
+			System.out.println("(4) Done! Create Order");
+			System.out.print("Enter a choice: ");
+			int n = Integer.parseInt(s.nextLine());
 			switch(n) {
 				case 1:
 					System.out.print("Enter ItemID to add: ");
@@ -547,19 +558,21 @@ public class RestaurantApp {
 					System.out.println("Invalid input!");
 					break;
 			}
-			System.out.println("(1) Add Item");
-			System.out.println("(2) Remove Item");
-			System.out.println("(3) Print Menu");
-			System.out.println("(4) Done! Create Order");
-			System.out.print("Enter a choice: ");
-			n = Integer.parseInt(s.nextLine());
-		}
+		} while (n != 4);
+		
 		System.out.println("Order Created!");
 	}
 	
 	public static void updateOrder() {
 		System.out.print("Enter TableID: ");
 		int tableID = Integer.parseInt(s.nextLine());
+		
+		// Sanity checks
+		if (!tableList.exists(tableID)) {
+			System.out.println("No table with this tableID currently exists!");
+			return;
+		}
+		
 		if (tableList.getTableList().get(tableID).getStatus() != TableStatus.OCCUPIED) {
 			System.out.println("No orders currently being served at this table!");
 			return;
@@ -611,9 +624,15 @@ public class RestaurantApp {
 	}
 	
 	public static void viewOrder() {
-		
 		System.out.print("Enter TableID: ");
 		int tableID = Integer.parseInt(s.nextLine());
+		
+		// Sanity checks
+		if (!tableList.exists(tableID)) {
+			System.out.println("No table with this tableID currently exists!");
+			return;
+		}
+		
 		if (tableList.getTableList().get(tableID).getStatus() != TableStatus.OCCUPIED) {
 			System.out.println("No orders currently being served at this table!");
 			return;
@@ -624,9 +643,15 @@ public class RestaurantApp {
 	}
 	
 	public static void printInvoice() {
-		
 		System.out.print("Enter TableID: ");
 		int tableID = Integer.parseInt(s.nextLine());
+		
+		// Sanity checks
+		if (!tableList.exists(tableID)) {
+			System.out.println("No table with this tableID currently exists!");
+			return;
+		}
+		
 		if (tableList.getTableList().get(tableID).getStatus() != TableStatus.OCCUPIED) {
 			System.out.println("No orders currently being served at this table!");
 			return;
