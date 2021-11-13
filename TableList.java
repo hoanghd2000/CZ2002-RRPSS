@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -185,12 +186,8 @@ public class TableList implements Serializable {
 		}
 	}
 	
-	
-	/** 
-	 * @param table.getReservationList().getReservationList().get(0).getDateTime().compareTo(LocalDateTime.ofInstant(RestaurantApp.clockat.instant()
-	 * @param 0
-	 */
 	public void updateAllRezsTest() { // implement the 'expiry period'
+		System.out.println("Time: " + LocalDateTime.ofInstant(RestaurantApp.clockat.instant(), ZoneOffset.UTC));
 		Enumeration<Integer> tableIds = tableList.keys();
 		while(tableIds.hasMoreElements()) { // iterate through each table
 			int tableId = tableIds.nextElement();
@@ -208,7 +205,7 @@ public class TableList implements Serializable {
 	public void checkTableAvailabilityTest1() {
 //		System.out.println(RestaurantApp.clock.instant());
 //		System.out.println(RestaurantApp.clockbf.instant());
-//		System.out.println(LocalDateTime.ofInstant(RestaurantApp.clockbf.instant(), ZoneOffset.UTC));
+		System.out.println("Time: " + LocalDateTime.ofInstant(RestaurantApp.clockbf.instant(), ZoneOffset.UTC));
 		
 		Enumeration<Integer> tableIds = tableList.keys();
 		while(tableIds.hasMoreElements()) { // iterate through each table
@@ -235,7 +232,7 @@ public class TableList implements Serializable {
 	public void checkTableAvailabilityTest2() {
 //		System.out.println(RestaurantApp.clock.instant());
 //		System.out.println(RestaurantApp.clockbf.instant());
-//		System.out.println(LocalDateTime.ofInstant(RestaurantApp.clockbf.instant(), ZoneOffset.UTC));
+		System.out.println("Time: " + LocalDateTime.ofInstant(RestaurantApp.clockat.instant(), ZoneOffset.UTC));
 		
 		Enumeration<Integer> tableIds = tableList.keys();
 		while(tableIds.hasMoreElements()) { // iterate through each table
