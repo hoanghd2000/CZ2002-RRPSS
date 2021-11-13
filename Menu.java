@@ -102,24 +102,24 @@ public class Menu implements Serializable{
 
     public void printMenu(){
         System.out.println();
-        System.out.println("\t\tMenu Items");
+        System.out.println("\tMenu Items");
         System.out.println("");
-        System.out.println("itemID\t\tItem Name" + "\t\tPrice(S$)");
-        System.out.println("================================================");
+        System.out.println("itemID\tItem Name" + "\tPrice(S$)");
+        System.out.println("======================================");
         System.out.println("\t\tAla Carte\n");
         Set<Integer> set = orderableItems.keySet();
         for(Integer i : set){
             if(orderableItems.get(i).getItemID() < 200)
-            System.out.printf("%-4d %-20s %6.2f\n", orderableItems.get(i).getItemID(), orderableItems.get(i).getName(), orderableItems.get(i).getPrice());
+            System.out.printf("%-6d %-20s %6.2f\n", orderableItems.get(i).getItemID(), orderableItems.get(i).getName(), orderableItems.get(i).getPrice());
         }
-        System.out.println("================================================");
+        System.out.println("======================================");
         System.out.println("\tPromotional Set Packages\n");
         for(Integer i : set){
             if(orderableItems.get(i).getItemID() >= 200)
-            System.out.printf("%-4d %-20s %6.2f\n", orderableItems.get(i).getItemID(), orderableItems.get(i).getName(), orderableItems.get(i).getPrice());
+            System.out.printf("%-6d %-20s %6.2f\n", orderableItems.get(i).getItemID(), orderableItems.get(i).getName(), orderableItems.get(i).getPrice());
         }
         System.out.println("");
-        System.out.println("===================END OF MENU==================");
+        System.out.println("==============END OF MENU=============");
         System.out.println("");
     }
 }
