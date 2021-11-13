@@ -28,6 +28,7 @@ public class RestaurantApp {
 	public static void main(String args[]) {
 		// Load data from files/Create files to store data
 		initializeData();
+		int c;
 		
 		int c;
 		do {
@@ -647,7 +648,7 @@ public class RestaurantApp {
 				   
 	// Print revenue report
 	public static void printRevenueReport() {
-		DateTimeFormatter reportDateFormatter = new DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter reportDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		System.out.println("Choose period to view revenue report for");
 		System.out.print("Enter start date (YYYY-MM-DD): ");
 		String startDateStr = s.nextLine();
