@@ -17,23 +17,46 @@ public class MemberList implements Serializable {
         members = new Hashtable<Integer, Member>();
     }
 
+    
+    /** 
+     * @return Hashtable<Integer, Member>
+     */
     public Hashtable<Integer, Member> getMembers() {
 		return members;
 	}
 
-	public void setMembers(Hashtable<Integer, Member> members) {
+	
+    /** 
+     * @param members
+     */
+    public void setMembers(Hashtable<Integer, Member> members) {
 		this.members = members;
 	}
 
-	public void addMember(String name, String phoneNumber) {
+	
+    /** 
+     * @param name
+     * @param phoneNumber
+     */
+    public void addMember(String name, String phoneNumber) {
         Member member = new Member(name, phoneNumber);
         members.put(member.getMemberID(), member);
     }
 
+    
+    /** 
+     * @param memberID
+     */
     public void removeMember(int memberID) {
         members.remove(memberID);
     }
 
+    
+    /** 
+     * @param id
+     * @param phoneNumber
+     * @return boolean
+     */
     public boolean verifyMember(int id, String phoneNumber){
         Member member = members.get(id);
         if(member.getPhoneNumber().equals(phoneNumber)){
@@ -42,6 +65,12 @@ public class MemberList implements Serializable {
         return false;
     }
 
+    
+    /** 
+     * @param id
+     * @param phoneNumber
+     * @param name
+     */
     public void changeName(int id, String phoneNumber, String name){
         boolean verified = false;
         Member member = members.get(id);
@@ -55,6 +84,12 @@ public class MemberList implements Serializable {
         }
     }
 
+    
+    /** 
+     * @param id
+     * @param name
+     * @param newNumber
+     */
     public void changeNumber(int id, String name, String newNumber){
         boolean verified = false;
         Member member = members.get(id);

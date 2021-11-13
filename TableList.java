@@ -203,6 +203,12 @@ public class TableList implements Serializable {
 		}
 	}
 	
+	
+	/** 
+	 * @param LocalDateTime.ofInstant(RestaurantApp.clockat.instant()
+	 * @param table.getReservationList().getReservationList().get(0).getDateTime().compareTo(LocalDateTime.ofInstant(RestaurantApp.clockat.instant()
+	 * @param 0
+	 */
 	public void updateAllRezsTest() { // implement the 'expiry period'
 		System.out.println("Time: " + LocalDateTime.ofInstant(RestaurantApp.clockat.instant(), ZoneOffset.UTC));
 		Enumeration<Integer> tableIds = tableList.keys();

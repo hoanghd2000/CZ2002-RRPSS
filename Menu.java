@@ -16,6 +16,10 @@ public class Menu implements Serializable{
     
     private Hashtable<Integer, OrderableItems> orderableItems;
 
+    
+    /** 
+     * @return Hashtable<Integer, OrderableItems>
+     */
     public Hashtable<Integer, OrderableItems> getOrderableItems() {
 		return orderableItems;
 	}

@@ -21,30 +21,58 @@ public class Member implements Serializable{
         this.phoneNumber = phoneNumber;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getMemberID() {
         return memberID;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getName() {
         return name;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
+    
+    /** 
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    
+    /** 
+     * @param phoneNumber
+     */
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
+    
+    /** 
+     * @return int
+     */
     public static int getCount() {
         return count;
     }
 
+    
+    /** 
+     * @param count
+     */
     public static void setCount(int count) {
         Member.count = count;
     }

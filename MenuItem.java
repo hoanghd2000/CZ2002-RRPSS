@@ -35,11 +35,19 @@ public class MenuItem extends OrderableItems{
     }
 
     
+    
+    /** 
+     * @return int
+     */
     public static int getCount() {
 		return count;
 	}
 
-	public static void setCount(int count) {
+	
+    /** 
+     * @param count
+     */
+    public static void setCount(int count) {
 		MenuItem.count = count;
 	}
 

@@ -42,11 +42,19 @@ public class PromotionalSetPackage extends OrderableItems{
     }
 
     
+    
+    /** 
+     * @return int
+     */
     public static int getCounter() {
 		return counter;
 	}
 
-	public static void setCounter(int counter) {
+	
+    /** 
+     * @param counter
+     */
+    public static void setCounter(int counter) {
 		PromotionalSetPackage.counter = counter;
 	}
 
