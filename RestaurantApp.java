@@ -73,7 +73,7 @@ public class RestaurantApp {
 	}
 
 	// Sub-menu 1, and associated subfunctions
-	public static void subMenuOne(){
+	private static void subMenuOne(){
 		//Scanner scanner = new Scanner(System.in);
 		int choice;
 		do{
@@ -88,7 +88,7 @@ public class RestaurantApp {
 			System.out.println("(8) Print tableList");
 			System.out.println("(9) Edit individual menu items/ promotional set packages");
 			System.out.println("(10) Staff Submenu");
-			System.out.println("(11) Staff Submenu");
+			System.out.println("(11) Member Submenu");
 			System.out.println("(12) To Main Menu");
 			choice = Integer.parseInt(s.nextLine());
 			switch(choice){
@@ -179,7 +179,7 @@ public class RestaurantApp {
 		System.out.println("=========================");
 	}
 
-	public static void editIndividualItems(){
+	private static void editIndividualItems(){
 		int choice;
 		do{
 			System.out.println("Editing individual items submenu");
@@ -320,14 +320,14 @@ public class RestaurantApp {
 		System.out.println("Returning to restaurant configuration submenu");
 	}
 	
-	public static void memberSubMenu(){
+	private static void memberSubMenu(){
 		int choice;
 		do{
 			System.out.println("Choose one of the following options to configure the restaurant!");
-			System.out.println("(1) Add Customer Member");
-			System.out.println("(2) Remove Customer Member");
-			System.out.println("(3) Change Customer Name");
-			System.out.println("(4) Change Customer Number");
+			System.out.println("(1) Add Member");
+			System.out.println("(2) Remove Member");
+			System.out.println("(3) Change Name");
+			System.out.println("(4) Change Number");
 			choice = Integer.parseInt(s.nextLine());
 			switch(choice){
 				case 1:
@@ -347,10 +347,10 @@ public class RestaurantApp {
 					System.out.print("Enter the new name of the customer member : ");
 					name = s.nextLine();
 					System.out.print("Enter the number of the customer member : ");
-				        number = s.nextLine();
+				    number = s.nextLine();
 					System.out.print("Enter the memberID of the customer member: ");
 					memberID = Integer.parseInt(s.nextLine());
-					memberList.changeName(memberID, name, number);
+					memberList.changeName(memberID, number, name);
 					break;
 				case 4:
 					System.out.print("Enter the name of the customer member : ");
@@ -370,9 +370,7 @@ public class RestaurantApp {
 		System.out.println("Returning to main menu...");
 	}
 			
-			
-			
-	public static void staffSubMenu(){
+	private static void staffSubMenu(){
 		int choice;
 		do{
 			System.out.println("Choose one of the following options to configure the restaurant!");
@@ -411,7 +409,7 @@ public class RestaurantApp {
 	}
 	
 	// Sub-menu 2
-	public static void subMenuTwo() {
+	private static void subMenuTwo() {
 		System.out.println("(1) Create reservation booking");
 		System.out.println("(2) Check/Remove reservation booking");
 		System.out.println("(3) To Main Menu");
@@ -517,7 +515,7 @@ public class RestaurantApp {
 	}
 	
 	// Sub-menu 3, and associated subfunctions
-	public static void subMenuThree() {		
+	private static void subMenuThree() {		
 		int c;
 		do {
 			System.out.println("(1) Check table availability");
@@ -553,13 +551,13 @@ public class RestaurantApp {
 		} while (c != 6);
 	}
 	
-	public static void createOrder(){
+	private static void createOrder(){
 		// Create an order object
 		System.out.println("Enter Staff ID");
 		int staffID = Integer.parseInt(s.nextLine());
 		System.out.println("Member? (Y/N)");
 		boolean isMember = s.nextLine().equalsIgnoreCase("Y")? true:false;
-		if(isMember==true)
+		if(isMember)
 		{
 			System.out.print("Enter customer's number for verification");
 			String contact = s.nextLine();
@@ -569,7 +567,13 @@ public class RestaurantApp {
 				System.out.print("Cannot find the reservation. Please enter a valid customer's contact no.: ");
 				contact = s.nextLine();
 				System.out.print("Please enter a valid customer's memberID: ");
-				int memberID = Integer.parseInt(s.nextLine());
+				memberID = Integer.parseInt(s.nextLine());
+				System.out.println("if you wish to exit and continue without membership details, enter -1");
+				int quit = Integer.parseInt(s.nextLine());
+				if (quit == -1){
+					isMember = false;
+					break;
+				}
 			}
 		}	
 		System.out.println("Does the customer have a reservation? (Y/N)");
@@ -669,7 +673,7 @@ public class RestaurantApp {
 		System.out.println("Order Created!");
 	}
 	
-	public static void updateOrder() {
+	private static void updateOrder() {
 		System.out.print("Enter TableID: ");
 		int tableID = Integer.parseInt(s.nextLine());
 		
@@ -735,7 +739,7 @@ public class RestaurantApp {
 		} while (n != 4);
 	}
 	
-	public static void viewOrder() {
+	private static void viewOrder() {
 		System.out.print("Enter TableID: ");
 		int tableID = Integer.parseInt(s.nextLine());
 		
@@ -754,7 +758,7 @@ public class RestaurantApp {
 		order.viewOrder();
 	}
 	
-	public static void printInvoice() {
+	private static void printInvoice() {
 		System.out.print("Enter TableID: ");
 		int tableID = Integer.parseInt(s.nextLine());
 		
@@ -786,7 +790,7 @@ public class RestaurantApp {
 	}
 				   
 	// Print revenue report
-	public static void printRevenueReport() {
+	private static void printRevenueReport() {
 		DateTimeFormatter reportDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		System.out.println("Choose period to view revenue report for");
 		System.out.print("Enter start date (YYYY-MM-DD): ");
@@ -800,7 +804,7 @@ public class RestaurantApp {
 	}
 			   
 	// File I/O utility functions
-	public static void initializeData() {
+	private static void initializeData() {
 		String tableFile = "tables";
 		String menuFile = "menu";
 		String staffFile = "staff";
@@ -871,7 +875,7 @@ public class RestaurantApp {
 		}
 	}
 	
-	public static void saveData() {
+	private static void saveData() {
 		String tableFile = "tables";
 		String menuFile = "menu";
 		String staffFile = "staff";
@@ -911,7 +915,7 @@ public class RestaurantApp {
 	}
 	
 	// For testing purposes (with simulation of different time)
-	public static void testSubMenu() {
+	private static void testSubMenu() {
 		int n;
 		
 		do {
