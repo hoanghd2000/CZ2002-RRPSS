@@ -174,7 +174,7 @@ public class RestaurantApp {
 					System.out.println("Invalid input!");
 					break;
 			}
-		} while(choice != 11);
+		} while(choice != 12);
 		System.out.println("Returning to main menu...");
 		System.out.println("=========================");
 	}
@@ -328,6 +328,8 @@ public class RestaurantApp {
 			System.out.println("(2) Remove Member");
 			System.out.println("(3) Change Name");
 			System.out.println("(4) Change Number");
+			System.out.println("(5) Print list of members");
+			System.out.println("(6) Return to previous menu");
 			choice = Integer.parseInt(s.nextLine());
 			switch(choice){
 				case 1:
@@ -362,11 +364,13 @@ public class RestaurantApp {
 					memberList.changeNumber(memberID, name, number);
 					break;
 				case 5:
+					memberList.printMemberList();
+				case 6:
 					break;
 				default:
 					System.out.println("Invalid input!");
 			}
-		}while(choice != 4);
+		}while(choice != 6);
 		System.out.println("Returning to main menu...");
 	}
 			
@@ -568,12 +572,6 @@ public class RestaurantApp {
 				contact = s.nextLine();
 				System.out.print("Please enter a valid customer's memberID: ");
 				memberID = Integer.parseInt(s.nextLine());
-				System.out.println("if you wish to exit and continue without membership details, enter -1");
-				int quit = Integer.parseInt(s.nextLine());
-				if (quit == -1){
-					isMember = false;
-					break;
-				}
 			}
 		}	
 		System.out.println("Does the customer have a reservation? (Y/N)");

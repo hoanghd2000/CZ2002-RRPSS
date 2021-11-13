@@ -51,5 +51,12 @@ public class MemberList implements Serializable {
             System.out.println("Member not found");
         }
     }
+
+    public void printMemberList(){
+        System.out.println("memberID\tName");
+        for(Member member : members.values()){
+            System.out.println(member.getMemberID() + "\t\t" + member.getName());
+        }
+    }
     
 }
