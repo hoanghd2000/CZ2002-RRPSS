@@ -328,6 +328,7 @@ public class RestaurantApp {
 			System.out.println("(2) Remove Member");
 			System.out.println("(3) Change Name");
 			System.out.println("(4) Change Number");
+			System.out.println("(5) Exit Submenu");
 			choice = Integer.parseInt(s.nextLine());
 			switch(choice){
 				case 1:
@@ -347,7 +348,7 @@ public class RestaurantApp {
 					System.out.print("Enter the new name of the customer member : ");
 					name = s.nextLine();
 					System.out.print("Enter the number of the customer member : ");
-				    number = s.nextLine();
+				    	number = s.nextLine();
 					System.out.print("Enter the memberID of the customer member: ");
 					memberID = Integer.parseInt(s.nextLine());
 					memberList.changeName(memberID, number, name);
@@ -366,7 +367,7 @@ public class RestaurantApp {
 				default:
 					System.out.println("Invalid input!");
 			}
-		}while(choice != 4);
+		}while(choice != 5);
 		System.out.println("Returning to main menu...");
 	}
 			
