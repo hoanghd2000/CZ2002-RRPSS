@@ -660,9 +660,7 @@ public class RestaurantApp {
 					if (order.getItemSet().isEmpty()) {
 						System.out.println("No items have been added! Cancelling this order.");
 						currentOrders.remove(tableID);
-					}
-					else {
-						System.out.println("Order created!");
+						table.setStatus(TableStatus.VACANT);
 					}
 					break;
 				default:
@@ -683,8 +681,9 @@ public class RestaurantApp {
 			System.out.println("No table with this tableID currently exists!");
 			return;
 		}
-		
-		if (tableList.getTableList().get(tableID).getStatus() != TableStatus.OCCUPIED) {
+
+		Table table = tableList.getTableList().get(tableID);
+		if (table.getStatus() != TableStatus.OCCUPIED) {
 			System.out.println("No orders currently being served at this table!");
 			return;
 		}
@@ -728,6 +727,7 @@ public class RestaurantApp {
 					if (order.getItemSet().isEmpty()) {
 						System.out.println("Order now contains no items! Cancelling this order.");
 						currentOrders.remove(tableID);
+						table.setStatus(TableStatus.VACANT);
 					}
 					else {
 						System.out.println("Order updated!");
