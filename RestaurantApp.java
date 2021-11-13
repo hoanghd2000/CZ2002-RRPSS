@@ -14,6 +14,7 @@ public class RestaurantApp {
 	private static Hashtable<Integer, Order> currentOrders = new Hashtable<Integer, Order>();
 	private static TableList tableList = new TableList();
 	private static StaffList staffList = new StaffList();
+	private static MemberList memberList = new MemberList();
 	private static Menu menu = new Menu();
 	private static Report report = new Report();
 	
@@ -502,6 +503,19 @@ public class RestaurantApp {
 		int staffID = Integer.parseInt(s.nextLine());
 		System.out.println("Member? (Y/N)");
 		boolean isMember = s.nextLine().equalsIgnoreCase("Y")? true:false;
+		if(isMember==true)
+		{
+			System.out.print("Enter customer's number for verification");
+			String contact = s.nextLine();
+			System.out.print("Enter customer's memberID for verification");
+			int memberID = Integer.parseInt(s.nextLine());
+			while ( memberList.verifyMember(memberID,contact) == false) {
+				System.out.print("Cannot find the reservation. Please enter a valid customer's contact no.: ");
+				contact = s.nextLine();
+				System.out.print("Please enter a valid customer's memberID: ");
+				int memberID = Integer.parseInt(s.nextLine());
+			}
+		}	
 		System.out.println("Does the customer have a reservation? (Y/N)");
 		boolean reserved = s.nextLine().equalsIgnoreCase("Y")? true:false;
 		int tableID;
