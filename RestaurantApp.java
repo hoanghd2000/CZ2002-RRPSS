@@ -701,7 +701,7 @@ public class RestaurantApp {
 			doStream.writeObject(tableList);
 			doStream.writeInt(Table.getCount());
 			doStream.close();
-
+			
 			/* FOR MENU */
 			FileOutputStream foStreamMenu = new FileOutputStream(menuFile);
 			BufferedOutputStream boStreamMenu = new BufferedOutputStream(foStreamMenu);
@@ -709,7 +709,7 @@ public class RestaurantApp {
 			doStreamMenu.writeObject(menu);
 			doStreamMenu.close();
 
-			/* FOR STAFF*/
+			/* FOR STAFF */
 			FileOutputStream foStreamStaff = new FileOutputStream(staffFile);
 			BufferedOutputStream boStreamStaff = new BufferedOutputStream(foStreamStaff);
 			ObjectOutputStream doStreamStaff = new ObjectOutputStream(boStreamStaff);
