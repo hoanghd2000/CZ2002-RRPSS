@@ -8,10 +8,21 @@ public class Menu implements Serializable{
     
     private Hashtable<Integer, OrderableItems> orderableItems;
 
-    public Menu() {
+    public Hashtable<Integer, OrderableItems> getOrderableItems() {
+		return orderableItems;
+	}
+
+    /** 
+     * @param Hashtable<Integer, OrderableItems>
+     */
+	public void setOrderableItems(Hashtable<Integer, OrderableItems> orderableItems) {
+		this.orderableItems = orderableItems;
+	}
+
+
+	public Menu() {
         orderableItems = new Hashtable<Integer, OrderableItems>();
     }
-
     
     /** 
      * @param item

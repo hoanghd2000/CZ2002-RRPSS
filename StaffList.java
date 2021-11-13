@@ -19,8 +19,14 @@ public class StaffList implements Serializable{
         return staffList;
     }
 
-    
-    /** 
+	/** 
+     * @param ArrayList<Staff>
+     */
+    public void setStaffList(ArrayList<Staff> staffList) {
+		this.staffList = staffList;
+	}
+
+	/** 
      * @param name
      * @param gender
      * @param jobTitle
