@@ -1,3 +1,11 @@
+/**
+ * Represents the main driver class for the RestaurantApp containing 
+ * all classes required to ensure smooth flow in the console app.
+ * @author  SS10G5
+ * @version 12.0
+ * @since   2021-10-25
+*/
+
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Hashtable;
@@ -28,6 +36,9 @@ public class Order {
         this.isMember = isMember;
     }
 
+    /** 
+     * @param item, quantity
+     */
     public void addItem(OrderableItems item, int quantity) {
         // Check if item exists on menu
         if (item == null) {
@@ -50,7 +61,11 @@ public class Order {
         // If new item, add to set
         set.put(item, quantity);
     }
-
+    
+    /** 
+     * @param item, quantity
+     * @return boolean
+     */
     public boolean removeItem(OrderableItems item, int quantity) {        
         // Check for repeated item and update where necessary
         Set<OrderableItems> keys = set.keySet();
@@ -83,8 +98,15 @@ public class Order {
         return false;
     }
     
+    /** 
+     * @return Hashtable<OrderableItems, Integer>
+     */
     public Hashtable<OrderableItems, Integer> getItemSet() { return set; }
     
+    /** 
+     * @param itemID
+     * @return int
+     */
     public int getItemQty(int itemID) {
         for (OrderableItems i : set.keySet()) {
             if (i.getItemID() == itemID) {
@@ -94,16 +116,34 @@ public class Order {
         return 0;
     }
 
+    /** 
+     * @return LocalDateTime
+     */
     public LocalDateTime getDateTime() { return dateTime; }
 
+    /** 
+     * @return double
+     */
     public double getSubtotal() { return price; }
     
+    /** 
+     * @return double
+     */
     public double getServCharge() { return price * SERV_CHARGE; }
 
+    /** 
+     * @return double
+     */
     public double getGST() { return (price + getServCharge()) * GST; }
 
+    /** 
+     * @return double
+     */
     public double getDiscount() { return (price + getServCharge() + getGST()) * MEM_DISCOUNT; }
 
+    /** 
+     * @return double
+     */
     public double getFinalPrice() {        
         double p = price + getServCharge() + getGST();
         if (isMember) {
@@ -114,10 +154,19 @@ public class Order {
         return Math.round(p * 100) / 100.0;
     }
 
+    /** 
+     * @return int
+     */
     public int getStaffID() { return staffID; }
 
+    /** 
+     * @param staffID
+     */
     public void setStaffID(int staffID) { this.staffID = staffID; }
 
+    /** 
+     * @return LocalDateTime
+     */
     public void viewOrder() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE dd/MM/yyyy h:mm a");
         System.out.println("=== View Order (Payment Pending) ===");
@@ -149,7 +198,7 @@ public class Order {
         System.out.println("-------------------------------");
 
     }
-    
+
     public void printOrderInvoice() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE dd/MM/yyyy h:mm a");
 
