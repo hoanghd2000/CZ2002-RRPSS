@@ -2,6 +2,7 @@ import java.io.*;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Hashtable;
 import java.util.Scanner;
 
@@ -24,15 +25,16 @@ public class RestaurantApp {
 		// Load data from files/Create files to store data
 		initializeData();
 		
-		System.out.println("(1) Configure Restaurant");
-		System.out.println("(2) Reservations");
-		System.out.println("(3) Order");
-		System.out.println("(4) Test");
-		System.out.println("(5) Exit");
-		System.out.print("Choose an option: ");
-		int c = Integer.parseInt(s.nextLine());
-		
-		while (1 <= c && c <= 4) {
+		do {
+			System.out.println("(1) Configure Restaurant");
+			System.out.println("(2) Reservations");
+			System.out.println("(3) Order");
+			System.out.println("(4) Print Revenue Report);
+			System.out.println("(5) Test");
+			System.out.println("(6) Exit");
+			System.out.print("Choose an option: ");
+			int c = Integer.parseInt(s.nextLine());
+
 			switch(c) {
 				case 1:
 					subMenuOne();
@@ -44,25 +46,26 @@ public class RestaurantApp {
 					subMenuThree();
 					break;
 				case 4:
+					printRevenueReport();
+					break
+				case 5:
 					testSubMenu();
+					break;
+				case 6:
+					break;
 				default:
 					System.out.println("Invalid input!");
 					break;
 			}
-			
-			System.out.println("(1) Configure Restaurant");
-			System.out.println("(2) Reservations");
-			System.out.println("(3) Order");
-			System.out.println("(4) Exit");
-			System.out.print("Choose an option: ");
-			c = Integer.parseInt(s.nextLine());
-		}
+		} while (1 <= c && c <= 4);
+
 		s.close();
 		
 		// Save data to file
 		saveData();
 	}
 
+	// Sub-menu 1, and associated subfunctions
 	public static void subMenuOne(){
 		//Scanner scanner = new Scanner(System.in);
 		int choice;
@@ -163,44 +166,6 @@ public class RestaurantApp {
 		} while(choice != 11);
 		System.out.println("Returning to main menu...");
 		System.out.println("=========================");
-	}
-
-	public static void staffSubMenu(){
-		int choice;
-		do{
-			System.out.println("Choose one of the following options to configure the restaurant!");
-			System.out.println("(1) Add Staff Member");
-			System.out.println("(2) Remove Staff Member");
-			System.out.println("(3) Print Staff List");
-			System.out.println("(4) Exit Submenu");
-			choice = Integer.parseInt(s.nextLine());
-			switch(choice){
-				case 1:
-					System.out.print("Enter the name of the new staff member: ");
-					String name = s.nextLine();
-					System.out.print("Enter the gender of the new staff member(M/F): ");
-					char gender = s.nextLine().charAt(0);
-					System.out.print("Enter the job title of the new staff member: ");
-					String title = s.nextLine();
-					staffList.addStaff(name, gender, title);
-					System.out.println("Staff enrolled!");
-					break;
-				case 2:
-					System.out.println("To remove a staff member, please enter their unique staffID. The staff list is printed for reference");
-					staffList.printStaffList();
-					int index = Integer.parseInt(s.nextLine());
-					staffList.removeStaff(index);
-					break;
-				case 3:
-					staffList.printStaffList();
-					break;
-				case 4:
-					break;
-				default:
-					System.out.println("Invalid input!");
-			}
-		}while(choice != 4);
-		System.out.println("Returning to main menu...");
 	}
 
 	public static void editIndividualItems(){
@@ -343,7 +308,46 @@ public class RestaurantApp {
 		} while (choice != 3);
 		System.out.println("Returning to restaurant configuration submenu");
 	}
+					   
+	public static void staffSubMenu(){
+		int choice;
+		do{
+			System.out.println("Choose one of the following options to configure the restaurant!");
+			System.out.println("(1) Add Staff Member");
+			System.out.println("(2) Remove Staff Member");
+			System.out.println("(3) Print Staff List");
+			System.out.println("(4) Exit Submenu");
+			choice = Integer.parseInt(s.nextLine());
+			switch(choice){
+				case 1:
+					System.out.print("Enter the name of the new staff member: ");
+					String name = s.nextLine();
+					System.out.print("Enter the gender of the new staff member(M/F): ");
+					char gender = s.nextLine().charAt(0);
+					System.out.print("Enter the job title of the new staff member: ");
+					String title = s.nextLine();
+					staffList.addStaff(name, gender, title);
+					System.out.println("Staff enrolled!");
+					break;
+				case 2:
+					System.out.println("To remove a staff member, please enter their unique staffID. The staff list is printed for reference");
+					staffList.printStaffList();
+					int index = Integer.parseInt(s.nextLine());
+					staffList.removeStaff(index);
+					break;
+				case 3:
+					staffList.printStaffList();
+					break;
+				case 4:
+					break;
+				default:
+					System.out.println("Invalid input!");
+			}
+		}while(choice != 4);
+		System.out.println("Returning to main menu...");
+	}
 	
+	// Sub-menu 2
 	public static void subMenuTwo() {
 		System.out.println("(1) Create reservation booking");
 		System.out.println("(2) Check/Remove reservation booking");
@@ -419,6 +423,7 @@ public class RestaurantApp {
 		}
 	}
 	
+	// Sub-menu 3, and associated subfunctions
 	public static void subMenuThree() {		
 		int c;
 		do {
@@ -629,7 +634,22 @@ public class RestaurantApp {
 		Table table = tableList.getTableList().get(tableID);
         	table.setStatus(TableStatus.VACANT);
 	}
-	
+				   
+	// Print revenue report
+	public static void printRevenueReport() {
+		DateTimeFormatter reportDateFormatter = new DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		System.out.println("Choose period to view revenue report for");
+		System.out.print("Enter start date (YYYY-MM-DD): ");
+		String startDateStr = s.nextLine();
+		System.out.print("Enter end date (YYYY-MM-DD): ");
+		String endDateStr = s.nextLine();
+		LocalDateTime startDate = LocalDateTime.parse(startDateStr, reportDateFormatter);
+		LocalDateTime endDate = LocalDateTime.parse(endDateStr, reportDateFormatter);
+		
+		report.printReport(startDate, endDate);
+	}
+			   
+	// File I/O utility functions
 	public static void initializeData() {
 		String tableFile = "tables";
 		String menuFile = "menu";
