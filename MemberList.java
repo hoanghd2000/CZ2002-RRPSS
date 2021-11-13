@@ -1,6 +1,3 @@
-import java.io.Serializable;
-import java.util.Hashtable;
-
 /**
  * MemberList class
  * 
@@ -8,6 +5,9 @@ import java.util.Hashtable;
  * @version 3.0
  * @since 2021-11-02
  */
+
+import java.io.Serializable;
+import java.util.Hashtable;
 
 public class MemberList implements Serializable {
     

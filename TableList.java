@@ -1,9 +1,6 @@
 /**
- * Represents an HashTable of Table objects. This is where the
- * methods for addition, removal, finding and printing of table objects are 
- * formulated. The key purpose of the TableList class is to create the functionalities
- * that ensure the removal of Reservation after XX minutes. Rerservations CRUD abilities
- * are present thru tableList too. A tableList must have at least 1 table object.
+ * Represents an HashTable of Table objects. This class ensures the removal of
+ * Reservation after XX minutes. A tableList must have at least 1 table object.
  * @author  SS10G5
  * @version 1.0
  * @since   2021-10-25

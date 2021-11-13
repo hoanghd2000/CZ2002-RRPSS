@@ -1,9 +1,3 @@
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Hashtable;
-import java.util.Set;
-
 /**
  * This class represents a menu.
  * 
@@ -11,6 +5,12 @@ import java.util.Set;
  * @version 11.0
  * @since 2021-10-27
  */
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Hashtable;
+import java.util.Set;
 
 public class Menu implements Serializable{
     

@@ -1,8 +1,6 @@
 /**
- * Represents the staff class holding onto each Staff's information
- * such as name, gender, employeeID, jobTitle. THe count's purpose here
- * is to ensure that when the staffList is printed it is printed in a
- * descending order.
+ * Represents the staff class. Count ensures that when the staffList is 
+ * printed it is printed in a descending order.
  * @author  SS10G5
  * @version 1.0
  * @since   2021-10-25

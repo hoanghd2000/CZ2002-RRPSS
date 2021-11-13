@@ -1,5 +1,3 @@
-import java.io.Serializable;
-
 /**
  * This class represents an orderable item.
  * 
@@ -7,6 +5,8 @@ import java.io.Serializable;
  * @version 1.0
  * @since 2021-10-25
  */
+
+import java.io.Serializable;
 
 abstract class OrderableItems implements Serializable{
 

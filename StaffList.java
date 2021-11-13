@@ -1,7 +1,6 @@
 /**
- * Represents an arrayList of Staff objects. This is where the
- * methods for addition, removal, finding and printing of staff objects are 
- * formulated. A staffList must have at least 1 staff object.
+ * Represents an arrayList of Staff objects.
+ * A staffList must have at least 1 staff object.
  * @author  SS10G5
  * @version 1.0
  * @since   2021-10-25

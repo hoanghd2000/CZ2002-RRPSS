@@ -1,6 +1,3 @@
-import java.util.Hashtable;
-import java.util.Set;
-
 /**
  * This class represents a set of items that can be purchased together.
  * 
@@ -8,6 +5,9 @@ import java.util.Set;
  * @version 1.0
  * @since 2021-10-25
  */
+
+import java.util.Hashtable;
+import java.util.Set;
 
 public class PromotionalSetPackage extends OrderableItems{
 
