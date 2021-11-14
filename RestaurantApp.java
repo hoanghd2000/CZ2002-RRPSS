@@ -497,11 +497,12 @@ public class RestaurantApp {
 				 	 			System.out.println("Do you want to remove this reservation? (Y/N)");
 				 	 			String choice = s.nextLine();
 				 	 			if (choice.equalsIgnoreCase("Y")) {
-				 	 				Table table = tableList.getTableList().get(rez.getTableNumber());
 				 	 				// Change the TableStatus from RESERVED to VACANT if reservation is canceled within 1hr before the reserved time
-				 		 			if (rez.getDateTime().compareTo(LocalDateTime.now().plusHours(1)) <= 0)
+				 		 			if (rez.getDateTime().compareTo(LocalDateTime.now().plusHours(1)) <= 0) {
+				 		 				Table table = tableList.getTableList().get(rez.getTableNumber());
 				 						if (table.getStatus() == TableStatus.RESERVED)
 				 							table.setStatus(TableStatus.VACANT);
+				 		 			}
 				 		 			tableList.removeRez(rez);
 				 		 			System.out.println("Reservation removed!");
 				 	 			}
