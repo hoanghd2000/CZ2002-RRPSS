@@ -14,7 +14,7 @@ public class PromotionalSetPackage extends OrderableItems{
     // this counter makes itemID autoincrement 
     private static int counter = 200;
 
-    // This hashtable has the itemID mapped to the quantity of that itemID
+    // This hashtable has the MenuItem mapped to the quantity of that itemID
     Hashtable<MenuItem, Integer> set = new Hashtable<MenuItem, Integer>();
 
     private double price;
